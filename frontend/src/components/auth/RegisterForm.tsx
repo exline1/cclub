@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 
 import { AuthCard } from "@/components/auth/AuthCard";
 import { FormField } from "@/components/auth/FormField";
@@ -11,64 +13,57 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-  validateEmailOrPhone,
+  validateEmail,
   validatePassword,
   validatePasswordMatch,
   validateRequired,
   validateTermsAccepted,
 } from "@/lib/validation";
 
-interface RegisterFormState {
-  name: string;
-  identifier: string;
-  password: string;
-  confirmPassword: string;
-  termsAccepted: boolean;
-}
-
 interface RegisterFormErrors {
   name?: string;
-  identifier?: string;
+  email?: string;
+  phone?: string;
   password?: string;
   confirmPassword?: string;
   termsAccepted?: string;
 }
 
 export function RegisterForm() {
-  const [form, setForm] = useState<RegisterFormState>({
-    name: "",
-    identifier: "",
-    password: "",
-    confirmPassword: "",
-    termsAccepted: false,
-  });
+  const router = useRouter();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("+998");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [termsAccepted, setTermsAccepted] = useState(false);
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  
   const [errors, setErrors] = useState<RegisterFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleChange = (
-    field: keyof Omit<RegisterFormState, "termsAccepted">,
-    value: string
-  ) => {
-    setForm((prev) => ({ ...prev, [field]: value }));
-    setErrors((prev) => ({ ...prev, [field]: undefined }));
-  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const nameResult = validateRequired(form.name, "Ism");
-    const identifierResult = validateEmailOrPhone(form.identifier);
-    const passwordResult = validatePassword(form.password);
-    const confirmResult = validatePasswordMatch(
-      form.password,
-      form.confirmPassword
-    );
-    const termsResult = validateTermsAccepted(form.termsAccepted);
+    const nameResult = validateRequired(name, "Ism");
+    const emailResult = email ? validateEmail(email) : { isValid: true };
+    
+    // Phone validation
+    const phoneClean = phone.replace(/[\s()-]/g, "");
+    const phoneValid = phoneClean && phoneClean !== "+998" && phoneClean.length >= 9;
+    const phoneMessage = phoneValid ? "" : "Telefon raqamini to'liq kiriting";
+
+    const passwordResult = validatePassword(password);
+    const confirmResult = validatePasswordMatch(password, confirmPassword);
+    const termsResult = validateTermsAccepted(termsAccepted);
 
     const newErrors: RegisterFormErrors = {};
 
     if (!nameResult.isValid) newErrors.name = nameResult.message;
-    if (!identifierResult.isValid) newErrors.identifier = identifierResult.message;
+    if (!emailResult.isValid) newErrors.email = emailResult.message;
+    if (!phoneValid) newErrors.phone = phoneMessage;
     if (!passwordResult.isValid) newErrors.password = passwordResult.message;
     if (!confirmResult.isValid) newErrors.confirmPassword = confirmResult.message;
     if (!termsResult.isValid) newErrors.termsAccepted = termsResult.message;
@@ -79,11 +74,23 @@ export function RegisterForm() {
     }
 
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    toast.success("Muvaffaqiyatli!", {
-      description: "Ro'yxatdan o'tish so'rovi qabul qilindi.",
+
+    const mockUser = {
+      name,
+      phone,
+      email: email || "mehmon@gameclubhub.uz",
+      joinDate: "19-iyun, 2026-yil",
+    };
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    localStorage.setItem("gameclub_user", JSON.stringify(mockUser));
+
+    toast.success("Muvaffaqiyatli ro'yxatdan o'tdingiz!", {
+      description: "Kabinetga yo'naltirilmoqdasiz...",
     });
+
     setIsSubmitting(false);
+    router.push("/dashboard");
   };
 
   const handleGoogleRegister = () => {
@@ -97,42 +104,76 @@ export function RegisterForm() {
       title="Ro'yxatdan o'tish"
       subtitle="GameClub Hub jamoasiga qo'shiling"
     >
-      <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+      <form onSubmit={handleSubmit} className="space-y-4" noValidate>
         <FormField id="name" label="Ism" error={errors.name}>
           <Input
             id="name"
             type="text"
             placeholder="Ismingiz"
-            value={form.name}
-            onChange={(e) => handleChange("name", e.target.value)}
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+              setErrors((prev) => ({ ...prev, name: undefined }));
+            }}
+            autoFocus
             autoComplete="name"
           />
         </FormField>
 
-        <FormField
-          id="identifier"
-          label="Email yoki telefon"
-          error={errors.identifier}
-        >
-          <Input
-            id="identifier"
-            type="text"
-            placeholder="email@example.com yoki +998901234567"
-            value={form.identifier}
-            onChange={(e) => handleChange("identifier", e.target.value)}
-            autoComplete="email"
-          />
-        </FormField>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <FormField id="phone" label="Telefon raqam" error={errors.phone}>
+            <Input
+              id="phone"
+              type="tel"
+              inputMode="numeric"
+              placeholder="+998 90 123 45 67"
+              value={phone}
+              onChange={(e) => {
+                setPhone(e.target.value);
+                setErrors((prev) => ({ ...prev, phone: undefined }));
+              }}
+              autoComplete="tel"
+            />
+          </FormField>
+
+          <FormField id="email" label="Email (Ixtiyoriy)" error={errors.email}>
+            <Input
+              id="email"
+              type="email"
+              placeholder="email@example.com"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setErrors((prev) => ({ ...prev, email: undefined }));
+              }}
+              autoComplete="email"
+            />
+          </FormField>
+        </div>
 
         <FormField id="password" label="Parol" error={errors.password}>
-          <Input
-            id="password"
-            type="password"
-            placeholder="Kamida 6 ta belgi"
-            value={form.password}
-            onChange={(e) => handleChange("password", e.target.value)}
-            autoComplete="new-password"
-          />
+          <div className="relative">
+            <Input
+              id="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Kamida 6 ta belgi"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setErrors((prev) => ({ ...prev, password: undefined }));
+              }}
+              autoComplete="new-password"
+              className="pr-12"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-text-secondary transition-colors duration-200 hover:text-text-primary h-8 w-8 flex items-center justify-center rounded-md"
+              aria-label={showPassword ? "Parolni yashirish" : "Parolni ko'rsatish"}
+            >
+              {showPassword ? <EyeOff className="h-4.5 w-4.5" /> : <Eye className="h-4.5 w-4.5" />}
+            </button>
+          </div>
         </FormField>
 
         <FormField
@@ -140,32 +181,43 @@ export function RegisterForm() {
           label="Parolni tasdiqlash"
           error={errors.confirmPassword}
         >
-          <Input
-            id="confirmPassword"
-            type="password"
-            placeholder="Parolni qayta kiriting"
-            value={form.confirmPassword}
-            onChange={(e) => handleChange("confirmPassword", e.target.value)}
-            autoComplete="new-password"
-          />
+          <div className="relative">
+            <Input
+              id="confirmPassword"
+              type={showConfirmPassword ? "text" : "password"}
+              placeholder="Parolni qayta kiriting"
+              value={confirmPassword}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+                setErrors((prev) => ({ ...prev, confirmPassword: undefined }));
+              }}
+              autoComplete="new-password"
+              className="pr-12"
+            />
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword((prev) => !prev)}
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-text-secondary transition-colors duration-200 hover:text-text-primary h-8 w-8 flex items-center justify-center rounded-md"
+              aria-label={showConfirmPassword ? "Parolni yashirish" : "Parolni ko'rsatish"}
+            >
+              {showConfirmPassword ? <EyeOff className="h-4.5 w-4.5" /> : <Eye className="h-4.5 w-4.5" />}
+            </button>
+          </div>
         </FormField>
 
-        <div className="space-y-2">
+        <div className="space-y-2 pt-1">
           <div className="flex items-start gap-3">
             <Checkbox
               id="terms"
-              checked={form.termsAccepted}
+              checked={termsAccepted}
               onCheckedChange={(checked) => {
-                setForm((prev) => ({
-                  ...prev,
-                  termsAccepted: checked === true,
-                }));
+                setTermsAccepted(checked === true);
                 setErrors((prev) => ({ ...prev, termsAccepted: undefined }));
               }}
             />
             <Label
               htmlFor="terms"
-              className="cursor-pointer text-sm font-normal leading-relaxed text-text-secondary"
+              className="cursor-pointer text-xs font-normal leading-relaxed text-text-secondary select-none"
             >
               Foydalanish shartlari va maxfiylik siyosatiga roziman
             </Label>
@@ -177,8 +229,15 @@ export function RegisterForm() {
           )}
         </div>
 
-        <Button type="submit" className="w-full" disabled={isSubmitting}>
-          {isSubmitting ? "Kutilmoqda..." : "Ro'yxatdan o'tish"}
+        <Button type="submit" className="w-full flex items-center justify-center gap-2" disabled={isSubmitting}>
+          {isSubmitting ? (
+            <>
+              <Loader2 className="h-4.5 w-4.5 animate-spin" />
+              Kutilmoqda...
+            </>
+          ) : (
+            "Ro'yxatdan o'tish"
+          )}
         </Button>
 
         <div className="relative py-2">
@@ -186,14 +245,14 @@ export function RegisterForm() {
             <span className="w-full border-t border-border-glass" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-transparent px-3 text-text-secondary">yoki</span>
+            <span className="bg-background-secondary px-3 text-text-secondary">yoki</span>
           </div>
         </div>
 
         <Button
           type="button"
           variant="google"
-          className="w-full"
+          className="w-full flex items-center justify-center gap-2"
           onClick={handleGoogleRegister}
         >
           <GoogleIcon />

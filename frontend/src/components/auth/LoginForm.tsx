@@ -2,22 +2,21 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 
 import { AuthCard } from "@/components/auth/AuthCard";
 import { FormField } from "@/components/auth/FormField";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
+  validateEmail,
   validateEmailOrPhone,
   validatePassword,
-  validateRequired,
 } from "@/lib/validation";
-
-interface LoginFormState {
-  identifier: string;
-  password: string;
-}
 
 interface LoginFormErrors {
   identifier?: string;
@@ -25,28 +24,49 @@ interface LoginFormErrors {
 }
 
 export function LoginForm() {
-  const [form, setForm] = useState<LoginFormState>({
-    identifier: "",
-    password: "",
-  });
+  const router = useRouter();
+  const [loginMethod, setLoginMethod] = useState<"email" | "phone">("phone");
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+  
   const [errors, setErrors] = useState<LoginFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (field: keyof LoginFormState, value: string) => {
-    setForm((prev) => ({ ...prev, [field]: value }));
-    setErrors((prev) => ({ ...prev, [field]: undefined }));
+  const handleMethodChange = (method: "email" | "phone") => {
+    setLoginMethod(method);
+    setIdentifier(method === "phone" ? "+998" : "");
+    setErrors({});
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const identifierResult = validateEmailOrPhone(form.identifier);
-    const passwordResult = validatePassword(form.password);
+    let identifierValid = false;
+    let identifierMessage = "";
+
+    if (loginMethod === "email") {
+      const emailResult = validateEmail(identifier);
+      identifierValid = emailResult.isValid;
+      identifierMessage = emailResult.message || "";
+    } else {
+      // Phone validation (simple check)
+      const phoneClean = identifier.replace(/[\s()-]/g, "");
+      if (!phoneClean || phoneClean === "+998" || phoneClean.length < 9) {
+        identifierValid = false;
+        identifierMessage = "Telefon raqamini to'liq kiriting";
+      } else {
+        identifierValid = true;
+      }
+    }
+
+    const passwordResult = validatePassword(password);
 
     const newErrors: LoginFormErrors = {};
 
-    if (!identifierResult.isValid) {
-      newErrors.identifier = identifierResult.message;
+    if (!identifierValid) {
+      newErrors.identifier = identifierMessage;
     }
     if (!passwordResult.isValid) {
       newErrors.password = passwordResult.message;
@@ -59,12 +79,25 @@ export function LoginForm() {
 
     setIsSubmitting(true);
 
-    // Backend hali yo'q — faqat UI demo
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    // Save mock user session to localStorage for dashboard retrieval
+    const cleanPhone = loginMethod === "phone" ? identifier : "+998 90 999 88 77";
+    const cleanEmail = loginMethod === "email" ? identifier : "guest@gameclubhub.uz";
+    const mockUser = {
+      name: "Ali",
+      phone: cleanPhone,
+      email: cleanEmail,
+      joinDate: "19-iyun, 2026-yil",
+    };
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    localStorage.setItem("gameclub_user", JSON.stringify(mockUser));
+    
     toast.success("Muvaffaqiyatli!", {
-      description: "Tizimga kirish so'rovi qabul qilindi.",
+      description: "Tizimga kirildi. Kabinetga yo'naltirilmoqdasiz...",
     });
+
     setIsSubmitting(false);
+    router.push("/dashboard");
   };
 
   const handleGoogleLogin = () => {
@@ -78,37 +111,113 @@ export function LoginForm() {
       title="Xush kelibsiz"
       subtitle="GameClub Hub hisobingizga kiring"
     >
-      <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-        <FormField
-          id="identifier"
-          label="Email yoki telefon"
-          error={errors.identifier}
+      {/* Login Method Toggle */}
+      <div className="mb-6 flex rounded-lg bg-background-primary p-1 border border-border-glass">
+        <button
+          type="button"
+          className={`flex-1 rounded-md py-1.5 text-xs font-bold transition-all duration-200 ${
+            loginMethod === "phone"
+              ? "bg-accent-primary text-white"
+              : "text-text-secondary hover:text-text-primary"
+          }`}
+          onClick={() => handleMethodChange("phone")}
         >
-          <Input
-            id="identifier"
-            type="text"
-            placeholder="email@example.com yoki +998901234567"
-            value={form.identifier}
-            onChange={(e) => handleChange("identifier", e.target.value)}
-            autoComplete="username"
-          />
-        </FormField>
+          Telefon orqali
+        </button>
+        <button
+          type="button"
+          className={`flex-1 rounded-md py-1.5 text-xs font-bold transition-all duration-200 ${
+            loginMethod === "email"
+              ? "bg-accent-primary text-white"
+              : "text-text-secondary hover:text-text-primary"
+          }`}
+          onClick={() => handleMethodChange("email")}
+        >
+          Email orqali
+        </button>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+        {loginMethod === "phone" ? (
+          <FormField
+            id="phone"
+            label="Telefon raqam"
+            error={errors.identifier}
+          >
+            <Input
+              id="phone"
+              type="tel"
+              inputMode="numeric"
+              placeholder="+998 90 123 45 67"
+              value={identifier}
+              onChange={(e) => {
+                setIdentifier(e.target.value);
+                setErrors((prev) => ({ ...prev, identifier: undefined }));
+              }}
+              autoFocus
+              autoComplete="tel"
+            />
+          </FormField>
+        ) : (
+          <FormField
+            id="email"
+            label="Email manzili"
+            error={errors.identifier}
+          >
+            <Input
+              id="email"
+              type="email"
+              placeholder="email@example.com"
+              value={identifier}
+              onChange={(e) => {
+                setIdentifier(e.target.value);
+                setErrors((prev) => ({ ...prev, identifier: undefined }));
+              }}
+              autoFocus
+              autoComplete="email"
+            />
+          </FormField>
+        )}
 
         <FormField id="password" label="Parol" error={errors.password}>
-          <Input
-            id="password"
-            type="password"
-            placeholder="••••••••"
-            value={form.password}
-            onChange={(e) => handleChange("password", e.target.value)}
-            autoComplete="current-password"
-          />
+          <div className="relative">
+            <Input
+              id="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setErrors((prev) => ({ ...prev, password: undefined }));
+              }}
+              autoComplete="current-password"
+              className="pr-12"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-text-secondary transition-colors duration-200 hover:text-text-primary h-8 w-8 flex items-center justify-center rounded-md"
+              aria-label={showPassword ? "Parolni yashirish" : "Parolni ko'rsatish"}
+            >
+              {showPassword ? <EyeOff className="h-4.5 w-4.5" /> : <Eye className="h-4.5 w-4.5" />}
+            </button>
+          </div>
         </FormField>
 
-        <div className="flex justify-end">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Checkbox
+              id="remember"
+              checked={rememberMe}
+              onCheckedChange={(checked) => setRememberMe(checked === true)}
+            />
+            <Label htmlFor="remember" className="cursor-pointer text-xs font-normal text-text-secondary select-none">
+              Eslab qol
+            </Label>
+          </div>
           <Link
             href="#"
-            className="text-sm text-accent-glow transition-colors duration-200 hover:text-accent-primary"
+            className="text-xs text-accent-glow transition-colors duration-200 hover:text-accent-primary"
             onClick={(e) => {
               e.preventDefault();
               toast.info("Tez orada", {
@@ -120,8 +229,15 @@ export function LoginForm() {
           </Link>
         </div>
 
-        <Button type="submit" className="w-full" disabled={isSubmitting}>
-          {isSubmitting ? "Kutilmoqda..." : "Kirish"}
+        <Button type="submit" className="w-full flex items-center justify-center gap-2" disabled={isSubmitting}>
+          {isSubmitting ? (
+            <>
+              <Loader2 className="h-4.5 w-4.5 animate-spin" />
+              Kirilmoqda...
+            </>
+          ) : (
+            "Kirish"
+          )}
         </Button>
 
         <div className="relative py-2">
@@ -129,14 +245,14 @@ export function LoginForm() {
             <span className="w-full border-t border-border-glass" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-transparent px-3 text-text-secondary">yoki</span>
+            <span className="bg-background-secondary px-3 text-text-secondary">yoki</span>
           </div>
         </div>
 
         <Button
           type="button"
           variant="google"
-          className="w-full"
+          className="w-full flex items-center justify-center gap-2"
           onClick={handleGoogleLogin}
         >
           <GoogleIcon />

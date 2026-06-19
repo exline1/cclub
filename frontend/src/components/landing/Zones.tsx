@@ -1,7 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { IMAGE_PATHS } from "@/lib/assets";
+import { cn } from "@/lib/utils";
 
 export interface ZoneItem {
   id: string;
@@ -9,6 +13,7 @@ export interface ZoneItem {
   description: string;
   imageSrc: string;
   badge?: string;
+  price: string;
 }
 
 const ZONES: ZoneItem[] = [
@@ -18,6 +23,7 @@ const ZONES: ZoneItem[] = [
     description:
       "Kuchli kompyuterlar, qulay o'rindiqlar va tez internet — kundalik o'yin uchun ideal.",
     imageSrc: IMAGE_PATHS.zoneStandard,
+    price: "10,000 so'm/soat",
   },
   {
     id: "vip",
@@ -26,6 +32,7 @@ const ZONES: ZoneItem[] = [
       "Premium jihozlar, keng monitorlar va alohida xona — maksimal komfort va performance.",
     imageSrc: IMAGE_PATHS.zoneVip,
     badge: "Premium",
+    price: "18,000 so'm/soat",
   },
   {
     id: "ps5",
@@ -34,6 +41,7 @@ const ZONES: ZoneItem[] = [
       "PlayStation 5 konsollari, 4K televizorlar va eng so'nggi eksklyuziv o'yinlar to'plami.",
     imageSrc: IMAGE_PATHS.zonePs5,
     badge: "Konsol",
+    price: "25,000 so'm/soat",
   },
 ];
 
@@ -64,27 +72,43 @@ export function Zones() {
 }
 
 function ZoneCard({ zone }: { zone: ZoneItem }) {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   return (
-    <Card className="overflow-hidden transition-all duration-200 hover:border-accent-glow hover:shadow-accent-glow-sm">
-      {/* Rasm placeholder — tegishli faylni public/images/ da almashtiring */}
-      <div className="relative aspect-[16/10] w-full bg-background-primary">
+    <Card className="overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-accent-glow hover:shadow-accent-glow-sm">
+      {/* Background color fallback */}
+      <div className="relative aspect-[16/10] w-full bg-background-primary overflow-hidden">
+        <div 
+          className={cn(
+            "absolute inset-0 bg-gradient-to-br from-background-secondary to-accent-deep/30 transition-opacity duration-500",
+            imageLoaded ? "opacity-0" : "opacity-100"
+          )} 
+        />
         <Image
           src={zone.imageSrc}
           alt={`${zone.name} zona — gaming klub`}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover"
+          className={cn(
+            "object-cover transition-all duration-700 ease-in-out",
+            imageLoaded ? "opacity-100 scale-100" : "opacity-0 scale-105"
+          )}
           loading="lazy"
+          onLoad={() => setImageLoaded(true)}
         />
         {zone.badge && (
-          <span className="absolute right-3 top-3 rounded-full bg-accent-primary px-3 py-1 text-xs font-bold text-white">
+          <span className="absolute right-3 top-3 rounded-full bg-accent-primary px-3 py-1 text-xs font-bold text-white z-10">
             {zone.badge}
           </span>
         )}
+        <div className="absolute inset-0 bg-gradient-to-t from-background-secondary/90 via-transparent to-transparent" />
       </div>
-      <CardHeader>
-        <CardTitle>{zone.name}</CardTitle>
-        <CardDescription className="leading-relaxed">
+      <CardHeader className="pb-3">
+        <div className="flex items-center justify-between gap-2">
+          <CardTitle>{zone.name}</CardTitle>
+          <span className="text-sm font-bold text-accent-glow">{zone.price}</span>
+        </div>
+        <CardDescription className="leading-relaxed mt-2">
           {zone.description}
         </CardDescription>
       </CardHeader>

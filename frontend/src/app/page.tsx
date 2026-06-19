@@ -13,6 +13,9 @@ const Services = dynamic(() =>
 const Zones = dynamic(() =>
   import("@/components/landing/Zones").then((mod) => mod.Zones)
 );
+const FAQ = dynamic(() =>
+  import("@/components/landing/FAQ").then((mod) => mod.FAQ)
+);
 const Footer = dynamic(() =>
   import("@/components/landing/Footer").then((mod) => mod.Footer)
 );
@@ -25,6 +28,7 @@ export default function HomePage() {
       <About />
       <Services />
       <Zones />
+      <FAQ />
       <Footer />
     </main>
   );
