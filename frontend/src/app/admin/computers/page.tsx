@@ -31,7 +31,7 @@ export default function ComputersAdminPage() {
 
   // 1. Initial State Load from LocalStorage
   useEffect(() => {
-    const saved = localStorage.getItem("gameclub_admin_computers");
+    const saved = localStorage.getItem("cclub_admin_computers");
     if (saved) {
       try {
         const { computers: savedComputers, timestamp } = JSON.parse(saved);
@@ -50,7 +50,7 @@ export default function ComputersAdminPage() {
 
         setComputers(updatedComputers);
         localStorage.setItem(
-          "gameclub_admin_computers",
+          "cclub_admin_computers",
           JSON.stringify({ computers: updatedComputers, timestamp: Date.now() })
         );
       } catch (e) {
@@ -59,7 +59,7 @@ export default function ComputersAdminPage() {
     } else {
       setComputers(MOCK_COMPUTERS);
       localStorage.setItem(
-        "gameclub_admin_computers",
+        "cclub_admin_computers",
         JSON.stringify({ computers: MOCK_COMPUTERS, timestamp: Date.now() })
       );
     }
@@ -85,7 +85,7 @@ export default function ComputersAdminPage() {
 
         // Sync with LocalStorage
         localStorage.setItem(
-          "gameclub_admin_computers",
+          "cclub_admin_computers",
           JSON.stringify({ computers: updated, timestamp: Date.now() })
         );
 
@@ -108,13 +108,13 @@ export default function ComputersAdminPage() {
   const saveState = (updatedList: Computer[]) => {
     setComputers(updatedList);
     localStorage.setItem(
-      "gameclub_admin_computers",
+      "cclub_admin_computers",
       JSON.stringify({ computers: updatedList, timestamp: Date.now() })
     );
   };
 
   const logActivity = (action: string, details: string, type: "pc" | "order" | "system" | "product") => {
-    const saved = localStorage.getItem("gameclub_admin_activity");
+    const saved = localStorage.getItem("cclub_admin_activity");
     let currentLogs = [];
     if (saved) {
       try {
@@ -128,8 +128,8 @@ export default function ComputersAdminPage() {
       timestamp: new Date().toISOString(),
       type
     };
-    localStorage.setItem("gameclub_admin_activity", JSON.stringify([newLog, ...currentLogs].slice(0, 100)));
-    window.dispatchEvent(new Event("gameclub_activity_updated"));
+    localStorage.setItem("cclub_admin_activity", JSON.stringify([newLog, ...currentLogs].slice(0, 100)));
+    window.dispatchEvent(new Event("cclub_activity_updated"));
   };
 
   // Actions
@@ -164,23 +164,54 @@ export default function ComputersAdminPage() {
 
   const handleStopSession = (pcId: string) => {
     const pc = computers.find((p) => p.id === pcId);
-    const updated: Computer[] = computers.map((pc) => {
-      if (pc.id === pcId) {
-        return { ...pc, status: "free" as const, remainingSeconds: 0, customerName: undefined };
+    if (!pc) return;
+
+    const previousState = { ...pc };
+
+    const updated: Computer[] = computers.map((item) => {
+      if (item.id === pcId) {
+        return { ...item, status: "free" as const, remainingSeconds: 0, customerName: undefined };
       }
-      return pc;
+      return item;
     });
 
     saveState(updated);
 
-    toast.error(`${pc?.number}-PC to'xtatildi`);
+    toast.error(`PC ${pc.number} seansi to'xtatildi`, {
+      duration: 5000,
+      action: {
+        label: "Bekor qilish",
+        onClick: () => {
+          setComputers((prev) => {
+            const restored = prev.map((item) => {
+              if (item.id === pcId) {
+                return { ...previousState };
+              }
+              return item;
+            });
+            localStorage.setItem(
+              "cclub_admin_computers",
+              JSON.stringify({ computers: restored, timestamp: Date.now() })
+            );
+            return restored;
+          });
+          setSelectedPc(previousState);
+          toast.success(`PC ${previousState.number} seansi tiklandi`);
+          logActivity(
+            `PC ${previousState.number} seansi tiklandi`,
+            `To'xtatilgan seans bekor qilindi. Mijoz: ${previousState.customerName || "Mijoz"}.`,
+            "pc"
+          );
+        },
+      },
+    });
+
     logActivity(
-      `PC ${pc?.number || ""} seansi yakunlandi`,
-      `Mijoz: ${pc?.customerName || "Mijoz"}. Seans qo'lda to'xtatildi.`,
+      `PC ${pc.number} seansi yakunlandi`,
+      `Mijoz: ${pc.customerName || "Mijoz"}. Seans qo'lda to'xtatildi.`,
       "pc"
     );
     
-    // Close panel since PC is now free (or keep open in free state)
     const current = updated.find((p) => p.id === pcId);
     if (current) setSelectedPc(current);
   };

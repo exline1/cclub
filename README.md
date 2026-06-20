@@ -1,11 +1,11 @@
-# GameClub Hub
+# cclub
 
 Kompyuter o'yinlari markazlari uchun bar buyurtma va kompyuter boshqaruv tizimi.
 
 ## Loyiha strukturasi
 
 ```
-game-hub/
+cclub/
 ├── frontend/   # Next.js 14 — Landing Page + Authentication (Faza 1)
 └── backend/    # API server (keyingi fazalarda)
 ```

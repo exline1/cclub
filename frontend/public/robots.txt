@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /dashboard
 Disallow: /profile
-Sitemap: https://gameclubhub.uz/sitemap.xml
+Sitemap: https://cclub.uz/sitemap.xml

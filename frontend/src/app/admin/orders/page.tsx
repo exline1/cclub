@@ -31,7 +31,7 @@ export default function OrdersAdminPage() {
 
   // 1. Initial State Load
   useEffect(() => {
-    const saved = localStorage.getItem("gameclub_admin_orders");
+    const saved = localStorage.getItem("cclub_admin_orders");
     if (saved) {
       try {
         setOrders(JSON.parse(saved));
@@ -40,7 +40,7 @@ export default function OrdersAdminPage() {
       }
     } else {
       setOrders(MOCK_ORDERS);
-      localStorage.setItem("gameclub_admin_orders", JSON.stringify(MOCK_ORDERS));
+      localStorage.setItem("cclub_admin_orders", JSON.stringify(MOCK_ORDERS));
     }
     setIsMounted(true);
   }, []);
@@ -48,14 +48,14 @@ export default function OrdersAdminPage() {
   // Sync state changes with localStorage and raise sync events
   const saveOrders = (updatedList: Order[]) => {
     setOrders(updatedList);
-    localStorage.setItem("gameclub_admin_orders", JSON.stringify(updatedList));
+    localStorage.setItem("cclub_admin_orders", JSON.stringify(updatedList));
     // Dispatch synchronization custom events
-    window.dispatchEvent(new Event("gameclub_orders_updated"));
+    window.dispatchEvent(new Event("cclub_orders_updated"));
     window.dispatchEvent(new Event("storage"));
   };
 
   const logActivity = (action: string, details: string, type: "pc" | "order" | "system" | "product") => {
-    const saved = localStorage.getItem("gameclub_admin_activity");
+    const saved = localStorage.getItem("cclub_admin_activity");
     let currentLogs = [];
     if (saved) {
       try {
@@ -69,8 +69,8 @@ export default function OrdersAdminPage() {
       timestamp: new Date().toISOString(),
       type
     };
-    localStorage.setItem("gameclub_admin_activity", JSON.stringify([newLog, ...currentLogs].slice(0, 100)));
-    window.dispatchEvent(new Event("gameclub_activity_updated"));
+    localStorage.setItem("cclub_admin_activity", JSON.stringify([newLog, ...currentLogs].slice(0, 100)));
+    window.dispatchEvent(new Event("cclub_activity_updated"));
   };
 
   // Actions
@@ -163,7 +163,7 @@ export default function OrdersAdminPage() {
     );
 
     // 5. Add Notification
-    const savedNotifs = localStorage.getItem("gameclub_admin_notifications");
+    const savedNotifs = localStorage.getItem("cclub_admin_notifications");
     let currentNotifs: NotificationItem[] = [];
     if (savedNotifs) {
       try {
@@ -183,8 +183,8 @@ export default function OrdersAdminPage() {
     };
 
     const updatedNotifs = [newNotif, ...currentNotifs].slice(0, 30); // Keep max 30
-    localStorage.setItem("gameclub_admin_notifications", JSON.stringify(updatedNotifs));
-    window.dispatchEvent(new Event("gameclub_notifications_updated"));
+    localStorage.setItem("cclub_admin_notifications", JSON.stringify(updatedNotifs));
+    window.dispatchEvent(new Event("cclub_notifications_updated"));
   };
 
   // Group columns

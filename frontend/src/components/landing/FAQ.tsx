@@ -50,7 +50,7 @@ export function FAQ() {
             Tez-tez so&apos;raladigan savollar
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm text-text-secondary sm:text-base">
-            GameClub Hub platformasi va klubimiz xizmatlari haqida batafsil ma&apos;lumot.
+            cclub platformasi va klubimiz xizmatlari haqida batafsil ma&apos;lumot.
           </p>
         </div>
 

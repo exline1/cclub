@@ -1,8 +1,8 @@
 {
-  "name": "gameclub-hub",
+  "name": "cclub",
   "version": "0.1.0",
   "private": true,
-  "description": "GameClub Hub — gaming klub buyurtma va boshqaruv platformasi",
+  "description": "cclub — gaming klub buyurtma va boshqaruv platformasi",
   "scripts": {
     "dev": "npm run dev --prefix frontend",
     "dev:frontend": "npm run dev --prefix frontend",

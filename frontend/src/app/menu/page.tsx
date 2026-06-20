@@ -37,7 +37,7 @@ function MenuContent() {
 
   // Load cart from localStorage on mount (if user refreshes)
   useEffect(() => {
-    const savedCart = localStorage.getItem("gameclub_cart");
+    const savedCart = localStorage.getItem("cclub_cart");
     if (savedCart) {
       setCartItems(JSON.parse(savedCart));
     }
@@ -45,7 +45,7 @@ function MenuContent() {
 
   const saveCart = (newCart: CartItem[]) => {
     setCartItems(newCart);
-    localStorage.setItem("gameclub_cart", JSON.stringify(newCart));
+    localStorage.setItem("cclub_cart", JSON.stringify(newCart));
   };
 
   const handleAddToCart = (product: Product) => {
@@ -87,7 +87,7 @@ function MenuContent() {
     if (cartItems.length === 0) return;
 
     // Retrieve existing orders from localStorage
-    const localOrders = localStorage.getItem("gameclub_orders");
+    const localOrders = localStorage.getItem("cclub_orders");
     const existingOrders = localOrders ? JSON.parse(localOrders) : [];
 
     // Format current date and time
@@ -109,11 +109,11 @@ function MenuContent() {
     };
 
     const updatedOrders = [newOrder, ...existingOrders];
-    localStorage.setItem("gameclub_orders", JSON.stringify(updatedOrders));
+    localStorage.setItem("cclub_orders", JSON.stringify(updatedOrders));
 
     // Clear cart
     saveCart([]);
-    localStorage.removeItem("gameclub_cart");
+    localStorage.removeItem("cclub_cart");
     setIsCartOpen(false);
 
     toast.success("Buyurtma qabul qilindi!", {

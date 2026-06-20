@@ -22,9 +22,9 @@ export function Header({ userName }: HeaderProps) {
   const initial = userName ? userName.charAt(0).toUpperCase() : "U";
 
   const handleLogout = () => {
-    localStorage.removeItem("gameclub_user");
-    localStorage.removeItem("gameclub_session");
-    localStorage.removeItem("gameclub_orders");
+    localStorage.removeItem("cclub_user");
+    localStorage.removeItem("cclub_session");
+    localStorage.removeItem("cclub_orders");
     toast.success("Tizimdan chiqildi!");
     router.push("/");
   };

@@ -20,7 +20,7 @@ export default function NotificationDropdown() {
 
   // 1. Initial load
   const loadNotifications = () => {
-    const saved = localStorage.getItem("gameclub_admin_notifications");
+    const saved = localStorage.getItem("cclub_admin_notifications");
     if (saved) {
       try {
         setNotifications(JSON.parse(saved));
@@ -40,7 +40,7 @@ export default function NotificationDropdown() {
         },
       ];
       setNotifications(initial);
-      localStorage.setItem("gameclub_admin_notifications", JSON.stringify(initial));
+      localStorage.setItem("cclub_admin_notifications", JSON.stringify(initial));
     }
   };
 
@@ -52,11 +52,11 @@ export default function NotificationDropdown() {
       loadNotifications();
     };
 
-    window.addEventListener("gameclub_notifications_updated", handleUpdate);
+    window.addEventListener("cclub_notifications_updated", handleUpdate);
     window.addEventListener("storage", handleUpdate);
 
     return () => {
-      window.removeEventListener("gameclub_notifications_updated", handleUpdate);
+      window.removeEventListener("cclub_notifications_updated", handleUpdate);
       window.removeEventListener("storage", handleUpdate);
     };
   }, []);
@@ -80,16 +80,16 @@ export default function NotificationDropdown() {
     if (!isOpen && notifications.some((n) => !n.isRead)) {
       const updated = notifications.map((n) => ({ ...n, isRead: true }));
       setNotifications(updated);
-      localStorage.setItem("gameclub_admin_notifications", JSON.stringify(updated));
+      localStorage.setItem("cclub_admin_notifications", JSON.stringify(updated));
       // Dispatch event to refresh other notification counters
-      window.dispatchEvent(new Event("gameclub_notifications_updated"));
+      window.dispatchEvent(new Event("cclub_notifications_updated"));
     }
   };
 
   const handleClearAll = () => {
     setNotifications([]);
-    localStorage.setItem("gameclub_admin_notifications", JSON.stringify([]));
-    window.dispatchEvent(new Event("gameclub_notifications_updated"));
+    localStorage.setItem("cclub_admin_notifications", JSON.stringify([]));
+    window.dispatchEvent(new Event("cclub_notifications_updated"));
   };
 
   const getRelativeTime = (isoString: string) => {

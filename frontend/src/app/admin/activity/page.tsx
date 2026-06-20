@@ -15,7 +15,7 @@ export default function ActivityAdminPage() {
 
   // 1. Initial State Load
   useEffect(() => {
-    const saved = localStorage.getItem("gameclub_admin_activity");
+    const saved = localStorage.getItem("cclub_admin_activity");
     if (saved) {
       try {
         setLogs(JSON.parse(saved));
@@ -24,22 +24,22 @@ export default function ActivityAdminPage() {
       }
     } else {
       setLogs(MOCK_ACTIVITIES);
-      localStorage.setItem("gameclub_admin_activity", JSON.stringify(MOCK_ACTIVITIES));
+      localStorage.setItem("cclub_admin_activity", JSON.stringify(MOCK_ACTIVITIES));
     }
     setIsMounted(true);
 
     const handleUpdate = () => {
-      const current = localStorage.getItem("gameclub_admin_activity");
+      const current = localStorage.getItem("cclub_admin_activity");
       if (current) {
         try {
           setLogs(JSON.parse(current));
         } catch (e) {}
       }
     };
-    window.addEventListener("gameclub_activity_updated", handleUpdate);
+    window.addEventListener("cclub_activity_updated", handleUpdate);
     window.addEventListener("storage", handleUpdate);
     return () => {
-      window.removeEventListener("gameclub_activity_updated", handleUpdate);
+      window.removeEventListener("cclub_activity_updated", handleUpdate);
       window.removeEventListener("storage", handleUpdate);
     };
   }, []);
@@ -47,8 +47,8 @@ export default function ActivityAdminPage() {
   const handleClearLogs = () => {
     if (confirm("Haqiqatan ham barcha faoliyat jurnallarini o'chirib tashlamoqchimisiz?")) {
       setLogs([]);
-      localStorage.setItem("gameclub_admin_activity", JSON.stringify([]));
-      window.dispatchEvent(new Event("gameclub_activity_updated"));
+      localStorage.setItem("cclub_admin_activity", JSON.stringify([]));
+      window.dispatchEvent(new Event("cclub_activity_updated"));
     }
   };
 

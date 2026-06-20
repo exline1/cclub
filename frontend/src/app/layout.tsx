@@ -20,7 +20,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "GameClub Hub — Gaming Arena Platformasi",
+  title: "cclub — Gaming Arena Platformasi",
   description:
     "Kompyuter o'yinlari markazlari uchun tezkor buyurtma va boshqaruv platformasi.",
 };

@@ -20,7 +20,7 @@ export default function ProductsAdminPage() {
 
   // 1. Initial State Load
   useEffect(() => {
-    const saved = localStorage.getItem("gameclub_admin_products");
+    const saved = localStorage.getItem("cclub_admin_products");
     if (saved) {
       try {
         setProducts(JSON.parse(saved));
@@ -29,14 +29,14 @@ export default function ProductsAdminPage() {
       }
     } else {
       setProducts(MOCK_PRODUCTS);
-      localStorage.setItem("gameclub_admin_products", JSON.stringify(MOCK_PRODUCTS));
+      localStorage.setItem("cclub_admin_products", JSON.stringify(MOCK_PRODUCTS));
     }
     setIsMounted(true);
   }, []);
 
   const saveProducts = (updatedList: Product[]) => {
     setProducts(updatedList);
-    localStorage.setItem("gameclub_admin_products", JSON.stringify(updatedList));
+    localStorage.setItem("cclub_admin_products", JSON.stringify(updatedList));
   };
 
   // CRUD Actions

@@ -4,8 +4,8 @@ import { RegisterForm } from "@/components/auth/RegisterForm";
 import { Logo } from "@/components/shared/Logo";
 
 export const metadata = {
-  title: "Ro'yxatdan o'tish — GameClub Hub",
-  description: "GameClub Hub ga ro'yxatdan o'ting",
+  title: "Ro'yxatdan o'tish — cclub",
+  description: "cclub ga ro'yxatdan o'ting",
 };
 
 export default function RegisterPage() {

@@ -10,7 +10,7 @@ export function About() {
             O&apos;yin dunyosining yangi standarti
           </h2>
           <p className="mt-5 text-sm leading-relaxed text-text-secondary sm:text-base lg:text-lg">
-            GameClub Hub — zamonaviy kompyuter o&apos;yinlari markazlari uchun yaratilgan
+            cclub — zamonaviy kompyuter o&apos;yinlari markazlari uchun yaratilgan
             platforma. Biz mijozlarga tezkor buyurtma, shaffof vaqt nazorati va qulay
             o&apos;yin muhitini taqdim etamiz. Har bir zona — professional jihozlar,
             qulay atmosfera va yuqori tezlikdagi internet bilan jihozlangan.

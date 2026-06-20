@@ -42,28 +42,28 @@ export default function DashboardPage() {
 
   useEffect(() => {
     // Load or initialize mock session data
-    let localUser = localStorage.getItem("gameclub_user");
+    let localUser = localStorage.getItem("cclub_user");
     if (!localUser) {
       // Auto-populate default user if none exists (for quick testing)
       const defaultUser = {
         name: "Temur",
         phone: "+998 90 123 45 67",
-        email: "temur@gameclubhub.uz",
+        email: "temur@cclub.uz",
         joinDate: "19-iyun, 2026-yil",
       };
-      localStorage.setItem("gameclub_user", JSON.stringify(defaultUser));
+      localStorage.setItem("cclub_user", JSON.stringify(defaultUser));
       localUser = JSON.stringify(defaultUser);
     }
     setUser(JSON.parse(localUser));
 
     // Load active session if any
-    const localSession = localStorage.getItem("gameclub_session");
+    const localSession = localStorage.getItem("cclub_session");
     if (localSession) {
       setSession(JSON.parse(localSession));
     }
 
     // Load orders
-    const localOrders = localStorage.getItem("gameclub_orders");
+    const localOrders = localStorage.getItem("cclub_orders");
     // Xato tuzatildi: JSON.JSON.parse -> JSON.parse
     if (localOrders) {
       setOrders(JSON.parse(localOrders));
@@ -88,7 +88,7 @@ export default function DashboardPage() {
       duration,
       startTime: Date.now(),
     };
-    localStorage.setItem("gameclub_session", JSON.stringify(newSession));
+    localStorage.setItem("cclub_session", JSON.stringify(newSession));
     setSession(newSession);
     setIsBookingOpen(false);
     // Booking tugagandan so'ng state'larni ham tozalash
@@ -97,7 +97,7 @@ export default function DashboardPage() {
   };
 
   const handleEndSession = () => {
-    localStorage.removeItem("gameclub_session");
+    localStorage.removeItem("cclub_session");
     setSession(null);
   };
 

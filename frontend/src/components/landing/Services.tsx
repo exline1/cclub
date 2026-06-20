@@ -45,7 +45,7 @@ export function Services() {
             Imkoniyatlar
           </p>
           <h2 className="font-heading mt-3 text-2xl font-bold text-text-primary sm:text-3xl lg:text-4xl">
-            Nima uchun GameClub Hub?
+            Nima uchun cclub?
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm text-text-secondary sm:text-base">
             O&apos;yin klubingiz uchun kerakli barcha xizmatlar — bitta zamonaviy platformada.

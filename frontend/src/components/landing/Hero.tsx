@@ -49,7 +49,7 @@ export function Hero() {
         <div className="mb-6 flex flex-col items-center gap-2">
           <Logo showText={false} className="h-12 w-12 sm:h-14 sm:w-14" />
           <span className="font-heading text-xs font-bold uppercase tracking-[0.25em] text-accent-glow sm:text-sm mt-2">
-            GameClub Hub
+            cclub
           </span>
         </div>
 
@@ -59,7 +59,7 @@ export function Hero() {
         </h1>
 
         <p className="mt-6 max-w-2xl text-sm leading-relaxed text-text-secondary sm:text-base lg:text-lg">
-          GameClub Hub — kompyuter o&apos;yinlari markazlari uchun tezkor buyurtma,
+          cclub — kompyuter o&apos;yinlari markazlari uchun tezkor buyurtma,
           onlayn vaqt nazorati va premium o&apos;yin zonalari bitta platformada.
         </p>
 

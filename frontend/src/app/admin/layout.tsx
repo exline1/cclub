@@ -33,7 +33,7 @@ export default function AdminLayout({
 
   useEffect(() => {
     const updateCount = () => {
-      const saved = localStorage.getItem("gameclub_admin_orders");
+      const saved = localStorage.getItem("cclub_admin_orders");
       if (saved) {
         try {
           const orders = JSON.parse(saved);
@@ -50,10 +50,10 @@ export default function AdminLayout({
 
     updateCount();
     window.addEventListener("storage", updateCount);
-    window.addEventListener("gameclub_orders_updated", updateCount);
+    window.addEventListener("cclub_orders_updated", updateCount);
     return () => {
       window.removeEventListener("storage", updateCount);
-      window.removeEventListener("gameclub_orders_updated", updateCount);
+      window.removeEventListener("cclub_orders_updated", updateCount);
     };
   }, []);
 
@@ -81,7 +81,7 @@ export default function AdminLayout({
         <div className="p-4 border-b border-border-glass/40 flex items-center gap-3">
           <Logo showText={false} className="h-8 w-8" />
           <div className="flex flex-col">
-            <span className="font-heading font-bold text-sm tracking-wide">GameClub Hub</span>
+            <span className="font-heading font-bold text-sm tracking-wide">cclub</span>
             <span className="text-[10px] text-accent-glow font-bold uppercase tracking-wider">Admin Panel</span>
           </div>
         </div>
@@ -147,7 +147,7 @@ export default function AdminLayout({
           <div className="flex items-center gap-3">
             <Logo showText={false} className="h-8 w-8" />
             <div className="flex flex-col">
-              <span className="font-heading font-bold text-sm tracking-wide">GameClub Hub</span>
+              <span className="font-heading font-bold text-sm tracking-wide">cclub</span>
               <span className="text-[10px] text-accent-glow font-bold uppercase tracking-wider">Admin Panel</span>
             </div>
           </div>
@@ -218,7 +218,7 @@ export default function AdminLayout({
             </button>
             <Logo showText={false} className="h-7 w-7 lg:hidden" />
             <span className="hidden lg:inline font-heading font-bold text-xs tracking-wider uppercase text-text-secondary">
-              GameClub Hub Dashboard
+              cclub Dashboard
             </span>
           </div>
 

@@ -36,7 +36,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     // Check if user is logged in
-    const localUser = localStorage.getItem("gameclub_user");
+    const localUser = localStorage.getItem("cclub_user");
     if (localUser) {
       const parsed = JSON.parse(localUser);
       setUser(parsed);
@@ -48,10 +48,10 @@ export default function ProfilePage() {
       const defaultUser = {
         name: "Temur",
         phone: "+998 90 123 45 67",
-        email: "temur@gameclubhub.uz",
+        email: "temur@cclub.uz",
         joinDate: "19-iyun, 2026-yil",
       };
-      localStorage.setItem("gameclub_user", JSON.stringify(defaultUser));
+      localStorage.setItem("cclub_user", JSON.stringify(defaultUser));
       setUser(defaultUser);
       setEditName(defaultUser.name);
       setEditPhone(defaultUser.phone);
@@ -75,7 +75,7 @@ export default function ProfilePage() {
       email: editEmail,
     };
 
-    localStorage.setItem("gameclub_user", JSON.stringify(updatedUser));
+    localStorage.setItem("cclub_user", JSON.stringify(updatedUser));
     setUser(updatedUser);
     setIsEditing(false);
     toast.success("Profil ma'lumotlari saqlandi!");
@@ -103,9 +103,9 @@ export default function ProfilePage() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("gameclub_user");
-    localStorage.removeItem("gameclub_session");
-    localStorage.removeItem("gameclub_orders");
+    localStorage.removeItem("cclub_user");
+    localStorage.removeItem("cclub_session");
+    localStorage.removeItem("cclub_orders");
     toast.success("Tizimdan chiqildi!");
     router.push("/");
   };

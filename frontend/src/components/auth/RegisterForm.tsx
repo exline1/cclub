@@ -78,7 +78,7 @@ export function RegisterForm() {
     const mockUser = {
       name,
       phone,
-      email: email || "mehmon@gameclubhub.uz",
+      email: email || "mehmon@cclub.uz",
       joinDate: "19-iyun, 2026-yil",
     };
 
@@ -102,7 +102,7 @@ export function RegisterForm() {
   return (
     <AuthCard
       title="Ro'yxatdan o'tish"
-      subtitle="GameClub Hub jamoasiga qo'shiling"
+      subtitle="cclub jamoasiga qo'shiling"
     >
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
         <FormField id="name" label="Ism" error={errors.name}>

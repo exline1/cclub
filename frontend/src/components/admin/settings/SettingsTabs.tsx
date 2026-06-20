@@ -21,14 +21,14 @@ export default function SettingsTabs() {
   const [closeTime, setCloseTime] = useState("23:00");
 
   // 3. Club Information
-  const [clubName, setClubName] = useState("GameClub Hub");
+  const [clubName, setClubName] = useState("cclub");
   const [clubAddress, setClubAddress] = useState("Toshkent sh., Yunusobod t.");
   const [clubPhone, setClubPhone] = useState("+998 90 123 45 67");
 
   // Initial Load from LocalStorage
   useEffect(() => {
     // 1. Load Pricing
-    const savedPricing = localStorage.getItem("gameclub_zone_prices");
+    const savedPricing = localStorage.getItem("cclub_zone_prices");
     if (savedPricing) {
       try {
         const prices = JSON.parse(savedPricing);
@@ -39,7 +39,7 @@ export default function SettingsTabs() {
     }
 
     // 2. Load Hours
-    const savedHours = localStorage.getItem("gameclub_club_hours");
+    const savedHours = localStorage.getItem("cclub_club_hours");
     if (savedHours) {
       try {
         const hours = JSON.parse(savedHours);
@@ -49,11 +49,11 @@ export default function SettingsTabs() {
     }
 
     // 3. Load Club Info
-    const savedInfo = localStorage.getItem("gameclub_club_info");
+    const savedInfo = localStorage.getItem("cclub_club_info");
     if (savedInfo) {
       try {
         const info = JSON.parse(savedInfo);
-        setClubName(info.name ?? "GameClub Hub");
+        setClubName(info.name ?? "cclub");
         setClubAddress(info.address ?? "Toshkent sh., Yunusobod t.");
         setClubPhone(info.phone ?? "+998 90 123 45 67");
       } catch (e) {}
@@ -73,7 +73,7 @@ export default function SettingsTabs() {
     }
 
     const prices = { Standard: std, VIP: vip, PS5: ps5 };
-    localStorage.setItem("gameclub_zone_prices", JSON.stringify(prices));
+    localStorage.setItem("cclub_zone_prices", JSON.stringify(prices));
     toast.success("Tarif narxlari muvaffaqiyatli saqlandi!");
     
     logActivity("Tizim sozlamalari o'zgartirildi", "Zonalar tarif narxlari yangilandi.", "system");
@@ -87,7 +87,7 @@ export default function SettingsTabs() {
     }
 
     const hours = { open: openTime, close: closeTime };
-    localStorage.setItem("gameclub_club_hours", JSON.stringify(hours));
+    localStorage.setItem("cclub_club_hours", JSON.stringify(hours));
     toast.success("Klub ish vaqti muvaffaqiyatli saqlandi!");
 
     logActivity("Klub ish vaqti o'zgartirildi", `Ochilish: ${openTime}, yopilish: ${closeTime}.`, "system");
@@ -101,14 +101,14 @@ export default function SettingsTabs() {
     }
 
     const info = { name: clubName.trim(), address: clubAddress.trim(), phone: clubPhone.trim() };
-    localStorage.setItem("gameclub_club_info", JSON.stringify(info));
+    localStorage.setItem("cclub_club_info", JSON.stringify(info));
     toast.success("Klub ma'lumotlari muvaffaqiyatli saqlandi!");
 
     logActivity("Klub profili yangilandi", `Nomi: ${clubName}.`, "system");
   };
 
   const logActivity = (action: string, details: string, type: "pc" | "order" | "system" | "product") => {
-    const savedLogs = localStorage.getItem("gameclub_admin_activity");
+    const savedLogs = localStorage.getItem("cclub_admin_activity");
     let logs = [];
     if (savedLogs) {
       try {
@@ -122,8 +122,8 @@ export default function SettingsTabs() {
       timestamp: new Date().toISOString(),
       type
     };
-    localStorage.setItem("gameclub_admin_activity", JSON.stringify([newLog, ...logs].slice(0, 100)));
-    window.dispatchEvent(new Event("gameclub_activity_updated"));
+    localStorage.setItem("cclub_admin_activity", JSON.stringify([newLog, ...logs].slice(0, 100)));
+    window.dispatchEvent(new Event("cclub_activity_updated"));
   };
 
   const TABS: { key: TabKey; label: string; icon: any }[] = [

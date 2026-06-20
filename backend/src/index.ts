@@ -11,7 +11,7 @@ app.use(express.json());
 app.get("/api/health", (_req, res) => {
   res.json({
     status: "ok",
-    service: "gameclub-hub-backend",
+    service: "cclub-backend",
     message: "Backend tayyor — keyingi fazada API qo'shiladi",
   });
 });

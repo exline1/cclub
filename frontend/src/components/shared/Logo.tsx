@@ -25,7 +25,7 @@ export function Logo({
       <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-lg sm:h-11 sm:w-11">
         <Image
           src={IMAGE_PATHS.logo}
-          alt="GameClub Hub logotipi"
+          alt="cclub logotipi"
           fill
           sizes="44px"
           className={cn("object-contain", imageClassName)}
@@ -34,7 +34,7 @@ export function Logo({
       </div>
       {showText && (
         <span className="font-heading text-base font-bold tracking-tight text-text-primary sm:text-lg">
-          GameClub Hub
+          cclub
         </span>
       )}
     </div>

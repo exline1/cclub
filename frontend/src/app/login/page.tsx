@@ -4,8 +4,8 @@ import { LoginForm } from "@/components/auth/LoginForm";
 import { Logo } from "@/components/shared/Logo";
 
 export const metadata = {
-  title: "Kirish — GameClub Hub",
-  description: "GameClub Hub hisobingizga kiring",
+  title: "Kirish — cclub",
+  description: "cclub hisobingizga kiring",
 };
 
 export default function LoginPage() {

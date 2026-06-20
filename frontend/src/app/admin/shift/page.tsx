@@ -18,7 +18,7 @@ export default function ShiftAdminPage() {
 
   useEffect(() => {
     // Check if shift is closed from localStorage
-    const saved = localStorage.getItem("gameclub_admin_shift_closed");
+    const saved = localStorage.getItem("cclub_admin_shift_closed");
     if (saved === "true") {
       setIsShiftClosed(true);
     }
@@ -27,11 +27,11 @@ export default function ShiftAdminPage() {
 
   const handleConfirmClose = () => {
     setIsShiftClosed(true);
-    localStorage.setItem("gameclub_admin_shift_closed", "true");
+    localStorage.setItem("cclub_admin_shift_closed", "true");
     toast.success("Smena yopildi!");
     
     // Log system activity event
-    const savedLogs = localStorage.getItem("gameclub_admin_activity");
+    const savedLogs = localStorage.getItem("cclub_admin_activity");
     let logs = [];
     if (savedLogs) {
       try {
@@ -45,13 +45,13 @@ export default function ShiftAdminPage() {
       timestamp: new Date().toISOString(),
       type: "system" as const
     };
-    localStorage.setItem("gameclub_admin_activity", JSON.stringify([newLog, ...logs].slice(0, 100)));
-    window.dispatchEvent(new Event("gameclub_activity_updated"));
+    localStorage.setItem("cclub_admin_activity", JSON.stringify([newLog, ...logs].slice(0, 100)));
+    window.dispatchEvent(new Event("cclub_activity_updated"));
   };
 
   const handleReopenShift = () => {
     setIsShiftClosed(false);
-    localStorage.removeItem("gameclub_admin_shift_closed");
+    localStorage.removeItem("cclub_admin_shift_closed");
     toast.info("Yangi smena ochildi!");
   };
 

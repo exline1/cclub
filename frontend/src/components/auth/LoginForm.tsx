@@ -81,7 +81,7 @@ export function LoginForm() {
 
     // Save mock user session to localStorage for dashboard retrieval
     const cleanPhone = loginMethod === "phone" ? identifier : "+998 90 999 88 77";
-    const cleanEmail = loginMethod === "email" ? identifier : "guest@gameclubhub.uz";
+    const cleanEmail = loginMethod === "email" ? identifier : "guest@cclub.uz";
     const mockUser = {
       name: "Ali",
       phone: cleanPhone,
@@ -109,7 +109,7 @@ export function LoginForm() {
   return (
     <AuthCard
       title="Xush kelibsiz"
-      subtitle="GameClub Hub hisobingizga kiring"
+      subtitle="cclub hisobingizga kiring"
     >
       {/* Login Method Toggle */}
       <div className="mb-6 flex rounded-lg bg-background-primary p-1 border border-border-glass">

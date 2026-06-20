@@ -1,8 +1,8 @@
 {
-  "name": "gameclub-hub-backend",
+  "name": "cclub-backend",
   "version": "0.1.0",
   "private": true,
-  "description": "GameClub Hub API server — keyingi fazalarda rivojlantiriladi",
+  "description": "cclub API server — keyingi fazalarda rivojlantiriladi",
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc",

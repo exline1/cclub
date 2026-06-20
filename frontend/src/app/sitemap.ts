@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://gameclubhub.uz";
+  const baseUrl = "https://cclub.uz";
   const routes = ["", "/menu", "/login", "/register"];
 
   return routes.map((route) => ({
