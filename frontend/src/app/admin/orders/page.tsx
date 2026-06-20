@@ -314,7 +314,7 @@ export default function OrdersAdminPage() {
         {isCancelledOpen && (
           <div className="mt-4 border-t border-border-glass/20 pt-4 animate-in slide-in-from-top-2 duration-200">
             {cancelledOrders.length === 0 ? (
-              <p className="text-xs text-text-secondary/70 text-center py-6">Bekor qilingan buyurtmalar yo'q.</p>
+              <p className="text-xs text-text-secondary/70 text-center py-6">Bekor qilingan buyurtmalar yo&apos;q.</p>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {cancelledOrders.map((order) => (

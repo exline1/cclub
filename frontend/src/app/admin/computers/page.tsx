@@ -391,7 +391,7 @@ function ComputersAdminContent() {
         <div className="flex items-center justify-between bg-status-ending/10 border border-status-ending/30 text-status-ending px-4 py-3 rounded-xl text-xs font-semibold">
           <div className="flex items-center gap-2">
             <AlertTriangle className="h-4 w-4" />
-            <span>Faqat tugash arafasidagi kompyuterlar ko'rsatilmoqda (Status: {statusParam})</span>
+            <span>Faqat tugash arafasidagi kompyuterlar ko&apos;rsatilmoqda (Status: {statusParam})</span>
           </div>
           <button 
             onClick={() => {

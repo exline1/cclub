@@ -229,7 +229,7 @@ export default function ComputerControlPanel({
                   >
                     <span>30 daqiqa</span>
                     <span className="text-[9px] opacity-80">
-                      {(getZonePrice(computer.zone) * 0.5).toLocaleString()} so'm
+                      {(getZonePrice(computer.zone) * 0.5).toLocaleString()} so&apos;m
                     </span>
                   </button>
                   <button
@@ -247,7 +247,7 @@ export default function ComputerControlPanel({
                   >
                     <span>1 soat</span>
                     <span className="text-[9px] opacity-80">
-                      {(getZonePrice(computer.zone) * 1).toLocaleString()} so'm
+                      {(getZonePrice(computer.zone) * 1).toLocaleString()} so&apos;m
                     </span>
                   </button>
                   <button
@@ -265,7 +265,7 @@ export default function ComputerControlPanel({
                   >
                     <span>2 soat</span>
                     <span className="text-[9px] opacity-80">
-                      {(getZonePrice(computer.zone) * 2).toLocaleString()} so'm
+                      {(getZonePrice(computer.zone) * 2).toLocaleString()} so&apos;m
                     </span>
                   </button>
                   <button
@@ -283,7 +283,7 @@ export default function ComputerControlPanel({
                   >
                     <span>3 soat</span>
                     <span className="text-[9px] opacity-80">
-                      {(getZonePrice(computer.zone) * 3).toLocaleString()} so'm
+                      {(getZonePrice(computer.zone) * 3).toLocaleString()} so&apos;m
                     </span>
                   </button>
                 </div>
@@ -328,7 +328,7 @@ export default function ComputerControlPanel({
                       seconds = isNaN(minutes) ? 0 : minutes * 60;
                     }
                     const totalCost = (hourlyPrice * seconds) / 3600;
-                    return `${Math.round(totalCost).toLocaleString()} so'm`;
+                    return `${Math.round(totalCost).toLocaleString()} so&apos;m`;
                   })()}
                 </span>
               </div>
@@ -361,7 +361,7 @@ export default function ComputerControlPanel({
                       15 daq.
                     </span>
                     <span className="text-[9px] text-text-secondary">
-                      {(getZonePrice(computer.zone) * 0.25).toLocaleString()} so'm
+                      {(getZonePrice(computer.zone) * 0.25).toLocaleString()} so&apos;m
                     </span>
                   </button>
                   <button
@@ -374,7 +374,7 @@ export default function ComputerControlPanel({
                       30 daq.
                     </span>
                     <span className="text-[9px] text-text-secondary">
-                      {(getZonePrice(computer.zone) * 0.5).toLocaleString()} so'm
+                      {(getZonePrice(computer.zone) * 0.5).toLocaleString()} so&apos;m
                     </span>
                   </button>
                   <button
@@ -387,7 +387,7 @@ export default function ComputerControlPanel({
                       1 soat
                     </span>
                     <span className="text-[9px] text-text-secondary">
-                      {(getZonePrice(computer.zone) * 1).toLocaleString()} so'm
+                      {(getZonePrice(computer.zone) * 1).toLocaleString()} so&apos;m
                     </span>
                   </button>
                 </div>
