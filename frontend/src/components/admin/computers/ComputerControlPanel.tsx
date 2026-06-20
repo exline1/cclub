@@ -29,6 +29,31 @@ export default function ComputerControlPanel({
   const [customMinutes, setCustomMinutes] = useState("");
   const [isCustomMode, setIsCustomMode] = useState(false);
 
+  const [pricing, setPricing] = useState({
+    Standard: 10000,
+    VIP: 18000,
+    PS5: 25000
+  });
+
+  useEffect(() => {
+    const saved = localStorage.getItem("cclub_zone_prices");
+    if (saved) {
+      try {
+        const prices = JSON.parse(saved);
+        setPricing({
+          Standard: Number(prices.Standard ?? 10000),
+          VIP: Number(prices.VIP ?? 18000),
+          PS5: Number(prices.PS5 ?? 25000)
+        });
+      } catch (e) {}
+    }
+  }, [isOpen]);
+
+  const getZonePrice = (zone: string) => {
+    const price = pricing[zone as keyof typeof pricing] ?? 10000;
+    return price < 1000 ? price * 1000 : price;
+  };
+
   // Reset inputs when computer changes
   useEffect(() => {
     if (computer) {
@@ -196,13 +221,16 @@ export default function ComputerControlPanel({
                       setIsCustomMode(false);
                     }}
                     className={cn(
-                      "py-2.5 rounded-xl text-xs font-bold border transition-all duration-200",
+                      "py-2 px-1 rounded-xl text-xs font-bold border transition-all duration-200 flex flex-col items-center justify-center gap-0.5",
                       selectedDuration === 1800 && !isCustomMode
                         ? "border-accent-glow bg-accent-primary text-white shadow-accent-glow-sm"
                         : "border-border-glass bg-background-primary text-text-secondary hover:border-accent-glow/50 hover:text-text-primary"
                     )}
                   >
-                    30 daqiqa
+                    <span>30 daqiqa</span>
+                    <span className="text-[9px] opacity-80">
+                      {(getZonePrice(computer.zone) * 0.5).toLocaleString()} so'm
+                    </span>
                   </button>
                   <button
                     type="button"
@@ -211,13 +239,16 @@ export default function ComputerControlPanel({
                       setIsCustomMode(false);
                     }}
                     className={cn(
-                      "py-2.5 rounded-xl text-xs font-bold border transition-all duration-200",
+                      "py-2 px-1 rounded-xl text-xs font-bold border transition-all duration-200 flex flex-col items-center justify-center gap-0.5",
                       selectedDuration === 3600 && !isCustomMode
                         ? "border-accent-glow bg-accent-primary text-white shadow-accent-glow-sm"
                         : "border-border-glass bg-background-primary text-text-secondary hover:border-accent-glow/50 hover:text-text-primary"
                     )}
                   >
-                    1 soat
+                    <span>1 soat</span>
+                    <span className="text-[9px] opacity-80">
+                      {(getZonePrice(computer.zone) * 1).toLocaleString()} so'm
+                    </span>
                   </button>
                   <button
                     type="button"
@@ -226,13 +257,16 @@ export default function ComputerControlPanel({
                       setIsCustomMode(false);
                     }}
                     className={cn(
-                      "py-2.5 rounded-xl text-xs font-bold border transition-all duration-200",
+                      "py-2 px-1 rounded-xl text-xs font-bold border transition-all duration-200 flex flex-col items-center justify-center gap-0.5",
                       selectedDuration === 7200 && !isCustomMode
                         ? "border-accent-glow bg-accent-primary text-white shadow-accent-glow-sm"
                         : "border-border-glass bg-background-primary text-text-secondary hover:border-accent-glow/50 hover:text-text-primary"
                     )}
                   >
-                    2 soat
+                    <span>2 soat</span>
+                    <span className="text-[9px] opacity-80">
+                      {(getZonePrice(computer.zone) * 2).toLocaleString()} so'm
+                    </span>
                   </button>
                   <button
                     type="button"
@@ -241,13 +275,16 @@ export default function ComputerControlPanel({
                       setIsCustomMode(false);
                     }}
                     className={cn(
-                      "py-2.5 rounded-xl text-xs font-bold border transition-all duration-200",
+                      "py-2 px-1 rounded-xl text-xs font-bold border transition-all duration-200 flex flex-col items-center justify-center gap-0.5",
                       selectedDuration === 10800 && !isCustomMode
                         ? "border-accent-glow bg-accent-primary text-white shadow-accent-glow-sm"
                         : "border-border-glass bg-background-primary text-text-secondary hover:border-accent-glow/50 hover:text-text-primary"
                     )}
                   >
-                    3 soat
+                    <span>3 soat</span>
+                    <span className="text-[9px] opacity-80">
+                      {(getZonePrice(computer.zone) * 3).toLocaleString()} so'm
+                    </span>
                   </button>
                 </div>
 
@@ -279,6 +316,23 @@ export default function ComputerControlPanel({
                 )}
               </div>
 
+              {/* Pricing Summary */}
+              <div className="rounded-xl bg-background-primary border border-border-glass/40 p-4 mt-4 flex items-center justify-between">
+                <span className="text-xs text-text-secondary">Jami hisob:</span>
+                <span className="font-heading text-sm font-bold text-accent-glow">
+                  {(() => {
+                    const hourlyPrice = getZonePrice(computer.zone);
+                    let seconds = selectedDuration;
+                    if (isCustomMode) {
+                      const minutes = parseInt(customMinutes);
+                      seconds = isNaN(minutes) ? 0 : minutes * 60;
+                    }
+                    const totalCost = (hourlyPrice * seconds) / 3600;
+                    return `${Math.round(totalCost).toLocaleString()} so'm`;
+                  })()}
+                </span>
+              </div>
+
               {/* Start Trigger Button */}
               <button
                 type="submit"
@@ -300,26 +354,41 @@ export default function ComputerControlPanel({
                   <button
                     type="button"
                     onClick={() => onAddTime(computer.id, 900)} // +15 min
-                    className="py-2.5 rounded-xl border border-border-glass bg-background-primary text-text-primary hover:border-accent-glow/60 hover:bg-accent-deep/10 text-xs font-bold flex items-center justify-center gap-1 active:scale-95 transition-all duration-200"
+                    className="py-2 px-1 rounded-xl border border-border-glass bg-background-primary text-text-primary hover:border-accent-glow/60 hover:bg-accent-deep/10 text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all duration-200"
                   >
-                    <Plus className="h-3.5 w-3.5" />
-                    15 daq.
+                    <span className="flex items-center gap-1">
+                      <Plus className="h-3 w-3" />
+                      15 daq.
+                    </span>
+                    <span className="text-[9px] text-text-secondary">
+                      {(getZonePrice(computer.zone) * 0.25).toLocaleString()} so'm
+                    </span>
                   </button>
                   <button
                     type="button"
                     onClick={() => onAddTime(computer.id, 1800)} // +30 min
-                    className="py-2.5 rounded-xl border border-border-glass bg-background-primary text-text-primary hover:border-accent-glow/60 hover:bg-accent-deep/10 text-xs font-bold flex items-center justify-center gap-1 active:scale-95 transition-all duration-200"
+                    className="py-2 px-1 rounded-xl border border-border-glass bg-background-primary text-text-primary hover:border-accent-glow/60 hover:bg-accent-deep/10 text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all duration-200"
                   >
-                    <Plus className="h-3.5 w-3.5" />
-                    30 daq.
+                    <span className="flex items-center gap-1">
+                      <Plus className="h-3 w-3" />
+                      30 daq.
+                    </span>
+                    <span className="text-[9px] text-text-secondary">
+                      {(getZonePrice(computer.zone) * 0.5).toLocaleString()} so'm
+                    </span>
                   </button>
                   <button
                     type="button"
                     onClick={() => onAddTime(computer.id, 3600)} // +60 min
-                    className="py-2.5 rounded-xl border border-border-glass bg-background-primary text-text-primary hover:border-accent-glow/60 hover:bg-accent-deep/10 text-xs font-bold flex items-center justify-center gap-1 active:scale-95 transition-all duration-200"
+                    className="py-2 px-1 rounded-xl border border-border-glass bg-background-primary text-text-primary hover:border-accent-glow/60 hover:bg-accent-deep/10 text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all duration-200"
                   >
-                    <Plus className="h-3.5 w-3.5" />
-                    1 soat
+                    <span className="flex items-center gap-1">
+                      <Plus className="h-3 w-3" />
+                      1 soat
+                    </span>
+                    <span className="text-[9px] text-text-secondary">
+                      {(getZonePrice(computer.zone) * 1).toLocaleString()} so'm
+                    </span>
                   </button>
                 </div>
               </div>
