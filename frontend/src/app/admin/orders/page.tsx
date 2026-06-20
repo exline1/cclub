@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { ShoppingBag, Plus, Sparkles, Coffee } from "lucide-react";
+import { ShoppingBag, Plus, Sparkles, Coffee, ChevronDown, ChevronUp } from "lucide-react";
 import { toast } from "sonner";
 import { MOCK_ORDERS, Order, Computer } from "@/lib/admin-mock-data";
 import OrderColumn from "@/components/admin/orders/OrderColumn";
+import OrderCard from "@/components/admin/orders/OrderCard";
 import { NotificationItem } from "@/components/admin/orders/NotificationDropdown";
 
 // Helper list of mock products for simulation
@@ -28,6 +29,7 @@ const VALID_PC_NUMBERS = [
 export default function OrdersAdminPage() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
+  const [isCancelledOpen, setIsCancelledOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
   // 1. Initial State Load
@@ -105,6 +107,23 @@ export default function OrdersAdminPage() {
     logActivity(
       `Buyurtma yetkazildi`,
       `PC ${order?.computerNumber || ""} buyurtmasi (#${orderId}) mijozga topshirildi.`,
+      "order"
+    );
+  };
+
+  const handleCancelOrder = (orderId: string) => {
+    const order = orders.find((o) => o.id === orderId);
+    const updated = orders.map((o) => {
+      if (o.id === orderId) {
+        return { ...o, status: "cancelled" as const };
+      }
+      return o;
+    });
+    saveOrders(updated);
+    toast.error(`Buyurtma bekor qilindi (#${orderId})`);
+    logActivity(
+      `Buyurtma bekor qilindi`,
+      `PC ${order?.computerNumber || ""} buyurtmasi (#${orderId}) bekor qilindi.`,
       "order"
     );
   };
@@ -199,6 +218,7 @@ export default function OrdersAdminPage() {
   const pendingOrders = sortedOrders.filter((o) => o.status === "pending");
   const preparingOrders = sortedOrders.filter((o) => o.status === "preparing");
   const deliveredOrders = sortedOrders.filter((o) => o.status === "delivered");
+  const cancelledOrders = sortedOrders.filter((o) => o.status === "cancelled");
 
   if (!isMounted) {
     return (
@@ -254,18 +274,58 @@ export default function OrdersAdminPage() {
           status="pending"
           orders={pendingOrders}
           onAccept={handleAcceptOrder}
+          onCancel={handleCancelOrder}
         />
         <OrderColumn
           title="Tayyorlanmoqda"
           status="preparing"
           orders={preparingOrders}
           onReady={handleReadyOrder}
+          onCancel={handleCancelOrder}
         />
         <OrderColumn
           title="Yetkazildi"
           status="delivered"
           orders={deliveredOrders}
         />
+      </div>
+
+      {/* Collapsible Cancelled Orders Section */}
+      <div className="bg-background-secondary/10 border border-border-glass/25 rounded-2xl p-4 sm:p-5">
+        <button
+          type="button"
+          onClick={() => setIsCancelledOpen(!isCancelledOpen)}
+          className="flex items-center justify-between w-full text-left font-heading text-sm font-bold text-text-primary tracking-wide select-none cursor-pointer"
+        >
+          <div className="flex items-center gap-2">
+            <span className="h-2.5 w-2.5 rounded-full bg-status-occupied opacity-60" />
+            <span>Bekor qilingan buyurtmalar</span>
+            <span className="text-[10px] bg-background-primary border border-border-glass/50 px-1.5 py-0.5 rounded text-text-secondary font-bold">
+              {cancelledOrders.length} ta buyurtma
+            </span>
+          </div>
+          {isCancelledOpen ? (
+            <ChevronUp className="h-4.5 w-4.5 text-text-secondary" />
+          ) : (
+            <ChevronDown className="h-4.5 w-4.5 text-text-secondary" />
+          )}
+        </button>
+
+        {isCancelledOpen && (
+          <div className="mt-4 border-t border-border-glass/20 pt-4 animate-in slide-in-from-top-2 duration-200">
+            {cancelledOrders.length === 0 ? (
+              <p className="text-xs text-text-secondary/70 text-center py-6">Bekor qilingan buyurtmalar yo'q.</p>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {cancelledOrders.map((order) => (
+                  <div key={order.id} className="opacity-50 hover:opacity-80 transition-opacity duration-200">
+                    <OrderCard order={order} />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </main>
   );

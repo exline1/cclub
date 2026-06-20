@@ -2,16 +2,17 @@
 
 import React, { useState, useEffect } from "react";
 import { Order } from "@/lib/admin-mock-data";
-import { Clock, User, Coffee, Check, Play } from "lucide-react";
+import { Clock, User, Coffee, Check, Play, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface OrderCardProps {
   order: Order;
   onAccept?: (orderId: string) => void;
   onReady?: (orderId: string) => void;
+  onCancel?: (orderId: string) => void;
 }
 
-export default function OrderCard({ order, onAccept, onReady }: OrderCardProps) {
+export default function OrderCard({ order, onAccept, onReady, onCancel }: OrderCardProps) {
   const [minutesAgo, setMinutesAgo] = useState(0);
 
   // Minutes ago offset calculator
@@ -55,6 +56,7 @@ export default function OrderCard({ order, onAccept, onReady }: OrderCardProps) 
   const isPending = order.status === "pending";
   const isPreparing = order.status === "preparing";
   const isDelivered = order.status === "delivered";
+  const isCancelled = order.status === "cancelled";
 
   return (
     <div
@@ -103,29 +105,65 @@ export default function OrderCard({ order, onAccept, onReady }: OrderCardProps) 
       {/* Actions */}
       <div className="pt-1.5">
         {isPending && onAccept && (
-          <button
-            type="button"
-            onClick={() => onAccept(order.id)}
-            className="w-full bg-accent-primary hover:bg-accent-glow text-white font-bold py-2 px-3 rounded-lg text-xs flex items-center justify-center gap-1.5 active:scale-95 transition-all duration-200 shadow-lg shadow-accent-primary/10"
-          >
-            <Play className="h-3 w-3 fill-current" />
-            Qabul qilish
-          </button>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={() => onAccept(order.id)}
+              className="flex-1 bg-accent-primary hover:bg-accent-glow text-white font-bold py-2 px-3 rounded-lg text-xs flex items-center justify-center gap-1.5 active:scale-95 transition-all duration-200 shadow-lg shadow-accent-primary/10"
+            >
+              <Play className="h-3 w-3 fill-current" />
+              Qabul qilish
+            </button>
+            {onCancel && (
+              <button
+                type="button"
+                onClick={() => {
+                  if (confirm(`Buyurtmani (#${order.id}) bekor qilmoqchimisiz?`)) {
+                    onCancel(order.id);
+                  }
+                }}
+                className="px-3 py-2 rounded-lg border border-border-glass bg-background-primary/30 text-text-secondary hover:text-status-occupied hover:border-status-occupied/50 active:scale-95 transition-all duration-200 text-xs font-bold"
+              >
+                Bekor qilish
+              </button>
+            )}
+          </div>
         )}
         {isPreparing && onReady && (
-          <button
-            type="button"
-            onClick={() => onReady(order.id)}
-            className="w-full bg-status-free hover:bg-status-free/90 text-white font-bold py-2 px-3 rounded-lg text-xs flex items-center justify-center gap-1.5 active:scale-95 transition-all duration-200 shadow-lg shadow-status-free/10"
-          >
-            <Check className="h-3.5 w-3.5" />
-            Tayyor
-          </button>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={() => onReady(order.id)}
+              className="flex-1 bg-status-free hover:bg-status-free/90 text-white font-bold py-2 px-3 rounded-lg text-xs flex items-center justify-center gap-1.5 active:scale-95 transition-all duration-200 shadow-lg shadow-status-free/10"
+            >
+              <Check className="h-3.5 w-3.5" />
+              Tayyor
+            </button>
+            {onCancel && (
+              <button
+                type="button"
+                onClick={() => {
+                  if (confirm(`Buyurtmani (#${order.id}) bekor qilmoqchimisiz?`)) {
+                    onCancel(order.id);
+                  }
+                }}
+                className="px-3 py-2 rounded-lg border border-border-glass bg-background-primary/30 text-text-secondary hover:text-status-occupied hover:border-status-occupied/50 active:scale-95 transition-all duration-200 text-xs font-bold"
+              >
+                Bekor qilish
+              </button>
+            )}
+          </div>
         )}
         {isDelivered && (
           <div className="w-full py-1.5 rounded-lg bg-status-free/10 border border-status-free/20 text-status-free text-[10px] font-bold uppercase tracking-wider text-center flex items-center justify-center gap-1">
             <Check className="h-3 w-3" />
             Yetkazildi
+          </div>
+        )}
+        {isCancelled && (
+          <div className="w-full py-1.5 rounded-lg bg-status-occupied/10 border border-status-occupied/25 text-status-occupied text-[10px] font-bold uppercase tracking-wider text-center flex items-center justify-center gap-1">
+            <X className="h-3 w-3" />
+            Bekor qilindi
           </div>
         )}
       </div>

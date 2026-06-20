@@ -12,6 +12,7 @@ interface OrderColumnProps {
   orders: Order[];
   onAccept?: (orderId: string) => void;
   onReady?: (orderId: string) => void;
+  onCancel?: (orderId: string) => void;
 }
 
 export default function OrderColumn({
@@ -20,6 +21,7 @@ export default function OrderColumn({
   orders,
   onAccept,
   onReady,
+  onCancel,
 }: OrderColumnProps) {
   const isPending = status === "pending";
   const isPreparing = status === "preparing";
@@ -78,6 +80,7 @@ export default function OrderColumn({
               order={order}
               onAccept={onAccept}
               onReady={onReady}
+              onCancel={onCancel}
             />
           ))
         )}

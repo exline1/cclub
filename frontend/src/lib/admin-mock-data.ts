@@ -11,7 +11,7 @@ export interface Order {
   id: string;
   computerNumber: number;
   items: { name: string; qty: number }[];
-  status: "pending" | "preparing" | "delivered";
+  status: "pending" | "preparing" | "delivered" | "cancelled";
   createdAt: string;
   total?: number;
 }
