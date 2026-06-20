@@ -216,14 +216,8 @@ export function LoginForm() {
             </Label>
           </div>
           <Link
-            href="#"
+            href="/forgot-password"
             className="text-xs text-accent-glow transition-colors duration-200 hover:text-accent-primary"
-            onClick={(e) => {
-              e.preventDefault();
-              toast.info("Tez orada", {
-                description: "Parolni tiklash funksiyasi keyingi bosqichda.",
-              });
-            }}
           >
             Parolni unutdingizmi?
           </Link>

@@ -1,15 +1,12 @@
 "use client";
 
-import { useState, Dispatch, SetStateAction } from "react"; // Dispatch va SetStateAction import qilindi
-import { Calendar, Clock, AlertCircle, Monitor, X } from "lucide-react"; // Calendar va Clock ikonkalari qo'shildi
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { Calendar, Clock, AlertCircle, Monitor, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-// Date Picker va Time Picker uchun shartli ravishda inputlar qo'llaniladi,
-// chunki murakkab UI komponentlarini tuzatish imkoniyatim cheklangan.
-// haqiqiy loyihada siz @formkit/react-phone-input yoki shadcn/ui dan DatePicker/TimePicker komponentlarini ishlatishingiz mumkin.
+import { cn } from "@/lib/utils";
 
-// BookingModalProps interfeysiga yangi proplar qo'shildi
 interface BookingModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -26,8 +23,38 @@ const ZONES = [
   { id: "PS5", price: 25000, desc: "4K Katta ekran, PlayStation 5, 2x DualSense" },
 ];
 
-// Vaqtni belgilash o'rniga, endi sanani va vaqtni aniqlash kerak
-// const TIME_PRESETS = ["1 soat", "2 soat", "3 soat", "Boshqa"]; // Bu qator o'zgartiriladi
+interface MockPC {
+  id: string;
+  status: "free" | "occupied" | "ending_soon";
+}
+
+const MOCK_PCS: Record<string, MockPC[]> = {
+  Standard: [
+    { id: "1", status: "free" },
+    { id: "2", status: "occupied" },
+    { id: "3", status: "free" },
+    { id: "4", status: "ending_soon" },
+    { id: "5", status: "occupied" },
+    { id: "6", status: "free" },
+    { id: "7", status: "free" },
+    { id: "8", status: "occupied" },
+    { id: "9", status: "free" },
+    { id: "10", status: "free" },
+  ],
+  VIP: [
+    { id: "31", status: "free" },
+    { id: "32", status: "occupied" },
+    { id: "33", status: "ending_soon" },
+    { id: "34", status: "free" },
+    { id: "35", status: "occupied" },
+  ],
+  PS5: [
+    { id: "41", status: "free" },
+    { id: "42", status: "occupied" },
+    { id: "43", status: "ending_soon" },
+    { id: "44", status: "free" },
+  ],
+};
 
 export function BookingModal({ 
   isOpen, 
@@ -40,10 +67,14 @@ export function BookingModal({
 }: BookingModalProps) {
   const [mockFull, setMockFull] = useState(false);
   const [selectedZone, setSelectedZone] = useState("Standard");
-  // const [selectedTime, setSelectedTime] = useState("1 soat"); // Bu holat o'zgartiriladi
-  const [selectedDuration, setSelectedDuration] = useState("1"); // Davomiylik (soat) uchun state, "1" default
-  const [customDuration, setCustomDuration] = useState(""); // Maxsus davomiylik uchun
+  const [selectedDuration, setSelectedDuration] = useState("1");
+  const [customDuration, setCustomDuration] = useState("");
+  const [selectedPc, setSelectedPc] = useState("");
 
+  // Reset selected PC when zone changes
+  useEffect(() => {
+    setSelectedPc("");
+  }, [selectedZone]);
   
   if (!isOpen) return null;
 
@@ -51,29 +82,23 @@ export function BookingModal({
     e.preventDefault();
     if (mockFull) return;
 
-    // Agar tanlangan sana yoki vaqt bo'lmasa, ogohlantirish
+    if (!selectedPc) {
+      alert("Iltimos, o'yin kompyuterini tanlang.");
+      return;
+    }
+
     if (!bookingDate || !bookingTime) {
       alert("Iltimos, sana va vaqtni to'g'ri tanlang.");
       return;
     }
 
     const duration = customDuration ? `${customDuration} soat` : `${selectedDuration} soat`;
-    
-    // Generate a random mock PC number (davomiylik o'zgartirilgan bo'lsa ham, PC raqami shu tarzda qoladi)
-    const pcNum = selectedZone === "VIP" 
-      ? Math.floor(Math.random() * 5) + 31 // VIP PC numbers 31-35
-      : selectedZone === "PS5"
-      ? Math.floor(Math.random() * 4) + 41 // PS5 numbers 41-44
-      : Math.floor(Math.random() * 20) + 1; // Standard numbers 1-20
-
-    // onBook prop'i endi date va time ni ham qabul qiladi
-    onBook(pcNum.toString(), selectedZone, bookingDate, bookingTime, duration);
+    onBook(selectedPc, selectedZone, bookingDate, bookingTime, duration);
   };
 
   const getPrice = () => {
     const zone = ZONES.find((z) => z.id === selectedZone);
     const hourly = zone ? zone.price : 10000;
-    // Davomiylikni hisoblash
     const hours = parseInt(customDuration || selectedDuration) || 1; 
     return (hourly * hours).toLocaleString() + " so'm";
   };
@@ -87,7 +112,7 @@ export function BookingModal({
       />
 
       {/* Modal Content */}
-      <div className="relative glass-card w-full max-w-lg rounded-2xl border border-border-glass bg-background-secondary p-6 shadow-2xl z-10 overflow-hidden max-h-[90vh] flex flex-col">
+      <div className="relative glass-card w-full max-w-lg rounded-2xl border border-border-glass bg-background-secondary p-6 shadow-2xl z-10 overflow-hidden max-h-[90vh] flex flex-col animate-in fade-in zoom-in duration-200">
         
         {/* Top Control Header for Mock State */}
         <div className="flex items-center justify-between border-b border-border-glass/40 pb-3 mb-4 shrink-0">
@@ -106,6 +131,7 @@ export function BookingModal({
           <button
             type="button"
             onClick={onClose}
+            aria-label="Yopish"
             className="text-text-secondary hover:text-text-primary transition-colors h-8 w-8 flex items-center justify-center rounded-lg border border-border-glass/40 hover:border-accent-glow"
           >
             <X className="h-4 w-4" />
@@ -159,6 +185,62 @@ export function BookingModal({
                 </div>
               </div>
 
+              {/* Select Computer */}
+              <div className="space-y-2">
+                <Label>Kompyuterni tanlang</Label>
+                <div className="grid grid-cols-5 gap-2">
+                  {MOCK_PCS[selectedZone].map((pc) => {
+                    const isOccupied = pc.status === "occupied";
+                    const isEnding = pc.status === "ending_soon";
+                    const isSelected = selectedPc === pc.id;
+
+                    return (
+                      <button
+                        key={pc.id}
+                        type="button"
+                        disabled={isOccupied}
+                        onClick={() => setSelectedPc(pc.id)}
+                        aria-label={`Kompyuter ${pc.id}, holati: ${
+                          isOccupied 
+                            ? "band" 
+                            : isEnding 
+                            ? "yaqinda bo'shaydi" 
+                            : "bo'sh"
+                        }`}
+                        className={cn(
+                          "relative flex flex-col items-center justify-center p-2 rounded-xl border text-center transition-all duration-200 aspect-square select-none",
+                          isOccupied
+                            ? "bg-background-secondary/20 border-border-glass/40 opacity-40 cursor-not-allowed text-text-secondary"
+                            : isSelected
+                            ? "border-accent-glow bg-accent-deep/30 text-text-primary shadow-accent-glow-sm scale-95"
+                            : "border-border-glass bg-background-primary hover:border-accent-glow/50 text-text-primary active:scale-95"
+                        )}
+                      >
+                        <Monitor className="h-4 w-4 mb-1" />
+                        <span className="text-[10px] font-bold font-heading">PC {pc.id}</span>
+                        
+                        {isOccupied && (
+                          <span className="absolute -top-1.5 -right-1 px-1 py-0.5 rounded bg-status-occupied text-[7px] font-bold text-white uppercase scale-90">
+                            Band
+                          </span>
+                        )}
+                        {isEnding && !isSelected && (
+                          <span className="absolute -top-1.5 -right-1 px-1 py-0.5 rounded bg-status-ending text-[7px] font-bold text-white uppercase scale-90">
+                            Band*
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+                {!selectedPc && (
+                  <p className="text-xs text-status-ending font-semibold flex items-center gap-1 mt-1">
+                    <AlertCircle className="h-3.5 w-3.5" />
+                    Iltimos, o&apos;yin kompyuterini tanlang.
+                  </p>
+                )}
+              </div>
+
               {/* Date and Time Selection */}
               <div className="space-y-2">
                 <Label>Qachon band qilish kerak?</Label>
@@ -169,8 +251,8 @@ export function BookingModal({
                      <div className="relative">
                        <Input
                          id="booking-date"
-                         type="date" // Date input type
-                         className="pl-8" // Add padding for icon
+                         type="date"
+                         className="pl-8"
                          value={bookingDate}
                          onChange={(e) => setBookingDate(e.target.value)}
                          required
@@ -184,8 +266,8 @@ export function BookingModal({
                      <div className="relative">
                        <Input
                          id="booking-time"
-                         type="time" // Time input type
-                         className="pl-8" // Add padding for icon
+                         type="time"
+                         className="pl-8"
                          value={bookingTime}
                          onChange={(e) => setBookingTime(e.target.value)}
                          required
@@ -200,7 +282,6 @@ export function BookingModal({
               <div className="space-y-2">
                 <Label>Qancha vaqtga?</Label>
                 <div className="grid grid-cols-4 gap-2">
-                  {/* Predefined durations (e.g., 1h, 2h, 3h) */}
                   <button
                     type="button"
                     onClick={() => {setSelectedDuration("1"); setCustomDuration("");}}
@@ -234,21 +315,20 @@ export function BookingModal({
                   >
                     3 soat
                   </button>
-                  {/* Custom Duration Input */}
-                   <div className="col-span-1"> {/* Custom input spans one column */}
+                  <div className="col-span-1">
                       <Input
                         id="custom-duration"
                         type="number"
                         min="1"
-                        max="8" // Max duration example
+                        max="8"
                         placeholder="Maxs."
                         value={customDuration}
                         onChange={(e) => {
                           setCustomDuration(e.target.value);
-                          setSelectedDuration(""); // Clear selected duration when custom is used
+                          setSelectedDuration("");
                         }}
-                        className="h-10 text-center" // Center align text in input
-                        required={!selectedDuration && !customDuration} // Required if nothing is selected
+                        className="h-10 text-center"
+                        required={!selectedDuration && !customDuration}
                       />
                     </div>
                 </div>
@@ -272,7 +352,7 @@ export function BookingModal({
                 <Button type="button" variant="secondary" onClick={onClose} className="flex-1">
                   Bekor qilish
                 </Button>
-                <Button type="submit" className="flex-1">
+                <Button type="submit" className="flex-1" disabled={!selectedPc}>
                   Band qilish
                 </Button>
               </div>

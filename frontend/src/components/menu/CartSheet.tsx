@@ -57,6 +57,7 @@ export function CartSheet({
           <button
             type="button"
             onClick={onClose}
+            aria-label="Yopish"
             className="text-text-secondary hover:text-text-primary transition-colors h-8 w-8 flex items-center justify-center rounded-lg border border-border-glass/40 hover:border-accent-glow"
           >
             <X className="h-4 w-4" />
@@ -94,6 +95,7 @@ export function CartSheet({
                   <button
                     type="button"
                     onClick={() => onUpdateQuantity(item.product.id, -1)}
+                    aria-label="Kamaytirish"
                     className="h-6 w-6 flex items-center justify-center rounded text-text-secondary hover:text-text-primary hover:bg-background-secondary transition-colors"
                   >
                     <Minus className="h-3 w-3" />
@@ -104,6 +106,7 @@ export function CartSheet({
                   <button
                     type="button"
                     onClick={() => onUpdateQuantity(item.product.id, 1)}
+                    aria-label="Ko'paytirish"
                     className="h-6 w-6 flex items-center justify-center rounded text-text-secondary hover:text-text-primary hover:bg-background-secondary transition-colors"
                   >
                     <Plus className="h-3 w-3" />

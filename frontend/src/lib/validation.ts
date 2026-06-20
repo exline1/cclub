@@ -11,7 +11,7 @@ export function validateRequired(
   fieldName: string
 ): ValidationResult {
   if (!value.trim()) {
-    return { isValid: false, message: `${fieldName} maydoni to'ldirilishi shart` };
+    return { isValid: false, message: `${fieldName}ni kiriting` };
   }
   return { isValid: true };
 }
@@ -28,7 +28,7 @@ export function validateEmailOrPhone(value: string): ValidationResult {
   if (!isEmail && !isPhone) {
     return {
       isValid: false,
-      message: "To'g'ri email yoki telefon raqamini kiriting",
+      message: "Email yoki telefon raqamini to'g'ri kiriting",
     };
   }
 
@@ -38,17 +38,17 @@ export function validateEmailOrPhone(value: string): ValidationResult {
 export function validateEmail(value: string): ValidationResult {
   const trimmed = value.trim();
   if (!trimmed) {
-    return { isValid: false, message: "Email maydoni to'ldirilishi shart" };
+    return { isValid: false, message: "Email manzilini kiriting" };
   }
   if (!EMAIL_REGEX.test(trimmed)) {
-    return { isValid: false, message: "To'g'ri email formatini kiriting" };
+    return { isValid: false, message: "Email manzilini to'g'ri kiriting" };
   }
   return { isValid: true };
 }
 
 export function validatePassword(value: string): ValidationResult {
   if (!value) {
-    return { isValid: false, message: "Parol maydoni to'ldirilishi shart" };
+    return { isValid: false, message: "Parolni kiriting" };
   }
   if (value.length < 6) {
     return {

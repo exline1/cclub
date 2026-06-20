@@ -50,6 +50,7 @@ export function Header({ userName }: HeaderProps) {
             <DropdownMenuTrigger asChild>
               <button 
                 type="button" 
+                aria-label="Profil menyusi"
                 className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border-glass bg-background-primary/50 hover:bg-background-primary hover:border-accent-glow transition-all duration-200 active:scale-95"
               >
                 <div className="flex h-7 w-7 items-center justify-center rounded-full bg-accent-deep border border-accent-glow/50 text-[11px] font-bold text-text-primary">
