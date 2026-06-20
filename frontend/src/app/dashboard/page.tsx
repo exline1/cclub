@@ -11,18 +11,21 @@ import { UserCabinet } from "@/components/dashboard/UserCabinet";
 import { MenuPreview } from "@/components/dashboard/MenuPreview";
 import { OrderHistory, Order } from "@/components/dashboard/OrderHistory";
 
+// Session qismiga date va time qo'shildi
+interface Session {
+  pc: string;
+  zone: string;
+  date: string; // Yangi qo'shildi
+  time: string; // Yangi qo'shildi
+  duration: string;
+  startTime: number;
+}
+
 interface UserProfile {
   name: string;
   phone: string;
   email: string;
   joinDate: string;
-}
-
-interface Session {
-  pc: string;
-  zone: string;
-  duration: string;
-  startTime: number;
 }
 
 export default function DashboardPage() {
@@ -32,6 +35,10 @@ export default function DashboardPage() {
   const [session, setSession] = useState<Session | null>(null);
   const [orders, setOrders] = useState<Order[]>([]);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  
+  // Date va Time ni tanlash uchun state'lar
+  const [bookingDate, setBookingDate] = useState("");
+  const [bookingTime, setBookingTime] = useState("");
 
   useEffect(() => {
     // Load or initialize mock session data
@@ -57,6 +64,7 @@ export default function DashboardPage() {
 
     // Load orders
     const localOrders = localStorage.getItem("gameclub_orders");
+    // Xato tuzatildi: JSON.JSON.parse -> JSON.parse
     if (localOrders) {
       setOrders(JSON.parse(localOrders));
     }
@@ -64,16 +72,28 @@ export default function DashboardPage() {
     setIsLoading(false);
   }, []);
 
-  const handleBook = (pc: string, zone: string, duration: string) => {
-    const newSession = {
+  // HandleBook funksiyasi endi date, time va duration ni ham oladi
+  const handleBook = (
+    pc: string, 
+    zone: string, 
+    date: string, 
+    time: string, 
+    duration: string
+  ) => {
+    const newSession: Session = {
       pc,
       zone,
+      date, // Yangi qo'shildi
+      time, // Yangi qo'shildi
       duration,
       startTime: Date.now(),
     };
     localStorage.setItem("gameclub_session", JSON.stringify(newSession));
     setSession(newSession);
     setIsBookingOpen(false);
+    // Booking tugagandan so'ng state'larni ham tozalash
+    setBookingDate("");
+    setBookingTime("");
   };
 
   const handleEndSession = () => {
@@ -98,6 +118,7 @@ export default function DashboardPage() {
 
       <div className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
         {/* Active Session Notification */}
+        {/* ActiveSession komponentiga yangi ma'lumotlarni uzatish kerak bo'lsa, u yerda ham o'zgartirish kiritish kerak */}
         <ActiveSession session={session} onEndSession={handleEndSession} />
 
         {/* Layout Grid */}
@@ -129,7 +150,13 @@ export default function DashboardPage() {
       <BookingModal
         isOpen={isBookingOpen}
         onClose={() => setIsBookingOpen(false)}
-        onBook={handleBook}
+        // onBook prop'iga date va time state'larini ham uzatish
+        onBook={handleBook} 
+        // BookingModal'da date va time state'larini boshqarish uchun
+        bookingDate={bookingDate} 
+        setBookingDate={setBookingDate}
+        bookingTime={bookingTime}
+        setBookingTime={setBookingTime}
       />
     </main>
   );

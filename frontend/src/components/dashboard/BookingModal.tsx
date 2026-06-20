@@ -1,15 +1,23 @@
 "use client";
 
-import { useState } from "react";
-import { AlertCircle, Monitor, X } from "lucide-react";
+import { useState, Dispatch, SetStateAction } from "react"; // Dispatch va SetStateAction import qilindi
+import { Calendar, Clock, AlertCircle, Monitor, X } from "lucide-react"; // Calendar va Clock ikonkalari qo'shildi
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+// Date Picker va Time Picker uchun shartli ravishda inputlar qo'llaniladi,
+// chunki murakkab UI komponentlarini tuzatish imkoniyatim cheklangan.
+// haqiqiy loyihada siz @formkit/react-phone-input yoki shadcn/ui dan DatePicker/TimePicker komponentlarini ishlatishingiz mumkin.
 
+// BookingModalProps interfeysiga yangi proplar qo'shildi
 interface BookingModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onBook: (pc: string, zone: string, duration: string) => void;
+  onBook: (pc: string, zone: string, date: string, time: string, duration: string) => void;
+  bookingDate: string;
+  setBookingDate: Dispatch<SetStateAction<string>>;
+  bookingTime: string;
+  setBookingTime: Dispatch<SetStateAction<string>>;
 }
 
 const ZONES = [
@@ -18,13 +26,24 @@ const ZONES = [
   { id: "PS5", price: 25000, desc: "4K Katta ekran, PlayStation 5, 2x DualSense" },
 ];
 
-const TIME_PRESETS = ["1 soat", "2 soat", "3 soat", "Boshqa"];
+// Vaqtni belgilash o'rniga, endi sanani va vaqtni aniqlash kerak
+// const TIME_PRESETS = ["1 soat", "2 soat", "3 soat", "Boshqa"]; // Bu qator o'zgartiriladi
 
-export function BookingModal({ isOpen, onClose, onBook }: BookingModalProps) {
+export function BookingModal({ 
+  isOpen, 
+  onClose, 
+  onBook, 
+  bookingDate, 
+  setBookingDate, 
+  bookingTime, 
+  setBookingTime 
+}: BookingModalProps) {
   const [mockFull, setMockFull] = useState(false);
   const [selectedZone, setSelectedZone] = useState("Standard");
-  const [selectedTime, setSelectedTime] = useState("1 soat");
-  const [customTime, setCustomTime] = useState("");
+  // const [selectedTime, setSelectedTime] = useState("1 soat"); // Bu holat o'zgartiriladi
+  const [selectedDuration, setSelectedDuration] = useState("1"); // Davomiylik (soat) uchun state, "1" default
+  const [customDuration, setCustomDuration] = useState(""); // Maxsus davomiylik uchun
+
   
   if (!isOpen) return null;
 
@@ -32,21 +51,30 @@ export function BookingModal({ isOpen, onClose, onBook }: BookingModalProps) {
     e.preventDefault();
     if (mockFull) return;
 
-    const duration = selectedTime === "Boshqa" ? `${customTime || 1} soat` : selectedTime;
-    // Generate a random mock PC number
+    // Agar tanlangan sana yoki vaqt bo'lmasa, ogohlantirish
+    if (!bookingDate || !bookingTime) {
+      alert("Iltimos, sana va vaqtni to'g'ri tanlang.");
+      return;
+    }
+
+    const duration = customDuration ? `${customDuration} soat` : `${selectedDuration} soat`;
+    
+    // Generate a random mock PC number (davomiylik o'zgartirilgan bo'lsa ham, PC raqami shu tarzda qoladi)
     const pcNum = selectedZone === "VIP" 
       ? Math.floor(Math.random() * 5) + 31 // VIP PC numbers 31-35
       : selectedZone === "PS5"
       ? Math.floor(Math.random() * 4) + 41 // PS5 numbers 41-44
       : Math.floor(Math.random() * 20) + 1; // Standard numbers 1-20
 
-    onBook(pcNum.toString(), selectedZone, duration);
+    // onBook prop'i endi date va time ni ham qabul qiladi
+    onBook(pcNum.toString(), selectedZone, bookingDate, bookingTime, duration);
   };
 
   const getPrice = () => {
     const zone = ZONES.find((z) => z.id === selectedZone);
     const hourly = zone ? zone.price : 10000;
-    const hours = selectedTime === "Boshqa" ? parseInt(customTime) || 1 : parseInt(selectedTime) || 1;
+    // Davomiylikni hisoblash
+    const hours = parseInt(customDuration || selectedDuration) || 1; 
     return (hourly * hours).toLocaleString() + " so'm";
   };
 
@@ -131,46 +159,100 @@ export function BookingModal({ isOpen, onClose, onBook }: BookingModalProps) {
                 </div>
               </div>
 
-              {/* Time Presets */}
+              {/* Date and Time Selection */}
               <div className="space-y-2">
-                <Label>Vaqtni belgilang</Label>
-                <div className="grid grid-cols-4 gap-2">
-                  {TIME_PRESETS.map((preset) => (
-                    <button
-                      key={preset}
-                      type="button"
-                      onClick={() => {
-                        setSelectedTime(preset);
-                        if (preset !== "Boshqa") setCustomTime("");
-                      }}
-                      className={`py-2 rounded-lg text-xs font-bold border transition-all duration-200 ${
-                        selectedTime === preset
-                          ? "border-accent-glow bg-accent-primary text-white"
-                          : "border-border-glass bg-background-primary text-text-secondary hover:border-accent-glow/50 hover:text-text-primary"
-                      }`}
-                    >
-                      {preset}
-                    </button>
-                  ))}
+                <Label>Qachon band qilish kerak?</Label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                   {/* Date Input */}
+                   <div>
+                     <Label htmlFor="booking-date" className="text-xs text-text-secondary mb-1 block">Sana</Label>
+                     <div className="relative">
+                       <Input
+                         id="booking-date"
+                         type="date" // Date input type
+                         className="pl-8" // Add padding for icon
+                         value={bookingDate}
+                         onChange={(e) => setBookingDate(e.target.value)}
+                         required
+                       />
+                       <Calendar className="absolute left-2 top-1/2 -translate-y-1/2 h-4 w-4 text-text-secondary" />
+                     </div>
+                   </div>
+                   {/* Time Input */}
+                   <div>
+                     <Label htmlFor="booking-time" className="text-xs text-text-secondary mb-1 block">Vaqt</Label>
+                     <div className="relative">
+                       <Input
+                         id="booking-time"
+                         type="time" // Time input type
+                         className="pl-8" // Add padding for icon
+                         value={bookingTime}
+                         onChange={(e) => setBookingTime(e.target.value)}
+                         required
+                       />
+                       <Clock className="absolute left-2 top-1/2 -translate-y-1/2 h-4 w-4 text-text-secondary" />
+                     </div>
+                   </div>
                 </div>
               </div>
 
-              {/* Custom Time Input */}
-              {selectedTime === "Boshqa" && (
-                <div className="space-y-2 animate-accordion-down">
-                  <Label htmlFor="custom-hours">Soatlar soni</Label>
-                  <Input
-                    id="custom-hours"
-                    type="number"
-                    min="1"
-                    max="24"
-                    placeholder="Masalan: 5"
-                    value={customTime}
-                    onChange={(e) => setCustomTime(e.target.value)}
-                    required
-                  />
+              {/* Duration Selection */}
+              <div className="space-y-2">
+                <Label>Qancha vaqtga?</Label>
+                <div className="grid grid-cols-4 gap-2">
+                  {/* Predefined durations (e.g., 1h, 2h, 3h) */}
+                  <button
+                    type="button"
+                    onClick={() => {setSelectedDuration("1"); setCustomDuration("");}}
+                    className={`py-2 rounded-lg text-xs font-bold border transition-all duration-200 ${
+                      selectedDuration === "1" && !customDuration
+                        ? "border-accent-glow bg-accent-primary text-white"
+                        : "border-border-glass bg-background-primary text-text-secondary hover:border-accent-glow/50 hover:text-text-primary"
+                    }`}
+                  >
+                    1 soat
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {setSelectedDuration("2"); setCustomDuration("");}}
+                    className={`py-2 rounded-lg text-xs font-bold border transition-all duration-200 ${
+                      selectedDuration === "2" && !customDuration
+                        ? "border-accent-glow bg-accent-primary text-white"
+                        : "border-border-glass bg-background-primary text-text-secondary hover:border-accent-glow/50 hover:text-text-primary"
+                    }`}
+                  >
+                    2 soat
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {setSelectedDuration("3"); setCustomDuration("");}}
+                    className={`py-2 rounded-lg text-xs font-bold border transition-all duration-200 ${
+                      selectedDuration === "3" && !customDuration
+                        ? "border-accent-glow bg-accent-primary text-white"
+                        : "border-border-glass bg-background-primary text-text-secondary hover:border-accent-glow/50 hover:text-text-primary"
+                    }`}
+                  >
+                    3 soat
+                  </button>
+                  {/* Custom Duration Input */}
+                   <div className="col-span-1"> {/* Custom input spans one column */}
+                      <Input
+                        id="custom-duration"
+                        type="number"
+                        min="1"
+                        max="8" // Max duration example
+                        placeholder="Maxs."
+                        value={customDuration}
+                        onChange={(e) => {
+                          setCustomDuration(e.target.value);
+                          setSelectedDuration(""); // Clear selected duration when custom is used
+                        }}
+                        className="h-10 text-center" // Center align text in input
+                        required={!selectedDuration && !customDuration} // Required if nothing is selected
+                      />
+                    </div>
                 </div>
-              )}
+              </div>
 
               {/* Pricing Summary */}
               <div className="rounded-xl bg-background-primary border border-border-glass/40 p-4 mt-6">
@@ -181,7 +263,7 @@ export function BookingModal({ isOpen, onClose, onBook }: BookingModalProps) {
                   </span>
                 </div>
                 <p className="text-[10px] text-text-secondary mt-1.5 leading-relaxed">
-                  * To&apos;lov naqd pul shaklida kompyuter oldiga borilganda yoki administratorga amalga oshiriladi.
+                  * To&apos;lov naqd pul shaklida kompyuter oldiga borilganda yoki administratorga amalga oshiriladi. Ushbu band qilingan vaqtda kompyuter siz uchun tayyor turadi.
                 </p>
               </div>
 
