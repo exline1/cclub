@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeft, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MenuFilter } from "@/components/menu/MenuFilter";
@@ -22,15 +22,22 @@ const PRODUCTS: Product[] = [
   { id: "9", name: "Mineral Water Nestlé", category: "Drink", price: 5000, emoji: "💧", desc: "Gazsiz toza tabiiy mineral ichimlik suvi." }
 ];
 
-export default function MenuPage() {
+function MenuContent() {
   const router = useRouter();
-  const [activeCategory, setActiveCategory] = useState("all");
+  const searchParams = useSearchParams();
+  const rawCategory = searchParams.get("category") || "all";
+  
+  // Normalize rawCategory. E.g. snack -> Snack, drink -> Drink, fastfood -> Fastfood
+  const activeCategory = ["snack", "drink", "fastfood"].includes(rawCategory.toLowerCase())
+    ? rawCategory.charAt(0).toUpperCase() + rawCategory.slice(1).toLowerCase()
+    : "all";
+
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  // Load cart from sessionStorage on mount (if user refreshes)
+  // Load cart from localStorage on mount (if user refreshes)
   useEffect(() => {
-    const savedCart = sessionStorage.getItem("gameclub_cart");
+    const savedCart = localStorage.getItem("gameclub_cart");
     if (savedCart) {
       setCartItems(JSON.parse(savedCart));
     }
@@ -38,7 +45,7 @@ export default function MenuPage() {
 
   const saveCart = (newCart: CartItem[]) => {
     setCartItems(newCart);
-    sessionStorage.setItem("gameclub_cart", JSON.stringify(newCart));
+    localStorage.setItem("gameclub_cart", JSON.stringify(newCart));
   };
 
   const handleAddToCart = (product: Product) => {
@@ -106,7 +113,7 @@ export default function MenuPage() {
 
     // Clear cart
     saveCart([]);
-    sessionStorage.removeItem("gameclub_cart");
+    localStorage.removeItem("gameclub_cart");
     setIsCartOpen(false);
 
     toast.success("Buyurtma qabul qilindi!", {
@@ -115,6 +122,16 @@ export default function MenuPage() {
 
     // Redirect to dashboard to check order status
     router.push("/dashboard");
+  };
+
+  const handleCategoryChange = (category: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (category === "all") {
+      params.delete("category");
+    } else {
+      params.set("category", category.toLowerCase());
+    }
+    router.push(`?${params.toString()}`);
   };
 
   const filteredProducts = activeCategory === "all"
@@ -167,7 +184,7 @@ export default function MenuPage() {
           </span>
           <MenuFilter
             activeCategory={activeCategory}
-            onChangeCategory={setActiveCategory}
+            onChangeCategory={handleCategoryChange}
           />
         </div>
 
@@ -193,5 +210,17 @@ export default function MenuPage() {
         onCheckout={handleCheckout}
       />
     </main>
+  );
+}
+
+export default function MenuPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex min-h-screen items-center justify-center bg-background-primary text-text-primary">
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-accent-glow/20 border-t-accent-glow" />
+      </div>
+    }>
+      <MenuContent />
+    </Suspense>
   );
 }

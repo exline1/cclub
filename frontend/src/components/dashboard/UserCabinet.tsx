@@ -1,7 +1,7 @@
 "use client";
 
-import { Calendar, Edit3, Phone, User } from "lucide-react";
-import { toast } from "sonner";
+import { ArrowRight, Calendar, Phone, User } from "lucide-react";
+import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -12,32 +12,15 @@ interface UserCabinetProps {
 }
 
 export function UserCabinet({ name, phone, joinDate }: UserCabinetProps) {
-  const handleEdit = () => {
-    toast.info("Tez orada", {
-      description: "Profilni tahrirlash funksiyasi Faza 2-da qo'shiladi.",
-    });
-  };
-
   return (
-    <Card className="mb-6">
+    <Card className="mb-6 border-border-glass bg-background-secondary/40 glass-card">
       <CardHeader className="pb-3 border-b border-border-glass/40">
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-base sm:text-lg flex items-center gap-2">
-            <User className="h-4.5 w-4.5 text-accent-glow" />
-            Mening kabinetim
-          </CardTitle>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleEdit}
-            className="h-8 text-xs text-accent-glow hover:text-accent-primary"
-          >
-            <Edit3 className="h-3.5 w-3.5 mr-1" />
-            Tahrirlash
-          </Button>
-        </div>
+        <CardTitle className="text-base sm:text-lg flex items-center gap-2 font-heading">
+          <User className="h-4.5 w-4.5 text-accent-glow" />
+          Mening kabinetim
+        </CardTitle>
       </CardHeader>
-      <CardContent className="pt-4">
+      <CardContent className="pt-4 space-y-4">
         <div className="space-y-3.5 text-sm sm:text-base">
           <div className="flex items-center justify-between">
             <span className="text-xs sm:text-sm text-text-secondary">Foydalanuvchi:</span>
@@ -58,6 +41,18 @@ export function UserCabinet({ name, phone, joinDate }: UserCabinetProps) {
             </span>
           </div>
         </div>
+
+        <Button
+          asChild
+          variant="outline"
+          size="sm"
+          className="w-full text-xs border-border-glass hover:border-accent-glow text-accent-glow hover:text-accent-primary transition-all duration-200"
+        >
+          <Link href="/profile" className="flex items-center justify-center gap-1">
+            Profilni ko&apos;rish
+            <ArrowRight className="h-3.5 w-3.5 ml-1" />
+          </Link>
+        </Button>
       </CardContent>
     </Card>
   );

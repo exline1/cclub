@@ -4,10 +4,10 @@
  */
 export const IMAGE_PATHS = {
   logo: "/logo.png",
-  heroBg: "/images/hero-bg.jpg",
-  zoneStandard: "/images/zone-standard.jpg",
-  zoneVip: "/images/zone-vip.jpg",
-  zonePs5: "/images/zone-ps5.jpg",
+  heroBg: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1920&q=80",
+  zoneStandard: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80",
+  zoneVip: "https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=800&q=80",
+  zonePs5: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80",
 } as const;
 
 export type ImagePathKey = keyof typeof IMAGE_PATHS;
