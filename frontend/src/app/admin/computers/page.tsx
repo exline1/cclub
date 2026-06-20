@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { 
   Monitor, 
   Search, 
@@ -20,7 +21,11 @@ import { cn } from "@/lib/utils";
 
 type ZoneFilter = "Hammasi" | "Standard" | "VIP" | "PS5";
 
-export default function ComputersAdminPage() {
+function ComputersAdminContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const statusParam = searchParams.get("status");
+
   const [computers, setComputers] = useState<Computer[]>([]);
   const [selectedZone, setSelectedZone] = useState<ZoneFilter>("Hammasi");
   const [searchQuery, setSearchQuery] = useState("");
@@ -286,7 +291,8 @@ export default function ComputersAdminPage() {
       searchQuery === "" ||
       pc.number.toString().includes(searchQuery) ||
       (pc.customerName && pc.customerName.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesZone && matchesSearch;
+    const matchesStatus = !statusParam || pc.status === statusParam;
+    return matchesZone && matchesSearch && matchesStatus;
   });
 
   // Zones for rendering when "Hammasi" is selected
@@ -380,6 +386,23 @@ export default function ComputersAdminPage() {
           />
         </div>
       </div>
+
+      {statusParam && (
+        <div className="flex items-center justify-between bg-status-ending/10 border border-status-ending/30 text-status-ending px-4 py-3 rounded-xl text-xs font-semibold">
+          <div className="flex items-center gap-2">
+            <AlertTriangle className="h-4 w-4" />
+            <span>Faqat tugash arafasidagi kompyuterlar ko'rsatilmoqda (Status: {statusParam})</span>
+          </div>
+          <button 
+            onClick={() => {
+              router.push("/admin/computers");
+            }}
+            className="text-[10px] font-bold text-status-ending uppercase bg-status-ending/10 hover:bg-status-ending/20 px-2 py-1 rounded transition-all"
+          >
+            Filtrni tozalash
+          </button>
+        </div>
+      )}
 
       {/* Grid Content */}
       <div className="space-y-6">
@@ -480,5 +503,20 @@ export default function ComputersAdminPage() {
         onChangePc={handleChangePc}
       />
     </main>
+  );
+}
+
+export default function ComputersAdminPage() {
+  return (
+    <Suspense fallback={
+      <main className="p-4 sm:p-6 lg:p-8 flex items-center justify-center min-h-[50vh]">
+        <div className="flex flex-col items-center gap-3 text-text-secondary">
+          <div className="h-8 w-8 rounded-full border-2 border-accent-glow border-t-transparent animate-spin" />
+          <span className="text-xs font-semibold">Yuklanmoqda...</span>
+        </div>
+      </main>
+    }>
+      <ComputersAdminContent />
+    </Suspense>
   );
 }

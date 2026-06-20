@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { 
   Monitor, 
   MonitorOff, 
@@ -182,46 +183,48 @@ export default function AdminOverviewPage() {
 
         {/* Right Column: Attention Required Section */}
         <div className="space-y-4">
-          <Card className="border-border-glass bg-background-secondary/40 glass-card">
-            <CardHeader className="pb-3 border-b border-border-glass/30">
-              <CardTitle className="text-sm sm:text-base font-heading flex items-center gap-2 text-status-ending">
-                <AlertTriangle className="h-4.5 w-4.5" />
-                Diqqat talab qilinadi
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-4 space-y-3">
-              {attentionRequiredPcs.length === 0 ? (
-                <div className="flex flex-col items-center justify-center py-6 text-center text-text-secondary">
-                  <CheckCircle2 className="h-8 w-8 text-status-free mb-2" />
-                  <p className="text-xs font-semibold">Barcha o&apos;rinlar yaxshi</p>
-                  <p className="text-[10px] opacity-75">Vaqti tugayotgan kompyuterlar yo&apos;q.</p>
-                </div>
-              ) : (
-                attentionRequiredPcs.map((pc) => (
-                  <div 
-                    key={pc.id} 
-                    className="flex items-start gap-3 p-3 rounded-lg border border-status-ending/20 bg-status-ending/5"
-                  >
-                    <Timer className="h-4.5 w-4.5 text-status-ending shrink-0 mt-0.5" />
-                    <div className="flex-1 space-y-1">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-text-primary">
-                          PC {pc.number} ({pc.zone})
-                        </span>
-                        <span className="text-[10px] font-bold text-status-ending uppercase bg-status-ending/10 px-1.5 py-0.5 rounded">
-                          {Math.floor(pc.remainingSeconds / 60)} daq.
-                        </span>
-                      </div>
-                      <p className="text-[10px] text-text-secondary leading-relaxed">
-                        Foydalanuvchi: <span className="font-bold text-text-primary">{pc.customerName}</span>. 
-                        Vaqti tugashiga oz qoldi.
-                      </p>
-                    </div>
+          <Link href="/admin/computers?status=ending_soon" className="block">
+            <Card className="border-border-glass bg-background-secondary/40 glass-card cursor-pointer hover:border-status-ending/40 hover:shadow-status-ending-sm transition-all duration-200">
+              <CardHeader className="pb-3 border-b border-border-glass/30">
+                <CardTitle className="text-sm sm:text-base font-heading flex items-center gap-2 text-status-ending">
+                  <AlertTriangle className="h-4.5 w-4.5" />
+                  Diqqat talab qilinadi
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-4 space-y-3">
+                {attentionRequiredPcs.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center py-6 text-center text-text-secondary">
+                    <CheckCircle2 className="h-8 w-8 text-status-free mb-2" />
+                    <p className="text-xs font-semibold">Barcha o&apos;rinlar yaxshi</p>
+                    <p className="text-[10px] opacity-75">Vaqti tugayotgan kompyuterlar yo&apos;q.</p>
                   </div>
-                ))
-              )}
-            </CardContent>
-          </Card>
+                ) : (
+                  attentionRequiredPcs.map((pc) => (
+                    <div 
+                      key={pc.id} 
+                      className="flex items-start gap-3 p-3 rounded-lg border border-status-ending/20 bg-status-ending/5"
+                    >
+                      <Timer className="h-4.5 w-4.5 text-status-ending shrink-0 mt-0.5" />
+                      <div className="flex-1 space-y-1">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-bold text-text-primary">
+                            PC {pc.number} ({pc.zone})
+                          </span>
+                          <span className="text-[10px] font-bold text-status-ending uppercase bg-status-ending/10 px-1.5 py-0.5 rounded">
+                            {Math.floor(pc.remainingSeconds / 60)} daq.
+                          </span>
+                        </div>
+                        <p className="text-[10px] text-text-secondary leading-relaxed">
+                          Foydalanuvchi: <span className="font-bold text-text-primary">{pc.customerName}</span>. 
+                          Vaqti tugashiga oz qoldi.
+                        </p>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </CardContent>
+            </Card>
+          </Link>
         </div>
       </div>
     </main>
