@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Edit2, Trash2, AlertTriangle, Coffee, ArrowUpDown } from "lucide-react";
+import { Edit2, Trash2, AlertTriangle, Coffee, ArrowUpDown, Package } from "lucide-react";
 import { Product } from "@/lib/admin-mock-data";
 import { cn } from "@/lib/utils";
 
@@ -18,6 +18,7 @@ export default function ProductTable({
 }: ProductTableProps) {
   const [sortField, setSortField] = useState<"price" | "stock" | null>(null);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
 
   const handleSort = (field: "price" | "stock") => {
     if (sortField === field) {
@@ -119,20 +120,28 @@ export default function ProductTable({
                       isLowStock && "bg-status-ending/[0.01]"
                     )}
                   >
-                    {/* Image and Name */}
+                     {/* Image and Name */}
                     <td className="p-4 pl-6 flex items-center gap-3">
-                      <img
-                        src={imageUrl || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100&auto=format&fit=crop&q=40"}
-                        alt={name}
-                        className={cn(
-                          "h-10 w-10 rounded-lg object-cover bg-background-primary border shrink-0 transition-transform group-hover:scale-105 duration-200",
-                          isOutOfStock ? "border-status-occupied/40 filter grayscale" : "border-border-glass/40"
-                        )}
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src =
-                            "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100&auto=format&fit=crop&q=40";
-                        }}
-                      />
+                      {failedImages[id] ? (
+                        <div className={cn(
+                          "h-10 w-10 rounded-lg bg-background-secondary border border-border-glass/40 flex items-center justify-center shrink-0 text-text-secondary/70",
+                          isOutOfStock && "filter grayscale opacity-55"
+                        )}>
+                          <Package className="h-5 w-5" />
+                        </div>
+                      ) : (
+                        <img
+                          src={imageUrl || "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=100&auto=format&fit=crop&q=40"}
+                          alt={name}
+                          className={cn(
+                            "h-10 w-10 rounded-lg object-cover bg-background-primary border shrink-0 transition-transform group-hover:scale-105 duration-200",
+                            isOutOfStock ? "border-status-occupied/40 filter grayscale" : "border-border-glass/40"
+                          )}
+                          onError={() => {
+                            setFailedImages((prev) => ({ ...prev, [id]: true }));
+                          }}
+                        />
+                      )}
                       <span className="font-semibold text-text-primary text-xs sm:text-sm">
                         {name}
                       </span>
