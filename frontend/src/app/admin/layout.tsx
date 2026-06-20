@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import NotificationDropdown from "@/components/admin/orders/NotificationDropdown";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { 
@@ -28,8 +29,33 @@ export default function AdminLayout({
   const pathname = usePathname();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
-  // Count pending orders
-  const pendingCount = MOCK_ORDERS.filter(o => o.status === "pending").length;
+  const [pendingCount, setPendingCount] = useState(0);
+
+  useEffect(() => {
+    const updateCount = () => {
+      const saved = localStorage.getItem("gameclub_admin_orders");
+      if (saved) {
+        try {
+          const orders = JSON.parse(saved);
+          const count = orders.filter((o: any) => o.status === "pending").length;
+          setPendingCount(count);
+        } catch (e) {
+          // ignore
+        }
+      } else {
+        const count = MOCK_ORDERS.filter(o => o.status === "pending").length;
+        setPendingCount(count);
+      }
+    };
+
+    updateCount();
+    window.addEventListener("storage", updateCount);
+    window.addEventListener("gameclub_orders_updated", updateCount);
+    return () => {
+      window.removeEventListener("storage", updateCount);
+      window.removeEventListener("gameclub_orders_updated", updateCount);
+    };
+  }, []);
 
   const MENU_ITEMS = [
     { href: "/admin", label: "Bosh sahifa", icon: LayoutDashboard },
@@ -179,20 +205,26 @@ export default function AdminLayout({
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0 min-h-screen">
-        {/* Mobile Header Bar */}
-        <header className="lg:hidden h-14 bg-background-secondary border-b border-border-glass px-4 flex items-center justify-between sticky top-0 z-40">
+        {/* Unified Header Bar */}
+        <header className="h-14 bg-background-secondary/80 backdrop-blur-md border-b border-border-glass px-4 flex items-center justify-between sticky top-0 z-40 select-none">
           <div className="flex items-center gap-3">
             <button
               type="button"
               onClick={() => setIsMobileOpen(true)}
               aria-label="Menyuni ochish"
-              className="text-text-secondary hover:text-text-primary p-1.5 border border-border-glass/40 rounded-lg"
+              className="lg:hidden text-text-secondary hover:text-text-primary p-1.5 border border-border-glass/40 rounded-lg active:scale-95 transition-all"
             >
               <Menu className="h-5 w-5" />
             </button>
-            <Logo showText={false} className="h-7 w-7" />
+            <Logo showText={false} className="h-7 w-7 lg:hidden" />
+            <span className="hidden lg:inline font-heading font-bold text-xs tracking-wider uppercase text-text-secondary">
+              GameClub Hub Dashboard
+            </span>
           </div>
-          <span className="font-heading font-bold text-sm tracking-wide text-accent-glow uppercase select-none">Admin Panel</span>
+
+          <div className="flex items-center gap-3">
+            <NotificationDropdown />
+          </div>
         </header>
 
         {/* Content Shell */}
