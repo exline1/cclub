@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Users, Search, Landmark, UserCheck, HeartHandshake } from "lucide-react";
+import { Users, Search, Landmark, UserCheck, HeartHandshake, ArrowUpDown } from "lucide-react";
 import { MOCK_CUSTOMERS, Customer } from "@/lib/admin-mock-data";
 import CustomerDetailModal from "@/components/admin/customers/CustomerDetailModal";
+import { cn } from "@/lib/utils";
 
 export default function CustomersAdminPage() {
   const [customers, setCustomers] = useState<Customer[]>([]);
@@ -11,6 +12,18 @@ export default function CustomersAdminPage() {
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+
+  const [sortField, setSortField] = useState<"totalSpent" | "lastVisit" | null>(null);
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+
+  const handleSort = (field: "totalSpent" | "lastVisit") => {
+    if (sortField === field) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortField(field);
+      setSortOrder("desc");
+    }
+  };
 
   useEffect(() => {
     // Standard mock list
@@ -30,6 +43,19 @@ export default function CustomersAdminPage() {
       c.name.toLowerCase().includes(query) ||
       c.phone.replace(/[^0-9+]/g, "").includes(query.replace(/[^0-9+]/g, ""))
     );
+  });
+
+  const sortedCustomers = [...filteredCustomers].sort((a, b) => {
+    if (!sortField) return 0;
+    if (sortField === "totalSpent") {
+      return sortOrder === "asc" ? a.totalSpent - b.totalSpent : b.totalSpent - a.totalSpent;
+    }
+    if (sortField === "lastVisit") {
+      const dateA = new Date(a.lastVisit).getTime();
+      const dateB = new Date(b.lastVisit).getTime();
+      return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
+    }
+    return 0;
   });
 
   // Calculate Registry Stats
@@ -101,16 +127,32 @@ export default function CustomersAdminPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs sm:text-sm whitespace-nowrap">
             <thead>
-              <tr className="border-b border-border-glass/30 bg-background-primary/40 text-text-secondary text-[10px] uppercase font-bold tracking-wider select-none">
+              <tr className="border-b border-border-glass/30 bg-background-primary/40 text-text-secondary text-[10px] uppercase font-bold tracking-wider select-none font-sans">
                 <th className="p-4 pl-6">Mijoz ismi</th>
                 <th className="p-4">Telefon</th>
                 <th className="p-4 text-center">A&apos;zo bo&apos;lgan sana</th>
-                <th className="p-4 text-right">Jami to&apos;lov (Spent)</th>
-                <th className="p-4 text-center">Oxirgi tashrif</th>
+                <th 
+                  className="p-4 text-right cursor-pointer hover:text-text-primary transition-colors"
+                  onClick={() => handleSort("totalSpent")}
+                >
+                  <div className="flex items-center justify-end gap-1">
+                    Jami to&apos;lov (Spent)
+                    <ArrowUpDown className={cn("h-3.5 w-3.5", sortField === "totalSpent" ? "text-accent-glow" : "opacity-40")} />
+                  </div>
+                </th>
+                <th 
+                  className="p-4 text-center cursor-pointer hover:text-text-primary transition-colors"
+                  onClick={() => handleSort("lastVisit")}
+                >
+                  <div className="flex items-center justify-center gap-1">
+                    Oxirgi tashrif
+                    <ArrowUpDown className={cn("h-3.5 w-3.5", sortField === "lastVisit" ? "text-accent-glow" : "opacity-40")} />
+                  </div>
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border-glass/10">
-              {filteredCustomers.length === 0 ? (
+              {sortedCustomers.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="p-10 text-center text-text-secondary/55">
                     <Users className="h-10 w-10 mx-auto mb-2 opacity-50 stroke-1" />
@@ -119,7 +161,7 @@ export default function CustomersAdminPage() {
                   </td>
                 </tr>
               ) : (
-                filteredCustomers.map((customer) => {
+                sortedCustomers.map((customer) => {
                   const { id, name, phone, joinedAt, totalSpent, lastVisit } = customer;
                   const isLoyal = totalSpent >= 800000;
 

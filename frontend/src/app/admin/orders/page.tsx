@@ -27,6 +27,7 @@ const VALID_PC_NUMBERS = [
 
 export default function OrdersAdminPage() {
   const [orders, setOrders] = useState<Order[]>([]);
+  const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
   const [isMounted, setIsMounted] = useState(false);
 
   // 1. Initial State Load
@@ -187,10 +188,17 @@ export default function OrdersAdminPage() {
     window.dispatchEvent(new Event("cclub_notifications_updated"));
   };
 
+  // Sort orders before grouping
+  const sortedOrders = [...orders].sort((a, b) => {
+    const timeA = new Date(a.createdAt).getTime();
+    const timeB = new Date(b.createdAt).getTime();
+    return sortOrder === "newest" ? timeB - timeA : timeA - timeB;
+  });
+
   // Group columns
-  const pendingOrders = orders.filter((o) => o.status === "pending");
-  const preparingOrders = orders.filter((o) => o.status === "preparing");
-  const deliveredOrders = orders.filter((o) => o.status === "delivered");
+  const pendingOrders = sortedOrders.filter((o) => o.status === "pending");
+  const preparingOrders = sortedOrders.filter((o) => o.status === "preparing");
+  const deliveredOrders = sortedOrders.filter((o) => o.status === "delivered");
 
   if (!isMounted) {
     return (
@@ -216,15 +224,27 @@ export default function OrdersAdminPage() {
           </p>
         </div>
 
-        {/* Simulation trigger */}
-        <button
-          type="button"
-          onClick={handleSimulateNewOrder}
-          className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-accent-glow hover:bg-accent-glow/95 border border-accent-glow/50 text-white text-xs font-bold transition-all duration-200 active:scale-95 shadow-lg shadow-accent-glow/15"
-        >
-          <Sparkles className="h-4 w-4 shrink-0" />
-          Test: yangi buyurtma yuborish
-        </button>
+        {/* Actions bar */}
+        <div className="flex items-center gap-3">
+          {/* Sort order toggle */}
+          <button
+            type="button"
+            onClick={() => setSortOrder(sortOrder === "newest" ? "oldest" : "newest")}
+            className="flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-border-glass bg-background-primary/40 text-text-primary text-xs font-bold transition-all duration-200 hover:border-accent-glow hover:bg-accent-glow/5 active:scale-95"
+          >
+            Saralash: {sortOrder === "newest" ? "Eng yangi" : "Eng eski"}
+          </button>
+
+          {/* Simulation trigger */}
+          <button
+            type="button"
+            onClick={handleSimulateNewOrder}
+            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-accent-glow hover:bg-accent-glow/95 border border-accent-glow/50 text-white text-xs font-bold transition-all duration-200 active:scale-95 shadow-lg shadow-accent-glow/15"
+          >
+            <Sparkles className="h-4 w-4 shrink-0" />
+            Test: yangi buyurtma yuborish
+          </button>
+        </div>
       </div>
 
       {/* Kanban Layout columns grid */}

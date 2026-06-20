@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { Edit2, Trash2, AlertTriangle, Coffee } from "lucide-react";
+import React, { useState } from "react";
+import { Edit2, Trash2, AlertTriangle, Coffee, ArrowUpDown } from "lucide-react";
 import { Product } from "@/lib/admin-mock-data";
 import { cn } from "@/lib/utils";
 
@@ -16,6 +16,28 @@ export default function ProductTable({
   onEdit,
   onDelete,
 }: ProductTableProps) {
+  const [sortField, setSortField] = useState<"price" | "stock" | null>(null);
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+
+  const handleSort = (field: "price" | "stock") => {
+    if (sortField === field) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortField(field);
+      setSortOrder("desc");
+    }
+  };
+
+  const sortedProducts = [...products].sort((a, b) => {
+    if (!sortField) return 0;
+    if (sortField === "price") {
+      return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
+    }
+    if (sortField === "stock") {
+      return sortOrder === "asc" ? a.stock - b.stock : b.stock - a.stock;
+    }
+    return 0;
+  });
   // Translate category key to Uzbek labels
   const getCategoryLabel = (category: Product["category"]) => {
     switch (category) {
@@ -51,14 +73,30 @@ export default function ProductTable({
             <tr className="border-b border-border-glass/30 bg-background-primary/40 text-text-secondary text-[10px] uppercase font-bold tracking-wider select-none">
               <th className="p-4 pl-6">Mahsulot</th>
               <th className="p-4">Kategoriya</th>
-              <th className="p-4 text-right">Narxi</th>
-              <th className="p-4 text-center">Qoldiq (Stock)</th>
+              <th 
+                className="p-4 text-right cursor-pointer hover:text-text-primary transition-colors"
+                onClick={() => handleSort("price")}
+              >
+                <div className="flex items-center justify-end gap-1">
+                  Narxi
+                  <ArrowUpDown className={cn("h-3.5 w-3.5", sortField === "price" ? "text-accent-glow" : "opacity-40")} />
+                </div>
+              </th>
+              <th 
+                className="p-4 text-center cursor-pointer hover:text-text-primary transition-colors"
+                onClick={() => handleSort("stock")}
+              >
+                <div className="flex items-center justify-center gap-1">
+                  Qoldiq (Stock)
+                  <ArrowUpDown className={cn("h-3.5 w-3.5", sortField === "stock" ? "text-accent-glow" : "opacity-40")} />
+                </div>
+              </th>
               <th className="p-4 text-center">Holati</th>
               <th className="p-4 pr-6 text-center">Amallar</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-border-glass/10">
-            {products.length === 0 ? (
+            {sortedProducts.length === 0 ? (
               <tr>
                 <td colSpan={6} className="p-10 text-center text-text-secondary/55">
                   <Coffee className="h-10 w-10 mx-auto mb-2 opacity-50 stroke-1" />
@@ -67,7 +105,7 @@ export default function ProductTable({
                 </td>
               </tr>
             ) : (
-              products.map((product) => {
+              sortedProducts.map((product) => {
                 const { id, name, category, price, stock, imageUrl } = product;
                 const isOutOfStock = stock === 0;
                 const isLowStock = stock > 0 && stock < 5;
