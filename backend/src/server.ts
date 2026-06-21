@@ -10,6 +10,9 @@ if (!process.env.JWT_ACCESS_SECRET || !process.env.JWT_REFRESH_SECRET) {
 import http from "http";
 import { Server } from "socket.io";
 import app from "./app";
+import { setIo } from "./lib/socket";
+import { registerSocketHandlers } from "./sockets";
+import { initSessionCheckerJob } from "./jobs/checkSessions";
 
 const PORT = process.env.PORT || 5000;
 const server = http.createServer(app);
@@ -21,9 +24,14 @@ const io = new Server(server, {
   },
 });
 
-io.on("connection", (socket) => {
-  console.log("Client ulandi");
-});
+// Set Socket.io instance
+setIo(io);
+
+// Register socket handlers
+registerSocketHandlers(io);
+
+// Start background cron jobs
+initSessionCheckerJob();
 
 server.listen(PORT, () => {
   console.log(`Server ${PORT} da ishga tushdi`);

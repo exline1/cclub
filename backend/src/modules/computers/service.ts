@@ -1,6 +1,7 @@
 import prisma from "../../lib/prisma";
 import { startSessionSchema, extendSessionSchema, changeComputerSchema } from "./validation";
 import { z } from "zod";
+import { getIo } from "../../lib/socket";
 
 type StartSessionInput = z.infer<typeof startSessionSchema>;
 type ExtendSessionInput = z.infer<typeof extendSessionSchema>;
@@ -87,6 +88,26 @@ export class ComputerService {
       return sess;
     });
 
+    try {
+      const io = getIo();
+      io.to("admin-room").emit("computer:status_changed", {
+        computerId,
+        status: "OCCUPIED",
+        session: {
+          id: session.id,
+          startedAt: session.startedAt,
+          endsAt: session.endsAt,
+          customerName: session.customerName,
+        },
+      });
+      io.to(`pc-${computerId}`).emit("pc:unlock", {
+        sessionId: session.id,
+        endsAt: session.endsAt,
+      });
+    } catch (err: any) {
+      console.warn("Real-time emit failed or Socket.io not initialized:", err.message);
+    }
+
     return session;
   }
 
@@ -138,6 +159,18 @@ export class ComputerService {
 
       return sess;
     });
+
+    try {
+      const io = getIo();
+      io.to("admin-room").emit("computer:status_changed", {
+        computerId: session.computerId,
+        status: "FREE",
+        session: null,
+      });
+      io.to(`pc-${session.computerId}`).emit("pc:lock");
+    } catch (err: any) {
+      console.warn("Real-time emit failed or Socket.io not initialized:", err.message);
+    }
 
     return updatedSession;
   }
@@ -191,6 +224,28 @@ export class ComputerService {
 
       return sess;
     });
+
+    try {
+      const io = getIo();
+      const timeLeftMs = updatedSession.endsAt.getTime() - new Date().getTime();
+      const newStatus = timeLeftMs < 10 * 60 * 1000 ? "ENDING_SOON" : "OCCUPIED";
+      io.to("admin-room").emit("computer:status_changed", {
+        computerId: session.computerId,
+        status: newStatus,
+        session: {
+          id: updatedSession.id,
+          startedAt: updatedSession.startedAt,
+          endsAt: updatedSession.endsAt,
+          customerName: updatedSession.customerName,
+        },
+      });
+      io.to(`pc-${session.computerId}`).emit("pc:unlock", {
+        sessionId: updatedSession.id,
+        endsAt: updatedSession.endsAt,
+      });
+    } catch (err: any) {
+      console.warn("Real-time emit failed or Socket.io not initialized:", err.message);
+    }
 
     return updatedSession;
   }
@@ -264,6 +319,40 @@ export class ComputerService {
       return sess;
     });
 
+    try {
+      const io = getIo();
+      
+      const now = new Date();
+      const timeLeftMs = new Date(updatedSession.endsAt).getTime() - now.getTime();
+      const newStatus = timeLeftMs < 10 * 60 * 1000 ? "ENDING_SOON" : "OCCUPIED";
+
+      // Emit lock and status FREE for old computer
+      io.to("admin-room").emit("computer:status_changed", {
+        computerId: session.computerId,
+        status: "FREE",
+        session: null,
+      });
+      io.to(`pc-${session.computerId}`).emit("pc:lock");
+
+      // Emit unlock and status for new computer
+      io.to("admin-room").emit("computer:status_changed", {
+        computerId: newComputerId,
+        status: newStatus,
+        session: {
+          id: updatedSession.id,
+          startedAt: updatedSession.startedAt,
+          endsAt: updatedSession.endsAt,
+          customerName: updatedSession.customerName,
+        },
+      });
+      io.to(`pc-${newComputerId}`).emit("pc:unlock", {
+        sessionId: updatedSession.id,
+        endsAt: updatedSession.endsAt,
+      });
+    } catch (err: any) {
+      console.warn("Real-time emit failed or Socket.io not initialized:", err.message);
+    }
+
     return updatedSession;
   }
 
@@ -293,6 +382,21 @@ export class ComputerService {
             data: { status: "ENDING_SOON" },
           });
           results.flagged.push(session.id);
+          try {
+            const io = getIo();
+            io.to("admin-room").emit("computer:status_changed", {
+              computerId: session.computerId,
+              status: "ENDING_SOON",
+              session: {
+                id: session.id,
+                startedAt: session.startedAt,
+                endsAt: session.endsAt,
+                customerName: session.customerName,
+              },
+            });
+          } catch (err: any) {
+            console.warn("Real-time emit failed or Socket.io not initialized:", err.message);
+          }
         }
       } else {
         if (session.computer.status === "ENDING_SOON") {
@@ -300,6 +404,21 @@ export class ComputerService {
             where: { id: session.computerId },
             data: { status: "OCCUPIED" },
           });
+          try {
+            const io = getIo();
+            io.to("admin-room").emit("computer:status_changed", {
+              computerId: session.computerId,
+              status: "OCCUPIED",
+              session: {
+                id: session.id,
+                startedAt: session.startedAt,
+                endsAt: session.endsAt,
+                customerName: session.customerName,
+              },
+            });
+          } catch (err: any) {
+            console.warn("Real-time emit failed or Socket.io not initialized:", err.message);
+          }
         }
       }
     }
