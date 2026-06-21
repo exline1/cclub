@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "prisma:seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
@@ -27,7 +28,11 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20.17.19",
     "prisma": "^6.19.3",
+    "ts-node": "^10.9.2",
     "tsx": "^4.19.3",
     "typescript": "^5.7.3"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   }
 }
