@@ -1,5 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
+import { ZodError } from "zod";
 import authRoutes from "./modules/auth/routes";
 import computerRoutes from "./modules/computers/routes";
 import orderRoutes from "./modules/orders/routes";
@@ -17,6 +19,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
+app.use(cookieParser());
 
 // Module skeleton routes
 app.use("/api/auth", authRoutes);
@@ -38,9 +41,30 @@ app.get("/health", (_req: Request, res: Response) => {
 // Global error handling middleware (strictly typed, no 'any')
 app.use((err: Error & { status?: number }, _req: Request, res: Response, _next: NextFunction) => {
   console.error("Global error handler:", err);
-  res.status(err.status || 500).json({
+
+  if (err instanceof ZodError) {
+    return res.status(400).json({
+      error: {
+        message: err.issues.map(e => e.message).join(", "),
+      },
+    });
+  }
+
+  // Handle specific known business logic error messages
+  const message = err.message || "Internal Server Error";
+  let status = err.status || 500;
+
+  if (message.includes("noto'g'ri") || message.includes("topilmadi") || message.includes("o'tilmagan")) {
+    status = 401;
+  } else if (message.includes("allaqachon ro'yxatdan o'tgan")) {
+    status = 400;
+  } else if (message.includes("Ruxsat etilmagan")) {
+    status = 403;
+  }
+
+  res.status(status).json({
     error: {
-      message: err.message || "Internal Server Error",
+      message,
     },
   });
 });
