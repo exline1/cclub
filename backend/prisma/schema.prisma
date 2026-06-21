@@ -1,0 +1,168 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum Zone {
+  STANDARD
+  VIP
+  PS5
+}
+
+enum ComputerStatus {
+  FREE
+  OCCUPIED
+  ENDING_SOON
+}
+
+enum SessionStatus {
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+enum ProductCategory {
+  SNACK
+  DRINK
+  FASTFOOD
+}
+
+enum OrderStatus {
+  PENDING
+  PREPARING
+  DELIVERED
+  CANCELLED
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  phone        String?  @unique
+  email        String?  @unique
+  passwordHash String
+  role         Role     @default(CUSTOMER)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  sessions     Session[]
+  activityLogs ActivityLog[]
+  shiftsOpened Shift[]
+
+  @@map("users")
+}
+
+model Computer {
+  id         String         @id @default(uuid())
+  number     Int            @unique
+  zone       Zone
+  status     ComputerStatus @default(FREE)
+  hourlyRate Int            // narx so'mda (zona narxi bilan sinxron, lekin 
+                              // tarixiy yozuv uchun bu yerda ham saqlanadi)
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+
+  sessions   Session[]
+
+  @@map("computers")
+}
+
+model Session {
+  id            String        @id @default(uuid())
+  computerId    String
+  computer      Computer      @relation(fields: [computerId], references: [id])
+  userId        String?
+  user          User?         @relation(fields: [userId], references: [id])
+  customerName  String?       // agar userId yo'q bo'lsa (admin qo'lda kiritgan)
+  startedAt     DateTime      @default(now())
+  endsAt        DateTime
+  status        SessionStatus @default(ACTIVE)
+  totalAmount   Int?          // sessiya tugagach hisoblanadi
+
+  orders        Order[]
+
+  @@map("sessions")
+}
+
+model Product {
+  id        String          @id @default(uuid())
+  name      String
+  category  ProductCategory
+  price     Int             // so'mda
+  stock     Int             @default(0)
+  imageUrl  String?
+  isActive  Boolean         @default(true)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+
+  orderItems OrderItem[]
+
+  @@map("products")
+}
+
+model Order {
+  id         String      @id @default(uuid())
+  sessionId  String?
+  session    Session?    @relation(fields: [sessionId], references: [id])
+  computerNumber Int     // tezkor ko'rsatish uchun denormalized
+  status     OrderStatus @default(PENDING)
+  total      Int
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  items      OrderItem[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id            String  @id @default(uuid())
+  orderId       String
+  order         Order   @relation(fields: [orderId], references: [id])
+  productId     String
+  product       Product @relation(fields: [productId], references: [id])
+  qty           Int
+  priceAtOrder  Int     // buyurtma vaqtidagi narx (tarixiy aniqlik uchun)
+
+  @@map("order_items")
+}
+
+model Shift {
+  id               String    @id @default(uuid())
+  openedAt         DateTime  @default(now())
+  closedAt         DateTime?
+  totalPcRevenue   Int       @default(0)
+  totalBarRevenue  Int       @default(0)
+  openedById       String?
+  openedBy         User?     @relation(fields: [openedById], references: [id])
+
+  @@map("shifts")
+}
+
+model ActivityLog {
+  id         String   @id @default(uuid())
+  actorId    String?
+  actor      User?    @relation(fields: [actorId], references: [id])
+  action     String   // masalan "computer_started", "order_created"
+  targetType String?  // masalan "computer", "order"
+  targetId   String?
+  createdAt  DateTime @default(now())
+
+  @@map("activity_logs")
+}
+
+model Setting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+
+  @@map("settings")
+}
