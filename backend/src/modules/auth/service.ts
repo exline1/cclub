@@ -95,20 +95,16 @@ export class AuthService {
   }
 
   static generateAccessToken(userId: string, role: string): string {
-    const secret = process.env.JWT_ACCESS_SECRET || "mock_access_secret_key_12345";
-    return jwt.sign({ id: userId, role }, secret, { expiresIn: "15m" });
+    return jwt.sign({ id: userId, role }, process.env.JWT_ACCESS_SECRET!, { expiresIn: "15m" });
   }
 
   static generateRefreshToken(userId: string): string {
-    const secret = process.env.JWT_REFRESH_SECRET || "mock_refresh_secret_key_12345";
-    return jwt.sign({ id: userId }, secret, { expiresIn: "7d" });
+    return jwt.sign({ id: userId }, process.env.JWT_REFRESH_SECRET!, { expiresIn: "7d" });
   }
 
   static async refreshAccessToken(refreshToken: string): Promise<string> {
-    const secret = process.env.JWT_REFRESH_SECRET || "mock_refresh_secret_key_12345";
-    
     try {
-      const decoded = jwt.verify(refreshToken, secret) as { id: string };
+      const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET!) as { id: string };
       
       const user = await prisma.user.findUnique({
         where: { id: decoded.id },
