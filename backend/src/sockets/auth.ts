@@ -24,7 +24,7 @@ export const socketAuthMiddleware = (socket: Socket, next: (err?: any) => void) 
     return next(new Error("Authentication error: Token is required"));
   }
 
-  const secret = process.env.JWT_ACCESS_SECRET || "mock_access_secret_key_12345";
+  const secret = process.env.JWT_ACCESS_SECRET!;
 
   try {
     const decoded = jwt.verify(token, secret) as DecodedToken;
