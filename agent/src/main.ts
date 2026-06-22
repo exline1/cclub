@@ -37,13 +37,13 @@ function enableAutoLaunch() {
 
     launcher
       .isEnabled()
-      .then((isEnabled) => {
+      .then((isEnabled: boolean) => {
         if (!isEnabled) {
           launcher.enable();
           console.log("Auto-launch registered successfully.");
         }
       })
-      .catch((err) => {
+      .catch((err: any) => {
         console.error("Auto-launch registration failed:", err);
       });
   }
