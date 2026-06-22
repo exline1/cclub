@@ -1,5 +1,9 @@
 import prisma from "../../lib/prisma";
-import { Role } from "@prisma/client";
+import { Role, Session, Order } from "@prisma/client";
+
+interface SessionWithOrders extends Session {
+  orders: Order[];
+}
 
 export class CustomerService {
   static async getAllCustomers() {
@@ -21,9 +25,9 @@ export class CustomerService {
       const sessionsCount = customer.sessions.length;
 
       // Calculate totalSpent: sessions totalAmount + non-cancelled orders total
-      const sessionsTotal = customer.sessions.reduce((sum, s) => sum + (s.totalAmount ?? 0), 0);
-      const ordersTotal = customer.sessions.reduce((sum, s) => {
-        return sum + s.orders.reduce((oSum, o) => oSum + o.total, 0);
+      const sessionsTotal = customer.sessions.reduce((sum: number, s: Session) => sum + (s.totalAmount ?? 0), 0);
+      const ordersTotal = customer.sessions.reduce((sum: number, s: any) => {
+        return sum + s.orders.reduce((oSum: number, o: Order) => oSum + o.total, 0);
       }, 0);
       const totalSpent = sessionsTotal + ordersTotal;
 

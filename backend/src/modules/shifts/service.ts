@@ -47,7 +47,7 @@ export class ShiftService {
       },
     });
 
-    const totalPcRevenue = sessions.reduce((sum, s) => sum + (s.totalAmount ?? 0), 0);
+    const totalPcRevenue = sessions.reduce((sum: number, s: { totalAmount: number | null }) => sum + (s.totalAmount ?? 0), 0);
 
     // Sum total of all non-cancelled orders created during the shift
     const orders = await prisma.order.findMany({
@@ -63,7 +63,7 @@ export class ShiftService {
       },
     });
 
-    const totalBarRevenue = orders.reduce((sum, o) => sum + o.total, 0);
+    const totalBarRevenue = orders.reduce((sum: number, o: { total: number }) => sum + o.total, 0);
 
     return prisma.shift.update({
       where: { id: shiftId },
