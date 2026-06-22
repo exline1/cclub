@@ -1,0 +1,5 @@
+{
+  "serverUrl": "http://localhost:5000",
+  "computerId": "insert-computer-uuid-here",
+  "deviceToken": "insert-device-token-here"
+}

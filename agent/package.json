@@ -1,0 +1,42 @@
+{
+  "name": "cclub-pc-agent",
+  "version": "1.0.0",
+  "description": "CClub PC lock/unlock kiosk agent",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc && electron .",
+    "dist": "tsc && electron-builder"
+  },
+  "dependencies": {
+    "auto-launch": "^5.0.6",
+    "socket.io-client": "^4.8.3"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3",
+    "typescript": "^5.5.0",
+    "@types/node": "^20.14.9"
+  },
+  "build": {
+    "appId": "com.cclub.pcagent",
+    "productName": "CClub Kiosk Agent",
+    "directories": {
+      "output": "dist-build"
+    },
+    "files": [
+      "dist/**/*",
+      "src/index.html",
+      "src/index.css",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "CClub Agent"
+    }
+  }
+}
