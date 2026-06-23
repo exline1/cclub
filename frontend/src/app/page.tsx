@@ -3,18 +3,21 @@ import dynamic from "next/dynamic";
 import { Hero } from "@/components/landing/Hero";
 import { Navbar } from "@/components/landing/Navbar";
 
-// Below-the-fold bo'limlar lazy-load — birinchi yuklanish tezligi uchun
-const About = dynamic(() =>
-  import("@/components/landing/About").then((mod) => mod.About)
+// Lazy loading below-the-fold components
+const HowItWorks = dynamic(() =>
+  import("@/components/landing/HowItWorks").then((mod) => mod.HowItWorks)
 );
-const Services = dynamic(() =>
-  import("@/components/landing/Services").then((mod) => mod.Services)
+const BenefitCards = dynamic(() =>
+  import("@/components/landing/BenefitCards").then((mod) => mod.BenefitCards)
 );
-const Zones = dynamic(() =>
-  import("@/components/landing/Zones").then((mod) => mod.Zones)
+const Pricing = dynamic(() =>
+  import("@/components/landing/Pricing").then((mod) => mod.Pricing)
 );
 const FAQ = dynamic(() =>
   import("@/components/landing/FAQ").then((mod) => mod.FAQ)
+);
+const DownloadCTA = dynamic(() =>
+  import("@/components/landing/DownloadCTA").then((mod) => mod.DownloadCTA)
 );
 const Footer = dynamic(() =>
   import("@/components/landing/Footer").then((mod) => mod.Footer)
@@ -22,13 +25,14 @@ const Footer = dynamic(() =>
 
 export default function HomePage() {
   return (
-    <main>
+    <main className="bg-background-primary text-text-primary min-h-screen">
       <Navbar />
       <Hero />
-      <About />
-      <Services />
-      <Zones />
+      <HowItWorks />
+      <BenefitCards />
+      <Pricing />
       <FAQ />
+      <DownloadCTA />
       <Footer />
     </main>
   );

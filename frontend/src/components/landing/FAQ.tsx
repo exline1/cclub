@@ -16,7 +16,7 @@ const FAQ_ITEMS: FAQItem[] = [
   },
   {
     question: "Joy band qilish qanday amalga oshiriladi?",
-    answer: "Shaxsiy kabinetingizga kirib, 'Joy band qilish' tugmasini bosasiz. Kerakli zonani (Standard, VIP yoki PS5) va vaqtni tanlab, bir zumda band qilishingiz mumkin.",
+    answer: "Ilova orqali 'Joy band qilish' tugmasini bosasiz. Kerakli zonani (Standard, VIP yoki PS5) va vaqtni tanlab, bir zumda band qilishingiz mumkin.",
   },
   {
     question: "Bar menyusidan buyurtma bersa bo'ladimi?",
@@ -24,7 +24,7 @@ const FAQ_ITEMS: FAQItem[] = [
   },
   {
     question: "VIP va PS5 zonalarida narxlar qanday?",
-    answer: "Standard zona narxi soatiga 10,000 so'm, VIP zona (alohida xona va kuchaytirilgan jihozlar) 18,000 so'm, PlayStation 5 zonasi esa soatiga 25,000 so'mni tashkil etadi.",
+    answer: "Tariflarimiz bo'limida barcha narxlar bilan tanishishingiz mumkin. Standard va VIP zonalar uchun alohida soatlik va haftalik tariflar mavjud.",
   },
   {
     question: "Klub ish tartibi qanday?",
@@ -40,44 +40,44 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" className="py-16 sm:py-20 lg:py-24">
+    <section id="faq" className="py-20 lg:py-28 bg-background-primary">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 text-center sm:mb-12">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent-glow sm:text-sm">
+        <div className="mb-14 text-center sm:mb-16">
+          <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-accent-secondary mb-3">
             FAQ
           </p>
-          <h2 className="font-heading mt-3 text-2xl font-bold text-text-primary sm:text-3xl lg:text-4xl">
-            Tez-tez so&apos;raladigan savollar
+          <h2 className="font-heading text-3xl font-bold text-text-primary sm:text-4xl lg:text-5xl">
+            Ko'p so'raladigan savollar
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-sm text-text-secondary sm:text-base">
-            cclub platformasi va klubimiz xizmatlari haqida batafsil ma&apos;lumot.
+          <p className="mx-auto mt-4 max-w-2xl text-base text-text-secondary">
+            CClub platformasi va xizmatlarimiz haqida batafsil ma'lumot.
           </p>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-4">
           {FAQ_ITEMS.map((item, index) => {
             const isOpen = openIndex === index;
             return (
               <div
                 key={index}
                 className={cn(
-                  "overflow-hidden rounded-xl border border-border-glass bg-background-secondary transition-all duration-300",
-                  isOpen && "border-accent-glow/50 shadow-accent-glow-sm"
+                  "overflow-hidden rounded-2xl border border-border-primary bg-background-secondary transition-all duration-300",
+                  isOpen && "border-accent-primary/50 shadow-accent-glow-sm bg-background-tertiary"
                 )}
               >
                 <button
                   type="button"
                   onClick={() => toggleItem(index)}
-                  className="flex w-full items-center justify-between p-5 text-left text-text-primary focus:outline-none focus:ring-1 focus:ring-accent-glow"
+                  className="flex w-full items-center justify-between p-6 text-left text-text-primary focus:outline-none"
                   aria-expanded={isOpen}
                 >
-                  <span className="font-heading text-sm font-bold sm:text-base">
+                  <span className="font-heading text-lg font-semibold">
                     {item.question}
                   </span>
                   <ChevronDown
                     className={cn(
-                      "h-4 w-4 text-text-secondary transition-transform duration-300 shrink-0 ml-4",
-                      isOpen && "rotate-180 text-accent-glow"
+                      "h-5 w-5 text-text-secondary transition-transform duration-300 shrink-0 ml-4",
+                      isOpen && "rotate-180 text-accent-secondary"
                     )}
                   />
                 </button>
@@ -88,7 +88,7 @@ export function FAQ() {
                   )}
                 >
                   <div className="overflow-hidden">
-                    <div className="border-t border-border-glass/40 p-5 text-sm leading-relaxed text-text-secondary sm:text-base">
+                    <div className="border-t border-border-primary/50 p-6 pt-0 text-base leading-relaxed text-text-secondary mt-2">
                       {item.answer}
                     </div>
                   </div>

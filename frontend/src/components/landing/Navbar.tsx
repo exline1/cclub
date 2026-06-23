@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, X, MapPin } from "lucide-react";
 
 import { Logo } from "@/components/shared/Logo";
 import { Button } from "@/components/ui/button";
@@ -14,10 +14,10 @@ interface NavLink {
 }
 
 const NAV_LINKS: NavLink[] = [
-  { label: "Biz haqimizda", href: "#about" },
-  { label: "Xizmatlar", href: "#services" },
-  { label: "Zonalar", href: "#zones" },
-  { label: "Aloqa", href: "#contact" },
+  { label: "Qanday ishlaydi", href: "/#how-it-works" },
+  { label: "Afzalliklar", href: "/#benefits" },
+  { label: "Tariflar", href: "/#pricing" },
+  { label: "FAQ", href: "/#faq" },
 ];
 
 export function Navbar() {
@@ -27,18 +27,28 @@ export function Navbar() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <nav className="glass-nav border-b border-border-glass">
+      <nav className="glass-nav border-b border-border-primary bg-background-primary/80 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Logo />
 
           {/* Desktop navigation */}
-          <div className="hidden items-center gap-8 lg:flex">
+          <div className="hidden items-center gap-8 xl:flex">
             <ul className="flex items-center gap-6">
+              <li>
+                <Link
+                  href="/clublar"
+                  className="inline-flex items-center gap-1.5 font-semibold text-accent-secondary transition-colors duration-200 hover:text-accent-glow"
+                >
+                  <MapPin className="h-4 w-4" />
+                  Barcha game clublar
+                </Link>
+              </li>
+              <div className="h-4 w-px bg-border-primary"></div>
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-text-secondary transition-colors duration-200 hover:text-text-primary"
+                    className="text-sm font-medium text-text-secondary transition-colors duration-200 hover:text-text-primary"
                   >
                     {link.label}
                   </Link>
@@ -46,11 +56,11 @@ export function Navbar() {
               ))}
             </ul>
             <div className="flex items-center gap-3">
-              <Button variant="ghost" asChild>
+              <Button variant="ghost" asChild className="hover:bg-background-tertiary">
                 <Link href="/login">Kirish</Link>
               </Button>
-              <Button asChild>
-                <Link href="/register">Ro&apos;yxatdan o&apos;tish</Link>
+              <Button asChild className="bg-accent-primary hover:bg-accent-glow">
+                <Link href="/royxatdan-otish">Ro&apos;yxatdan o&apos;tish</Link>
               </Button>
             </div>
           </div>
@@ -58,7 +68,7 @@ export function Navbar() {
           {/* Mobile hamburger */}
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-border-glass text-text-primary transition-colors duration-200 hover:border-accent-glow lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-border-primary text-text-primary transition-colors duration-200 hover:border-accent-primary xl:hidden"
             onClick={() => setIsOpen((prev) => !prev)}
             aria-label={isOpen ? "Menyuni yopish" : "Menyuni ochish"}
             aria-expanded={isOpen}
@@ -70,29 +80,38 @@ export function Navbar() {
         {/* Mobile menu */}
         <div
           className={cn(
-            "overflow-hidden border-t border-border-glass bg-background-secondary transition-all duration-200 lg:hidden",
-            isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+            "overflow-hidden border-t border-border-primary bg-background-secondary transition-all duration-300 xl:hidden",
+            isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
           )}
         >
           <div className="space-y-1 px-4 py-4">
+            <Link
+              href="/clublar"
+              onClick={closeMenu}
+              className="flex items-center gap-2 rounded-lg px-3 py-3 text-base font-semibold text-accent-secondary transition-colors duration-200 hover:bg-background-tertiary"
+            >
+              <MapPin className="h-5 w-5" />
+              Barcha game clublar
+            </Link>
+            <div className="my-2 border-t border-border-primary"></div>
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={closeMenu}
-                className="block rounded-lg px-3 py-3 text-sm text-text-secondary transition-colors duration-200 hover:bg-background-primary hover:text-text-primary"
+                className="block rounded-lg px-3 py-3 text-base font-medium text-text-secondary transition-colors duration-200 hover:bg-background-tertiary hover:text-text-primary"
               >
                 {link.label}
               </Link>
             ))}
-            <div className="flex flex-col gap-2 pt-3">
-              <Button variant="secondary" asChild className="w-full">
+            <div className="flex flex-col gap-3 pt-4">
+              <Button variant="outline" asChild className="w-full border-border-primary text-text-primary">
                 <Link href="/login" onClick={closeMenu}>
                   Kirish
                 </Link>
               </Button>
-              <Button asChild className="w-full">
-                <Link href="/register" onClick={closeMenu}>
+              <Button asChild className="w-full bg-accent-primary hover:bg-accent-glow text-white">
+                <Link href="/royxatdan-otish" onClick={closeMenu}>
                   Ro&apos;yxatdan o&apos;tish
                 </Link>
               </Button>

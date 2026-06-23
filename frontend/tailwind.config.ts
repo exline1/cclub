@@ -11,41 +11,46 @@ const config: Config = {
     extend: {
       colors: {
         background: {
-          primary: "#0a0e1a",
-          secondary: "#0f1729",
-          glass: "rgba(15, 23, 41, 0.6)",
+          primary: "#0A0E1A",
+          secondary: "#12172A",
+          tertiary: "#161C33",
+          glass: "rgba(18, 23, 42, 0.6)",
         },
         accent: {
-          primary: "#4f46e5",
+          primary: "#6366F1", // indigo
+          secondary: "#22D3EE", // cyan
+          deep: "#3730a3",
           glow: "#6366f1",
-          deep: "#312e81",
         },
         status: {
-          free: "#10b981",
+          free: "#34D399",
           occupied: "#ef4444",
           ending: "#f59e0b",
+          online: "#34D399",
         },
         text: {
-          primary: "#f1f5f9",
-          secondary: "#94a3b8",
+          primary: "#E2E4F3",
+          secondary: "#7C839E",
         },
         border: {
+          primary: "#232A45",
           glass: "rgba(99, 102, 241, 0.2)",
         },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        heading: ["var(--font-space-grotesk)", "var(--font-inter)", "system-ui", "sans-serif"],
+        heading: ["var(--font-sora)", "var(--font-inter)", "system-ui", "sans-serif"],
+        mono: ["var(--font-jetbrains-mono)", "ui-monospace", "monospace"],
       },
       boxShadow: {
-        "accent-glow": "0 0 20px rgba(99, 102, 241, 0.35)",
-        "accent-glow-sm": "0 0 12px rgba(99, 102, 241, 0.25)",
+        "accent-glow": "0 0 40px rgba(99, 102, 241, 0.15)",
+        "accent-glow-sm": "0 0 20px rgba(99, 102, 241, 0.2)",
+        "card-hover": "0 10px 30px -10px rgba(0, 0, 0, 0.5)",
       },
       backgroundImage: {
-        "hero-gradient":
-          "linear-gradient(135deg, #0a0e1a 0%, #0f1729 40%, #312e81 100%)",
-        "card-gradient":
-          "linear-gradient(180deg, rgba(15, 23, 41, 0.8) 0%, rgba(10, 14, 26, 0.95) 100%)",
+        "hero-gradient": "radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.15) 0%, rgba(10, 14, 26, 1) 50%)",
+        "cta-gradient": "linear-gradient(135deg, #0A0E1A 0%, rgba(99, 102, 241, 0.15) 100%)",
+        "card-gradient": "linear-gradient(180deg, #12172A 0%, #0A0E1A 100%)",
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
