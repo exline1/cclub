@@ -11,24 +11,20 @@ interface FAQItem {
 
 const FAQ_ITEMS: FAQItem[] = [
   {
-    question: "Klubda qanday kompyuterlar va konsollar bor?",
-    answer: "Bizning klubimizda eng so'nggi RTX 4070/4080 grafik kartalariga ega professional gaming kompyuterlari, 240Hz/360Hz chastotali monitorlar hamda 4K ekranli PlayStation 5 konsollari o'rnatilgan.",
+    question: "CClub bepulmi?",
+    answer: "Mijozlar uchun CClub platformasidan foydalanish va joy band qilish mutlaqo bepul. Klub egalari uchun maxsus tariflar mavjud.",
   },
   {
-    question: "Joy band qilish qanday amalga oshiriladi?",
-    answer: "Ilova orqali 'Joy band qilish' tugmasini bosasiz. Kerakli zonani (Standard, VIP yoki PS5) va vaqtni tanlab, bir zumda band qilishingiz mumkin.",
+    question: "Klubimni qanday qo'shaman?",
+    answer: "Platformaga klub qo'shish uchun 'Klubingizni qo'shing' tugmasini bosing va ro'yxatdan o'tish jarayonidan o'ting. Shundan so'ng boshqaruv paneliga kirishingiz mumkin bo'ladi.",
   },
   {
-    question: "Bar menyusidan buyurtma bersa bo'ladimi?",
-    answer: "Ha, albatta! Bizning platformamiz orqali o'tirgan joyingizdan turib bar menyusidan ichimliklar, sendvichlar yoki shirinliklarni buyurtma qilishingiz mumkin. Buyurtmangiz to'g'ridan-to'g'ri kompyuteringizga olib kelinadi.",
+    question: "Mijoz sifatida ro'yxatdan o'tish shart ekanmi?",
+    answer: "Ha, klublarni ko'rish va joy band qilish uchun tizimda ro'yxatdan o'tishingiz lozim. Bu orqali siz o'z buyurtmalaringiz tarixini ham kuzatib borishingiz mumkin.",
   },
   {
-    question: "VIP va PS5 zonalarida narxlar qanday?",
-    answer: "Tariflarimiz bo'limida barcha narxlar bilan tanishishingiz mumkin. Standard va VIP zonalar uchun alohida soatlik va haftalik tariflar mavjud.",
-  },
-  {
-    question: "Klub ish tartibi qanday?",
-    answer: "Biz haftaning har kuni 24 soat davomida ishlaymiz. Dushanba-Juma kunlari texnik tozalash soatlari va bar menyusi to'liq rejimi mavjud, dam olish kunlari esa shinam muhit va maxsus aksiyalar sizni kutmoqda.",
+    question: "Tizim qanday qurilmada ishlaydi?",
+    answer: "CClub istalgan qurilmada ishlaydi: smartfon, planshet, noutbuk yoki shaxsiy kompyuter. Siz brauzer orqali kirsangiz kifoya.",
   },
 ];
 
@@ -43,7 +39,7 @@ export function FAQ() {
     <section id="faq" className="py-20 lg:py-28 bg-background-primary">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="mb-14 text-center sm:mb-16">
-          <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-accent-secondary mb-3">
+          <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-accent-primary mb-3">
             FAQ
           </p>
           <h2 className="font-heading text-3xl font-bold text-text-primary sm:text-4xl lg:text-5xl">
@@ -77,7 +73,7 @@ export function FAQ() {
                   <ChevronDown
                     className={cn(
                       "h-5 w-5 text-text-secondary transition-transform duration-300 shrink-0 ml-4",
-                      isOpen && "rotate-180 text-accent-secondary"
+                      isOpen && "rotate-180 text-accent-primary"
                     )}
                   />
                 </button>

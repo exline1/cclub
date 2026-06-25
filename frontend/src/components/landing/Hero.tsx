@@ -53,26 +53,26 @@ export function Hero() {
         </div>
 
         <h1 className="font-heading max-w-4xl text-4xl font-bold leading-tight text-text-primary sm:text-5xl md:text-6xl lg:text-7xl">
-          O&apos;yinga sho&apos;ng&apos;i,{" "}
-          <span className="text-accent-secondary drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]">
-            qolganini bizga qo&apos;y
+          O'zbekistondagi barcha{" "}
+          <span className="text-accent-primary drop-shadow-[0_0_15px_rgba(129,140,248,0.5)]">
+            game club'lar bir joyda
           </span>
         </h1>
 
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-text-secondary sm:text-lg">
-          cClub — kompyuter o&apos;yinlari markazlari uchun tezkor buyurtma,
-          onlayn vaqt nazorati va premium o&apos;yin zonalari bitta platformada.
+          Klub toping, joy band qiling — yoki o'z klubingizni
+          platformaga qo'shing va boshqaruvni avtomatlashtiring.
         </p>
 
         <div className="mt-10 flex w-full max-w-md flex-col gap-4 sm:max-w-none sm:flex-row sm:justify-center">
           <Button asChild size="lg" className="w-full sm:w-auto h-14 px-8 text-base bg-accent-primary hover:bg-accent-glow hover:shadow-accent-glow transition-all active:scale-95 group">
-            <Link href="#pricing">
-              Joy band qilish
+            <Link href="/clublar">
+              Klub topish
               <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>
           <Button asChild variant="outline" size="lg" className="w-full sm:w-auto h-14 px-8 text-base border-border-primary bg-transparent hover:bg-background-tertiary transition-all active:scale-95">
-            <Link href="#how-it-works">Qanday ishlaydi?</Link>
+            <Link href="/royxatdan-otish/klub-egasi">Klubingizni qo'shing</Link>
           </Button>
         </div>
       </div>

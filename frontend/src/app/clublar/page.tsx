@@ -10,78 +10,22 @@ import { Footer } from "@/components/landing/Footer";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-// Mock Data for Clubs
-const MOCK_CLUBS = [
-  {
-    id: "1",
-    name: "Cyber Arena VIP",
-    address: "Yunusobod tumani, 19-kvartal",
-    distance: "1.2 km",
-    rating: 4.8,
-    reviews: 124,
-    image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop",
-    tags: ["RTX 4080", "24/7", "PS5 xonasi"],
-    availableSeats: 12,
-    price: "15,000 so'm/soat",
-  },
-  {
-    id: "2",
-    name: "Nexus Gaming Lounge",
-    address: "Chilonzor tumani, Muqimiy ko'chasi",
-    distance: "3.5 km",
-    rating: 4.5,
-    reviews: 89,
-    image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2071&auto=format&fit=crop",
-    tags: ["RTX 3060", "Bar menyu", "VIP zonalar"],
-    availableSeats: 0,
-    price: "10,000 so'm/soat",
-  },
-  {
-    id: "3",
-    name: "Matrix eSports Center",
-    address: "Mirzo Ulug'bek tumani, TTZ",
-    distance: "5.1 km",
-    rating: 4.9,
-    reviews: 312,
-    image: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=2070&auto=format&fit=crop",
-    tags: ["RTX 4090", "Streamer xonasi", "Oziq-ovqat"],
-    availableSeats: 4,
-    price: "20,000 so'm/soat",
-  },
-  {
-    id: "4",
-    name: "GameHub Tashkent",
-    address: "Shayxontohur tumani, Navoiy ko'chasi",
-    distance: "2.8 km",
-    rating: 4.2,
-    reviews: 56,
-    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop",
-    tags: ["GTX 1660", "Arzon", "24/7 emas"],
-    availableSeats: 25,
-    price: "8,000 so'm/soat",
-  },
-  {
-    id: "5",
-    name: "LevelUp Cyberclub",
-    address: "Yakkasaroy tumani, Shota Rustaveli",
-    distance: "4.0 km",
-    rating: 4.6,
-    reviews: 145,
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop",
-    tags: ["RTX 4070", "Lounge", "Kalyan"],
-    availableSeats: 8,
-    price: "18,000 so'm/soat",
-  },
-];
+import { MOCK_CLUBS, REGIONS, DISTRICTS } from "@/lib/mock-data";
 
 export default function ClubsPage() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedRegion, setSelectedRegion] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState("");
   
-  // Basic filtering based on search query
-  const filteredClubs = MOCK_CLUBS.filter(club => 
-    club.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    club.address.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // Basic filtering based on search query and region/district
+  const filteredClubs = MOCK_CLUBS.filter(club => {
+    const matchSearch = club.name.toLowerCase().includes(searchQuery.toLowerCase()) || club.address.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchRegion = selectedRegion ? club.viloyat === selectedRegion : true;
+    const matchDistrict = selectedDistrict ? club.tuman === selectedDistrict : true;
+    return matchSearch && matchRegion && matchDistrict;
+  });
+
+  const availableDistricts = selectedRegion ? DISTRICTS[selectedRegion] || [] : [];
 
   return (
     <div className="min-h-screen bg-background-primary text-text-primary flex flex-col">
@@ -113,22 +57,52 @@ export default function ClubsPage() {
               />
             </div>
             
-            <div className="flex gap-3 overflow-x-auto pb-2 md:pb-0">
-              <button className="flex items-center gap-2 whitespace-nowrap bg-background-secondary border border-border-primary rounded-xl px-4 py-3 text-sm font-medium hover:bg-background-tertiary transition-colors">
-                <MapPin className="h-4 w-4 text-accent-secondary" />
-                Toshkent
-                <ChevronDown className="h-4 w-4" />
-              </button>
+            <div className="flex gap-3 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto">
+              <div className="relative min-w-[160px]">
+                <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-accent-primary" />
+                <select 
+                  className="w-full appearance-none bg-background-secondary border border-border-primary rounded-xl py-3 pl-10 pr-10 text-sm font-medium focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-colors cursor-pointer text-text-primary"
+                  value={selectedRegion}
+                  onChange={(e) => {
+                    setSelectedRegion(e.target.value);
+                    setSelectedDistrict(""); // Reset district when region changes
+                  }}
+                >
+                  <option value="">Barcha viloyatlar</option>
+                  {REGIONS.map(region => (
+                    <option key={region} value={region}>{region}</option>
+                  ))}
+                </select>
+                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-secondary pointer-events-none" />
+              </div>
               
-              <button className="flex items-center gap-2 whitespace-nowrap bg-background-secondary border border-border-primary rounded-xl px-4 py-3 text-sm font-medium hover:bg-background-tertiary transition-colors">
-                Eng yaqin
-                <ChevronDown className="h-4 w-4" />
-              </button>
+              <div className="relative min-w-[160px]">
+                <select 
+                  className="w-full appearance-none bg-background-secondary border border-border-primary rounded-xl py-3 pl-4 pr-10 text-sm font-medium focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-colors cursor-pointer text-text-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                  value={selectedDistrict}
+                  onChange={(e) => setSelectedDistrict(e.target.value)}
+                  disabled={!selectedRegion || availableDistricts.length === 0}
+                >
+                  <option value="">Barcha tumanlar</option>
+                  {availableDistricts.map(district => (
+                    <option key={district} value={district}>{district}</option>
+                  ))}
+                </select>
+                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-secondary pointer-events-none" />
+              </div>
               
-              <button className="flex items-center gap-2 whitespace-nowrap bg-background-secondary border border-border-primary rounded-xl px-4 py-3 text-sm font-medium hover:bg-background-tertiary transition-colors">
-                <Filter className="h-4 w-4" />
-                Filtrlar
-              </button>
+              {(searchQuery || selectedRegion || selectedDistrict) && (
+                <button 
+                  onClick={() => {
+                    setSearchQuery("");
+                    setSelectedRegion("");
+                    setSelectedDistrict("");
+                  }}
+                  className="flex items-center justify-center whitespace-nowrap bg-background-tertiary border border-border-primary rounded-xl px-4 py-3 text-sm font-medium hover:bg-background-secondary hover:text-accent-primary transition-colors text-text-secondary"
+                >
+                  Tozalash
+                </button>
+              )}
             </div>
           </div>
 
@@ -182,7 +156,7 @@ export default function ClubsPage() {
                         {club.name}
                       </h3>
                       <div className="flex items-center gap-1 bg-background-tertiary px-2 py-1 rounded-md shrink-0">
-                        <Star className="h-3.5 w-3.5 fill-accent-secondary text-accent-secondary" />
+                        <Star className="h-3.5 w-3.5 fill-accent-primary text-accent-primary" />
                         <span className="text-sm font-bold text-text-primary">{club.rating}</span>
                       </div>
                     </div>
@@ -222,7 +196,11 @@ export default function ClubsPage() {
               <p className="text-text-secondary max-w-md">
                 Kiritilgan qidiruv so'roviga mos klublar afsuski topilmadi. Boshqa shahar yoki nom bilan qidirib ko'ring.
               </p>
-              <Button variant="outline" className="mt-6 border-border-primary" onClick={() => setSearchQuery("")}>
+              <Button variant="outline" className="mt-6 border-border-primary hover:bg-background-tertiary hover:text-text-primary" onClick={() => {
+                setSearchQuery("");
+                setSelectedRegion("");
+                setSelectedDistrict("");
+              }}>
                 Filtrlarni tozalash
               </Button>
             </div>

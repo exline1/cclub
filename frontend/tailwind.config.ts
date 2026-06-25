@@ -18,7 +18,7 @@ const config: Config = {
         },
         accent: {
           primary: "#6366F1", // indigo
-          secondary: "#22D3EE", // cyan
+          secondary: "#818CF8", // indigo-400
           deep: "#3730a3",
           glow: "#6366f1",
         },

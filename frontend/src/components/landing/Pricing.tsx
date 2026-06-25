@@ -15,42 +15,42 @@ interface PricingPlan {
 
 const PLANS: PricingPlan[] = [
   {
-    id: "hourly",
-    name: "Soatlik",
-    price: "15,000",
-    duration: "so'm / soat",
-    description: "Qisqa muddatli o'yinlar va do'stlar bilan vaqt o'tkazish uchun.",
+    id: "free",
+    name: "Bepul",
+    price: "0",
+    duration: "so'm / oy",
+    description: "Katalogga kirish va asosiy profil yaratish uchun qulay boshlang'ich nuqta.",
     features: [
-      "Standart kompyuterlar",
-      "Klub umumiy zali",
-      "Asosiy o'yinlar to'plami",
+      "Katalogga qo'shilish",
+      "Asosiy klub profili",
+      "Mijozlardan sharhlar qabul qilish",
     ],
   },
   {
-    id: "weekly",
-    name: "Haftalik Abo",
-    price: "150,000",
-    duration: "so'm / hafta",
-    description: "Doimiy o'yinchilar uchun eng maqbul taklif va VIP imtiyozlar.",
+    id: "pro",
+    name: "Pro",
+    price: "499,000",
+    duration: "so'm / oy",
+    description: "Klubni to'liq boshqarish va daromadni oshirish uchun ideal yechim.",
     features: [
-      "Istalgan zonaga kirish",
-      "Kuniga 5 soat bepul",
-      "PS5 xonasidan foydalanish",
-      "Ichimliklar uchun 10% chegirma",
+      "Boshqaruv tizimi (kompyuter + bar)",
+      "Real-time hisobot va statistika",
+      "Mijozlarni onlayn joy band qilishi",
+      "24/7 texnik yordam",
     ],
     recommended: true,
   },
   {
-    id: "owners",
-    name: "Klub egalari",
+    id: "enterprise",
+    name: "Enterprise",
     price: "Kelishuv",
     duration: "asosida",
-    description: "Klubingizni CClub tizimiga qo'shing va boshqaruvni avtomatlashtiring.",
+    description: "Katta tarmoqlar va qo'shimcha imkoniyatlarga muhtoj klublar uchun.",
     features: [
-      "To'liq CRM tizimi",
-      "Moliyaviy hisobotlar",
-      "Mijozlar bazasini boshqarish",
-      "24/7 texnik qo'llab-quvvatlash",
+      "Ko'p filiallarni boshqarish",
+      "API integratsiyasi",
+      "Shaxsiy menejer",
+      "Maxsus funksional qo'shish",
     ],
   },
 ];
@@ -60,11 +60,14 @@ export function Pricing() {
     <section id="pricing" className="py-20 lg:py-28 bg-background-primary relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="mb-14 text-center sm:mb-16">
+          <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-accent-primary mb-3">
+            Tariflar
+          </p>
           <h2 className="font-heading text-3xl font-bold text-text-primary sm:text-4xl lg:text-5xl">
-            Tariflar va narxlar
+            Klub egalari uchun tarif rejalari
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-base text-text-secondary">
-            O'zingizga mos tarifni tanlang va o'yindan zavqlaning.
+            Klubingizni platformaga ulash va avtomatlashtirish uchun o'zingizga mos tarifni tanlang.
           </p>
         </div>
 
@@ -98,25 +101,23 @@ export function Pricing() {
               <ul className="mb-8 space-y-4 flex-grow">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-3">
-                    <Check className="h-5 w-5 text-status-success shrink-0" />
-                    <span className="text-sm text-text-primary">{feature}</span>
+                    <Check className="h-5 w-5 text-accent-primary shrink-0" />
+                    <span className="text-sm text-text-secondary">{feature}</span>
                   </li>
                 ))}
               </ul>
 
               <Button 
-                asChild 
+                asChild
                 variant={plan.recommended ? "default" : "outline"} 
                 className={cn(
-                  "w-full h-12 text-base rounded-xl transition-all",
+                  "w-full h-12 rounded-xl transition-all",
                   plan.recommended 
-                    ? "bg-accent-primary hover:bg-accent-glow" 
-                    : "border-border-primary bg-transparent hover:bg-background-tertiary"
+                    ? "bg-accent-primary hover:bg-accent-glow text-white border-0 shadow-accent-glow-sm" 
+                    : "border-border-primary hover:bg-background-tertiary"
                 )}
               >
-                <Link href={plan.id === "owners" ? "/contact" : "/login"}>
-                  {plan.id === "owners" ? "Bog'lanish" : "Tanlash"}
-                </Link>
+                <Link href="/royxatdan-otish/klub-egasi">Ulanish</Link>
               </Button>
             </div>
           ))}

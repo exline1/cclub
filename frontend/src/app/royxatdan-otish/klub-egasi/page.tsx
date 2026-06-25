@@ -273,7 +273,7 @@ export default function ClubOwnerRegistrationPage() {
               </label>
             </div>
 
-            <Button type="submit" disabled={isLoading} className="w-full h-14 bg-accent-secondary text-background-primary hover:bg-[#1bc1d9] text-base font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:shadow-[0_0_30px_rgba(34,211,238,0.5)]">
+            <Button type="submit" disabled={isLoading} className="w-full h-14 bg-accent-primary text-white hover:bg-accent-glow text-base font-bold rounded-xl transition-all shadow-accent-glow-sm hover:shadow-accent-glow">
               {isLoading ? (
                 <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Yuborilmoqda...</>
               ) : (

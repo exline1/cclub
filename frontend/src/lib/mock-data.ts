@@ -1,0 +1,157 @@
+export const MOCK_CLUBS = [
+  {
+    id: "1",
+    name: "Cyber Arena VIP",
+    address: "Yunusobod tumani, 19-kvartal",
+    viloyat: "Toshkent shahri",
+    tuman: "Yunusobod tumani",
+    distance: "1.2 km",
+    rating: 4.8,
+    reviewsCount: 124,
+    image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop",
+    tags: ["RTX 4080", "24/7", "PS5 xonasi"],
+    availableSeats: 12,
+    price: "15,000 so'm/soat",
+    workingHours: "24/7",
+    zones: [
+      { id: "z1", name: "Standard", computersCount: 20, price: "15,000 so'm", image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop" },
+      { id: "z2", name: "VIP", computersCount: 5, price: "25,000 so'm", image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2071&auto=format&fit=crop" },
+      { id: "z3", name: "PS5 Xonasi", computersCount: 3, price: "35,000 so'm", image: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?q=80&w=2070&auto=format&fit=crop" },
+    ],
+    barMenu: [
+      { id: "b1", name: "Red Bull", price: "25,000 so'm" },
+      { id: "b2", name: "Lays", price: "18,000 so'm" },
+      { id: "b3", name: "Kofe", price: "15,000 so'm" },
+      { id: "b4", name: "Sendvich", price: "22,000 so'm" },
+    ],
+    reviews: [
+      { id: "r1", author: "Azizbek", rating: 5, text: "Eng zo'r kompyuter klub, kompyuterlari juda tez ishlaydi.", avatar: "" },
+      { id: "r2", author: "Murod", rating: 4, text: "Klub yaxshi, lekin joy topish ba'zan qiyin bo'ladi. Oldindan band qilish kerak.", avatar: "" },
+    ],
+  },
+  {
+    id: "2",
+    name: "Nexus Gaming Lounge",
+    address: "Chilonzor tumani, Muqimiy ko'chasi",
+    viloyat: "Toshkent shahri",
+    tuman: "Chilonzor tumani",
+    distance: "3.5 km",
+    rating: 4.5,
+    reviewsCount: 89,
+    image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2071&auto=format&fit=crop",
+    tags: ["RTX 3060", "Bar menyu", "VIP zonalar"],
+    availableSeats: 0,
+    price: "10,000 so'm/soat",
+    workingHours: "09:00 - 03:00",
+    zones: [
+      { id: "z1", name: "Umumiy Zal", computersCount: 30, price: "10,000 so'm", image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2071&auto=format&fit=crop" },
+      { id: "z2", name: "VIP", computersCount: 10, price: "20,000 so'm", image: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=2070&auto=format&fit=crop" },
+    ],
+    barMenu: [
+      { id: "b1", name: "Kola", price: "10,000 so'm" },
+      { id: "b2", name: "Burger", price: "30,000 so'm" },
+    ],
+    reviews: [
+      { id: "r1", author: "Sardor", rating: 5, text: "Atmosfera daxshat! Bar zo'r.", avatar: "" },
+    ],
+  },
+  {
+    id: "3",
+    name: "Matrix eSports Center",
+    address: "Mirzo Ulug'bek tumani, TTZ",
+    viloyat: "Toshkent shahri",
+    tuman: "Mirzo Ulug'bek tumani",
+    distance: "5.1 km",
+    rating: 4.9,
+    reviewsCount: 312,
+    image: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=2070&auto=format&fit=crop",
+    tags: ["RTX 4090", "Streamer xonasi", "Oziq-ovqat"],
+    availableSeats: 4,
+    price: "20,000 so'm/soat",
+    workingHours: "24/7",
+    zones: [
+      { id: "z1", name: "Pro Gaming", computersCount: 40, price: "20,000 so'm", image: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=2070&auto=format&fit=crop" },
+      { id: "z2", name: "Streamer xonasi", computersCount: 1, price: "50,000 so'm", image: "https://images.unsplash.com/photo-1563298723-dcfebaa392e3?q=80&w=2070&auto=format&fit=crop" },
+    ],
+    barMenu: [
+      { id: "b1", name: "Osh", price: "35,000 so'm" },
+      { id: "b2", name: "Choy", price: "5,000 so'm" },
+    ],
+    reviews: [
+      { id: "r1", author: "Jasur", rating: 5, text: "O'zbekistondagi eng zo'r klub", avatar: "" },
+      { id: "r2", author: "Anvar", rating: 4, text: "Biroz uzoqroqda joylashgan", avatar: "" },
+    ],
+  },
+  {
+    id: "4",
+    name: "GameHub Tashkent",
+    address: "Shayxontohur tumani, Navoiy ko'chasi",
+    viloyat: "Toshkent shahri",
+    tuman: "Shayxontohur tumani",
+    distance: "2.8 km",
+    rating: 4.2,
+    reviewsCount: 56,
+    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop",
+    tags: ["GTX 1660", "Arzon", "24/7 emas"],
+    availableSeats: 25,
+    price: "8,000 so'm/soat",
+    workingHours: "08:00 - 22:00",
+    zones: [
+      { id: "z1", name: "Standard", computersCount: 50, price: "8,000 so'm", image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop" },
+    ],
+    barMenu: [
+      { id: "b1", name: "Snickers", price: "12,000 so'm" },
+    ],
+    reviews: [
+      { id: "r1", author: "Dilshod", rating: 4, text: "Narxi arzon, talabalar uchun zo'r.", avatar: "" },
+    ],
+  },
+  {
+    id: "5",
+    name: "LevelUp Cyberclub",
+    address: "Yakkasaroy tumani, Shota Rustaveli",
+    viloyat: "Toshkent shahri",
+    tuman: "Yakkasaroy tumani",
+    distance: "4.0 km",
+    rating: 4.6,
+    reviewsCount: 145,
+    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop",
+    tags: ["RTX 4070", "Lounge", "Kalyan"],
+    availableSeats: 8,
+    price: "18,000 so'm/soat",
+    workingHours: "24/7",
+    zones: [
+      { id: "z1", name: "Lounge Area", computersCount: 15, price: "18,000 so'm", image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop" },
+      { id: "z2", name: "Premium VIP", computersCount: 4, price: "30,000 so'm", image: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=2070&auto=format&fit=crop" },
+    ],
+    barMenu: [
+      { id: "b1", name: "Kalyan", price: "150,000 so'm" },
+      { id: "b2", name: "Limonad", price: "30,000 so'm" },
+    ],
+    reviews: [
+      { id: "r1", author: "Umid", rating: 5, text: "Lounge hududi juda qulay, dam olish uchun zo'r.", avatar: "" },
+    ],
+  },
+];
+
+export const REGIONS = [
+  "Toshkent shahri",
+  "Toshkent viloyati",
+  "Samarqand viloyati",
+  "Farg'ona viloyati",
+  "Andijon viloyati",
+  "Namangan viloyati",
+  "Buxoro viloyati",
+  "Xorazm viloyati",
+  "Qashqadaryo viloyati",
+  "Surxondaryo viloyati",
+  "Sirdaryo viloyati",
+  "Jizzax viloyati",
+  "Navoiy viloyati",
+  "Qoraqalpog'iston Respublikasi"
+];
+
+export const DISTRICTS: Record<string, string[]> = {
+  "Toshkent shahri": ["Yunusobod tumani", "Chilonzor tumani", "Mirzo Ulug'bek tumani", "Shayxontohur tumani", "Yakkasaroy tumani", "Yashnobod tumani", "Olmazor tumani", "Uchtepa tumani", "Sirg'ali tumani", "Mirobod tumani", "Bektemir tumani"],
+  // Other districts can be mock data
+};

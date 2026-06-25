@@ -26,6 +26,7 @@ interface LoginFormErrors {
 export function LoginForm() {
   const router = useRouter();
   const [loginMethod, setLoginMethod] = useState<"email" | "phone">("phone");
+  const [role, setRole] = useState<"mijoz" | "klub">("mijoz");
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -97,7 +98,11 @@ export function LoginForm() {
     });
 
     setIsSubmitting(false);
-    router.push("/dashboard");
+    if (role === "klub") {
+      router.push("/klub-panel");
+    } else {
+      router.push("/dashboard");
+    }
   };
 
   const handleGoogleLogin = () => {
@@ -111,6 +116,32 @@ export function LoginForm() {
       title="Xush kelibsiz"
       subtitle="cclub hisobingizga kiring"
     >
+      {/* Role Toggle */}
+      <div className="mb-6 flex rounded-lg bg-background-tertiary p-1 border border-border-primary">
+        <button
+          type="button"
+          className={`flex-1 rounded-md py-2 text-sm font-bold transition-all duration-200 ${
+            role === "mijoz"
+              ? "bg-accent-primary text-white shadow-md"
+              : "text-text-secondary hover:text-text-primary"
+          }`}
+          onClick={() => setRole("mijoz")}
+        >
+          Mijoz
+        </button>
+        <button
+          type="button"
+          className={`flex-1 rounded-md py-2 text-sm font-bold transition-all duration-200 ${
+            role === "klub"
+              ? "bg-accent-primary text-white shadow-md"
+              : "text-text-secondary hover:text-text-primary"
+          }`}
+          onClick={() => setRole("klub")}
+        >
+          Klub egasi
+        </button>
+      </div>
+
       {/* Login Method Toggle */}
       <div className="mb-6 flex rounded-lg bg-background-primary p-1 border border-border-glass">
         <button
