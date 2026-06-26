@@ -27,7 +27,7 @@ interface UserProfile {
 
 export default function ProfilePage() {
   const router = useRouter();
-  const { shouldAnimate } = useDesktopAnimation();
+  const { shouldAnimate, isDesktop } = useDesktopAnimation();
   const MotionDiv = shouldAnimate ? motion.div : "div";
   const [user, setUser] = useState<UserProfile | null>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -132,12 +132,14 @@ export default function ProfilePage() {
   const nameInitial = user.name ? user.name.charAt(0).toUpperCase() : "U";
 
   return (
-    <main className="min-h-screen bg-background-primary pb-16 relative">
-      <Suspense fallback={null}>
-        <SceneWrapper variant="minimal" />
-      </Suspense>
+    <main className="min-h-screen bg-background-primary pb-16 relative md:bg-stripe-gradient">
+      {isDesktop && (
+        <Suspense fallback={null}>
+          <SceneWrapper variant="minimal" />
+        </Suspense>
+      )}
       {/* Header */}
-      <header className="border-b border-border-glass bg-background-secondary py-4 sticky top-0 z-40">
+      <header className="border-b border-border-glass bg-background-secondary/80 backdrop-blur-md py-4 sticky top-0 z-40">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <Button
             variant="ghost"
@@ -149,7 +151,7 @@ export default function ProfilePage() {
           </Button>
 
           <h1 className="font-heading text-sm font-bold text-text-primary sm:text-lg select-none">
-            Mening Profilim
+            <span className="gradient-text">Mening Profilim</span>
           </h1>
 
           <button
@@ -175,7 +177,7 @@ export default function ProfilePage() {
                 {nameInitial}
               </div>
               <div className="flex-1 text-center sm:text-left space-y-2">
-                <h2 className="text-2xl font-heading font-bold text-text-primary">{user.name}</h2>
+                <h2 className="text-2xl font-heading font-bold"><span className="gradient-text">{user.name}</span></h2>
                 <div className="flex items-center justify-center sm:justify-start gap-1.5 text-sm text-text-secondary">
                   <Calendar className="h-4 w-4 text-accent-glow" />
                   <span>A&apos;zo bo&apos;lingan sana: {user.joinDate}</span>
@@ -200,7 +202,7 @@ export default function ProfilePage() {
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base sm:text-lg flex items-center gap-2 font-heading">
                   <User className="h-5 w-5 text-accent-glow" />
-                  Profil ma&apos;lumotlari
+                  <span className="gradient-text">Profil ma&apos;lumotlari</span>
                 </CardTitle>
                 {!isEditing && (
                   <Button
@@ -302,7 +304,7 @@ export default function ProfilePage() {
             <CardHeader className="pb-3 border-b border-border-glass/40">
               <CardTitle className="text-base sm:text-lg flex items-center gap-2 font-heading">
                 <Bell className="h-5 w-5 text-accent-glow" />
-                Sozlamalar bo&apos;limi
+                <span className="gradient-text">Sozlamalar bo&apos;limi</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-6 flex items-center justify-between">
@@ -333,7 +335,7 @@ export default function ProfilePage() {
             <CardHeader className="pb-3 border-b border-border-glass/40">
               <CardTitle className="text-base sm:text-lg flex items-center gap-2 font-heading">
                 <Key className="h-5 w-5 text-accent-glow" />
-                Hisobni boshqarish
+                <span className="gradient-text">Hisobni boshqarish</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-6">

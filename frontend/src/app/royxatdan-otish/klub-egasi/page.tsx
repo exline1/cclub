@@ -7,6 +7,7 @@ import { Logo } from "@/components/shared/Logo";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
+import { useDesktopAnimation } from "@/hooks/useDesktopAnimation";
 
 const SceneWrapper = dynamic(
   () => import("@/components/three/SceneWrapper").then((mod) => ({ default: mod.SceneWrapper })),
@@ -14,6 +15,7 @@ const SceneWrapper = dynamic(
 );
 
 export default function ClubOwnerRegistrationPage() {
+  const { isDesktop } = useDesktopAnimation();
   const [isLoading, setIsLoading] = useState(false);
   
   // Dynamic lists states
@@ -38,10 +40,12 @@ export default function ClubOwnerRegistrationPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background-primary flex flex-col relative pb-20">
-      <Suspense fallback={null}>
-        <SceneWrapper variant="minimal" />
-      </Suspense>
+    <div className="min-h-screen bg-background-primary flex flex-col relative pb-20 md:bg-stripe-gradient">
+      {isDesktop && (
+        <Suspense fallback={null}>
+          <SceneWrapper variant="minimal" />
+        </Suspense>
+      )}
       <header className="p-6 flex items-center justify-between border-b border-border-primary bg-background-primary/95 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <Logo />
         <Link 

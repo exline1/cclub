@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 
 import { Hero } from "@/components/landing/Hero";
 import { Navbar } from "@/components/landing/Navbar";
+import { useDesktopAnimation } from "@/hooks/useDesktopAnimation";
 
 // Lazy loading below-the-fold components
 const HowItWorks = dynamic(() =>
@@ -12,6 +13,12 @@ const HowItWorks = dynamic(() =>
 );
 const BenefitCards = dynamic(() =>
   import("@/components/landing/BenefitCards").then((mod) => mod.BenefitCards)
+);
+const Pricing = dynamic(() =>
+  import("@/components/landing/Pricing").then((mod) => mod.Pricing)
+);
+const FAQ = dynamic(() =>
+  import("@/components/landing/FAQ").then((mod) => mod.FAQ)
 );
 const DownloadCTA = dynamic(() =>
   import("@/components/landing/DownloadCTA").then((mod) => mod.DownloadCTA)
@@ -26,15 +33,20 @@ const SceneWrapper = dynamic(
 );
 
 export default function HomePage() {
+  const { isDesktop } = useDesktopAnimation();
   return (
-    <main className="bg-background-primary text-text-primary min-h-screen relative">
-      <Suspense fallback={null}>
-        <SceneWrapper variant="hero" />
-      </Suspense>
+    <main className="bg-background-primary text-text-primary min-h-screen relative md:bg-stripe-gradient">
+      {isDesktop && (
+        <Suspense fallback={null}>
+          <SceneWrapper variant="hero" />
+        </Suspense>
+      )}
       <Navbar />
       <Hero />
       <HowItWorks />
       <BenefitCards />
+      <Pricing />
+      <FAQ />
       <DownloadCTA />
       <Footer />
     </main>

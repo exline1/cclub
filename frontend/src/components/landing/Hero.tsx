@@ -65,13 +65,13 @@ export function Hero() {
         {/* Live Status Indicator */}
         <Item
           {...itemProps}
-          className="mb-8 inline-flex items-center gap-2 rounded-full border border-border-primary bg-background-glass px-4 py-2 backdrop-blur-md"
+          className="mb-8 section-badge"
         >
           <span className="relative flex h-3 w-3">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-status-online opacity-75"></span>
             <span className="relative inline-flex rounded-full h-3 w-3 bg-status-online"></span>
           </span>
-          <span className="font-mono text-xs font-medium text-text-primary tracking-wide sm:text-sm">
+          <span className="font-mono text-xs font-medium tracking-wide sm:text-sm">
             4 JOY BO&apos;SH · 12:45 QOLDI
           </span>
         </Item>
@@ -80,7 +80,7 @@ export function Hero() {
           {...itemProps}
           className="font-heading max-w-4xl text-4xl font-bold leading-tight text-text-primary sm:text-5xl md:text-6xl lg:text-7xl"
         >
-          O&apos;zbekistondagi barcha{" "}
+          <span className="gradient-text">O&apos;zbekistondagi barcha </span>
           <span className="text-accent-primary drop-shadow-[0_0_15px_rgba(129,140,248,0.5)]">
             game club&apos;lar bir joyda
           </span>

@@ -37,6 +37,13 @@ const config: Config = {
           glass: "rgba(99, 102, 241, 0.2)",
         },
       },
+      backgroundColor: {
+        'glass': 'rgba(255, 255, 255, 0.03)',
+        'glass-hover': 'rgba(255, 255, 255, 0.06)',
+      },
+      borderColor: {
+        'glass': 'rgba(255, 255, 255, 0.08)',
+      },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
         heading: ["var(--font-sora)", "var(--font-inter)", "system-ui", "sans-serif"],
@@ -46,11 +53,14 @@ const config: Config = {
         "accent-glow": "0 0 40px rgba(99, 102, 241, 0.15)",
         "accent-glow-sm": "0 0 20px rgba(99, 102, 241, 0.2)",
         "card-hover": "0 10px 30px -10px rgba(0, 0, 0, 0.5)",
+        'glass': '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)',
+        'glow': '0 0 60px rgba(99,102,241,0.15)',
       },
       backgroundImage: {
         "hero-gradient": "radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.15) 0%, rgba(10, 14, 26, 1) 50%)",
         "cta-gradient": "linear-gradient(135deg, #0A0E1A 0%, rgba(99, 102, 241, 0.15) 100%)",
         "card-gradient": "linear-gradient(180deg, #12172A 0%, #0A0E1A 100%)",
+        'stripe-gradient': 'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99,102,241,0.3) 0%, transparent 100%)',
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",

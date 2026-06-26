@@ -20,13 +20,17 @@ interface SceneWrapperProps {
 export function SceneWrapper({ variant }: SceneWrapperProps) {
   const { shouldAnimate } = useDesktopAnimation();
   const [contextLost, setContextLost] = useState(false);
-  const [frameloop, setFrameloop] = useState<"always" | "demand">("always");
+  const [frameloop, setFrameloop] = useState<"always" | "demand">("demand");
   const glRef = useRef<HTMLCanvasElement | null>(null);
 
   // visibility change listener to pause rendering loops when browser tab is inactive
   useEffect(() => {
     const handleVisibilityChange = () => {
-      setFrameloop(document.hidden ? "demand" : "always");
+      if (document.hidden) {
+        setFrameloop("demand");
+      } else {
+        setFrameloop("demand");
+      }
     };
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
@@ -55,11 +59,6 @@ export function SceneWrapper({ variant }: SceneWrapperProps) {
     return null;
   }
 
-  // Drei Stats component load only in development
-  const StatsComponent = process.env.NODE_ENV === "development"
-    ? dynamic(() => import("@react-three/drei").then(mod => mod.Stats), { ssr: false })
-    : null;
-
   return (
     <div
       style={{
@@ -70,8 +69,8 @@ export function SceneWrapper({ variant }: SceneWrapperProps) {
       }}
     >
       <Canvas
-        gl={{ antialias: true, alpha: true }}
-        dpr={[1, 1.5]}
+        gl={{ antialias: false, alpha: true }}
+        dpr={1}
         camera={{ position: [0, 0, 5], fov: 75 }}
         frameloop={frameloop}
         onCreated={({ gl }) => {
@@ -79,11 +78,6 @@ export function SceneWrapper({ variant }: SceneWrapperProps) {
           gl.domElement.addEventListener("webglcontextlost", handleContextLost);
         }}
       >
-        {StatsComponent && (
-          <Suspense fallback={null}>
-            <StatsComponent className="pointer-events-none select-none" />
-          </Suspense>
-        )}
 
         {variant === "hero" && (
           <>
@@ -92,13 +86,13 @@ export function SceneWrapper({ variant }: SceneWrapperProps) {
             <pointLight position={[-3, -3, 2]} color="#818cf8" intensity={2} />
             <pointLight position={[0, 0, -3]} color="#4338ca" intensity={1} />
             <ParticleField
-              count={3000}
+              count={1500}
               size={0.012}
               speed={0.0003}
               repulsionEnabled={true}
             />
             <GamingCrystal />
-            <FloatingOrbs count={5} size="large" />
+            <FloatingOrbs count={3} size="large" />
             <MouseParallax strength={0.3} />
           </>
         )}
@@ -108,12 +102,12 @@ export function SceneWrapper({ variant }: SceneWrapperProps) {
             <ambientLight intensity={0.2} />
             <pointLight position={[2, 2, 2]} color="#6366f1" intensity={1.5} />
             <ParticleField
-              count={1500}
+              count={800}
               size={0.01}
               speed={0.0002}
               repulsionEnabled={false}
             />
-            <FloatingOrbs count={3} size="small" />
+            <FloatingOrbs count={2} size="small" />
             <MouseParallax strength={0.15} />
           </>
         )}
@@ -122,12 +116,11 @@ export function SceneWrapper({ variant }: SceneWrapperProps) {
           <>
             <ambientLight intensity={0.1} />
             <ParticleField
-              count={800}
+              count={300}
               size={0.008}
               speed={0.0001}
               repulsionEnabled={false}
             />
-            <MouseParallax strength={0.08} />
           </>
         )}
       </Canvas>

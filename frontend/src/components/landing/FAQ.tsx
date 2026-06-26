@@ -55,12 +55,12 @@ export function FAQ() {
   return (
     <section id="faq" className="py-20 lg:py-28 bg-background-primary">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <Header {...headerProps} className="mb-14 text-center sm:mb-16">
-          <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-accent-primary mb-3">
+        <Header {...headerProps} className="mb-14 text-center sm:mb-16 flex flex-col items-center">
+          <div className="section-badge mb-3">
             FAQ
-          </p>
-          <h2 className="font-heading text-3xl font-bold text-text-primary sm:text-4xl lg:text-5xl">
-            Ko&apos;p so&apos;raladigan savollar
+          </div>
+          <h2 className="font-heading text-3xl font-bold sm:text-4xl lg:text-5xl">
+            <span className="gradient-text">Ko&apos;p so&apos;raladigan savollar</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-text-secondary">
             CClub platformasi va xizmatlarimiz haqida batafsil ma&apos;lumot.
@@ -75,8 +75,8 @@ export function FAQ() {
                 key={index}
                 {...itemProps}
                 className={cn(
-                  "overflow-hidden rounded-2xl border border-border-primary bg-background-secondary transition-all duration-300",
-                  isOpen && "border-accent-primary/50 shadow-accent-glow-sm bg-background-tertiary"
+                  "overflow-hidden glass-card transition-all duration-300",
+                  isOpen && "border-accent-primary/50 shadow-accent-glow-sm bg-glass-hover"
                 )}
               >
                 <button

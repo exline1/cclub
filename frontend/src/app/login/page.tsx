@@ -16,7 +16,7 @@ const SceneWrapper = dynamic(
 );
 
 export default function LoginPage() {
-  const { shouldAnimate } = useDesktopAnimation();
+  const { shouldAnimate, isDesktop } = useDesktopAnimation();
 
   useEffect(() => {
     document.title = "Kirish — cclub";
@@ -25,10 +25,12 @@ export default function LoginPage() {
   const BackgroundWrapper = shouldAnimate ? motion.div : "div";
 
   return (
-    <main className="relative min-h-screen bg-background-primary">
-      <Suspense fallback={null}>
-        <SceneWrapper variant="minimal" />
-      </Suspense>
+    <main className="relative min-h-screen bg-background-primary md:bg-stripe-gradient">
+      {isDesktop && (
+        <Suspense fallback={null}>
+          <SceneWrapper variant="minimal" />
+        </Suspense>
+      )}
       {/* Animated gradient on desktop */}
       <BackgroundWrapper
         {...(shouldAnimate ? {
@@ -40,20 +42,44 @@ export default function LoginPage() {
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col px-4 py-6 sm:px-6 lg:px-8">
-        <div className="mb-8 flex justify-center sm:justify-start">
+      <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col justify-between px-4 py-6 sm:px-6 lg:px-8">
+        <div className="flex justify-center sm:justify-start">
           <Logo />
         </div>
 
-        <div className="flex flex-1 flex-col items-center justify-center pb-8">
-          <Suspense fallback={
-            <div className="flex flex-col items-center gap-3">
-              <div className="h-8 w-8 animate-spin rounded-full border-2 border-accent-glow/20 border-t-accent-glow" />
-              <p className="text-xs text-text-secondary">Yuklanmoqda...</p>
+        <div className="flex flex-1 flex-col md:flex-row items-center justify-center gap-12 py-10">
+          {/* Left Column - Branding (Desktop only) */}
+          <div className="hidden md:flex flex-col flex-1 max-w-lg space-y-6">
+            <div className="section-badge self-start">CClub Portal</div>
+            <h1 className="text-4xl lg:text-5xl font-heading font-bold leading-tight">
+              <span className="gradient-text">O&apos;yinga tezkor kirish va boshqaruv</span>
+            </h1>
+            <p className="text-text-secondary text-base lg:text-lg">
+              Klublardagi joyingizni oldindan band qiling, bar menyusidan buyurtma bering va hisobingizni to&apos;ldiring. Hammasi bir joyda.
+            </p>
+            <div className="flex flex-col gap-4 border-l border-indigo-500/20 pl-6 mt-4">
+              <div>
+                <span className="font-bold text-white text-sm block">Tezkor bron</span>
+                <span className="text-text-secondary text-xs">2 daqiqada sevimli kompyuteringizni band qiling</span>
+              </div>
+              <div>
+                <span className="font-bold text-white text-sm block">Bar menyusi</span>
+                <span className="text-text-secondary text-xs">O&apos;yin davomida bar va oshxonadan buyurtma bering</span>
+              </div>
             </div>
-          }>
-            <LoginForm />
-          </Suspense>
+          </div>
+
+          {/* Right Column - LoginForm */}
+          <div className="flex flex-1 justify-center w-full max-w-md">
+            <Suspense fallback={
+              <div className="flex flex-col items-center gap-3">
+                <div className="h-8 w-8 animate-spin rounded-full border-2 border-accent-glow/20 border-t-accent-glow" />
+                <p className="text-xs text-text-secondary">Yuklanmoqda...</p>
+              </div>
+            }>
+              <LoginForm />
+            </Suspense>
+          </div>
         </div>
 
         <p className="text-center text-xs text-text-secondary">

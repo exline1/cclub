@@ -6,6 +6,7 @@ import { ArrowLeft, Check, Loader2 } from "lucide-react";
 import { Logo } from "@/components/shared/Logo";
 import { Button } from "@/components/ui/button";
 import dynamic from "next/dynamic";
+import { useDesktopAnimation } from "@/hooks/useDesktopAnimation";
 
 const SceneWrapper = dynamic(
   () => import("@/components/three/SceneWrapper").then((mod) => ({ default: mod.SceneWrapper })),
@@ -13,6 +14,7 @@ const SceneWrapper = dynamic(
 );
 
 export default function ClientRegistrationPage() {
+  const { isDesktop } = useDesktopAnimation();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -26,10 +28,12 @@ export default function ClientRegistrationPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background-primary flex flex-col relative">
-      <Suspense fallback={null}>
-        <SceneWrapper variant="minimal" />
-      </Suspense>
+    <div className="min-h-screen bg-background-primary flex flex-col relative md:bg-stripe-gradient">
+      {isDesktop && (
+        <Suspense fallback={null}>
+          <SceneWrapper variant="minimal" />
+        </Suspense>
+      )}
       <header className="p-6 flex items-center justify-between border-b border-border-primary/50 bg-background-primary/80 backdrop-blur-md sticky top-0 z-50">
         <Logo />
         <Link 

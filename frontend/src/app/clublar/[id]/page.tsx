@@ -26,7 +26,7 @@ export default function ClubProfilePage() {
   const params = useParams();
   const id = params.id as string;
   
-  const { shouldAnimate } = useDesktopAnimation();
+  const { shouldAnimate, isDesktop } = useDesktopAnimation();
   
   const MotionDiv = shouldAnimate ? motion.div : "div";
   const MotionSection = shouldAnimate ? motion.section : "section";
@@ -74,10 +74,12 @@ export default function ClubProfilePage() {
   
   if (!club) {
     return (
-      <div className="min-h-screen bg-background-primary text-text-primary flex flex-col relative">
-        <Suspense fallback={null}>
-          <SceneWrapper variant="light" />
-        </Suspense>
+      <div className="min-h-screen bg-background-primary text-text-primary flex flex-col relative md:bg-stripe-gradient">
+        {isDesktop && (
+          <Suspense fallback={null}>
+            <SceneWrapper variant="light" />
+          </Suspense>
+        )}
         <Navbar />
         <main className="flex-grow pt-32 pb-20 flex flex-col items-center justify-center">
           <h1 className="text-2xl font-bold mb-4">Klub topilmadi</h1>
@@ -176,10 +178,12 @@ export default function ClubProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-background-primary text-text-primary flex flex-col relative">
-      <Suspense fallback={null}>
-        <SceneWrapper variant="light" />
-      </Suspense>
+    <div className="min-h-screen bg-background-primary text-text-primary flex flex-col relative md:bg-stripe-gradient">
+      {isDesktop && (
+        <Suspense fallback={null}>
+          <SceneWrapper variant="light" />
+        </Suspense>
+      )}
       <Navbar />
 
       <main className="flex-grow pt-24 pb-20 relative">
@@ -208,12 +212,12 @@ export default function ClubProfilePage() {
             <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
               <div>
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/50 px-3 py-1.5 backdrop-blur-md">
+                  <div className="section-badge">
                     <span className="relative flex h-2 w-2">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-status-online opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-status-online"></span>
                     </span>
-                    <span className="font-mono text-xs font-semibold tracking-wider text-white">
+                    <span className="font-mono text-xs font-semibold tracking-wider">
                       OCHIQ
                     </span>
                   </div>
@@ -225,7 +229,7 @@ export default function ClubProfilePage() {
                 </div>
                 
                 <h1 className="font-heading text-3xl md:text-5xl font-bold text-white mb-3">
-                  {club.name}
+                  <span className="gradient-text">{club.name}</span>
                 </h1>
                 
                 <div className="flex items-center gap-2 text-text-secondary">
@@ -248,7 +252,7 @@ export default function ClubProfilePage() {
               {/* Real-time Status Panel */}
               <MotionSection
                 {...(shouldAnimate ? { variants: fadeUp, initial: "hidden", whileInView: "visible", viewport: viewportOnce } : {})}
-                className={cn("bg-background-secondary border border-border-primary rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-4", !shouldAnimate && "animate-in fade-in slide-in-from-bottom-8")}
+                className={cn("glass-card p-6 flex flex-col md:flex-row items-center justify-between gap-4", !shouldAnimate && "animate-in fade-in slide-in-from-bottom-8")}
               >
                 <div>
                   <h3 className="text-lg font-bold mb-1">Kompyuterlar Holati</h3>
@@ -274,22 +278,22 @@ export default function ClubProfilePage() {
                 {...(shouldAnimate ? { variants: staggerContainer, initial: "hidden", whileInView: "visible", viewport: viewportOnce } : {})}
                 className={cn("grid grid-cols-2 sm:grid-cols-4 gap-4", !shouldAnimate && "animate-in fade-in slide-in-from-bottom-8")}
               >
-                <MotionDiv {...(shouldAnimate ? { variants: fadeUp } : {})} className="bg-background-secondary border border-border-primary rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                <MotionDiv {...(shouldAnimate ? { variants: fadeUp } : {})} className="glass-card p-4 flex flex-col items-center justify-center text-center">
                   <Monitor className="h-6 w-6 text-accent-primary mb-2" />
                   <span className="text-sm text-text-secondary mb-1">Kompyuterlar</span>
                   <span className="font-bold text-lg">{totalComputers} ta</span>
                 </MotionDiv>
-                <MotionDiv {...(shouldAnimate ? { variants: fadeUp } : {})} className="bg-background-secondary border border-border-primary rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                <MotionDiv {...(shouldAnimate ? { variants: fadeUp } : {})} className="glass-card p-4 flex flex-col items-center justify-center text-center">
                   <Gamepad2 className="h-6 w-6 text-accent-primary mb-2" />
                   <span className="text-sm text-text-secondary mb-1">Zonalar</span>
                   <span className="font-bold text-lg">{club.zones.length} ta</span>
                 </MotionDiv>
-                <MotionDiv {...(shouldAnimate ? { variants: fadeUp } : {})} className="bg-background-secondary border border-border-primary rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                <MotionDiv {...(shouldAnimate ? { variants: fadeUp } : {})} className="glass-card p-4 flex flex-col items-center justify-center text-center">
                   <Clock className="h-6 w-6 text-accent-primary mb-2" />
                   <span className="text-sm text-text-secondary mb-1">Ish vaqti</span>
                   <span className="font-bold text-lg">{club.workingHours}</span>
                 </MotionDiv>
-                <MotionDiv {...(shouldAnimate ? { variants: fadeUp } : {})} className="bg-background-secondary border border-border-primary rounded-2xl p-4 flex flex-col items-center justify-center text-center">
+                <MotionDiv {...(shouldAnimate ? { variants: fadeUp } : {})} className="glass-card p-4 flex flex-col items-center justify-center text-center">
                   <Wallet className="h-6 w-6 text-accent-primary mb-2" />
                   <span className="text-sm text-text-secondary mb-1">Boshlang'ich narx</span>
                   <span className="font-bold text-lg">{club.price.split('/')[0]}</span>
@@ -310,7 +314,7 @@ export default function ClubProfilePage() {
                     <MotionDiv
                       key={zone.id}
                       {...(shouldAnimate ? { variants: fadeUp, whileHover: { y: -4, transition: { type: "spring", stiffness: 300, damping: 20 } } } : {})}
-                      className="group bg-background-secondary border border-border-primary rounded-2xl overflow-hidden hover:border-accent-primary/50 transition-colors"
+                      className="group glass-card overflow-hidden hover:border-accent-primary/50 transition-colors"
                     >
                       <div className="relative h-32 w-full">
                         <Image src={zone.image} alt={zone.name} fill className="object-cover" />
@@ -371,7 +375,7 @@ export default function ClubProfilePage() {
                       <MotionDiv 
                         key={product.id} 
                         {...(shouldAnimate ? { variants: fadeUp } : {})}
-                        className="bg-background-secondary border border-border-primary rounded-2xl overflow-hidden flex flex-col"
+                        className="glass-card overflow-hidden flex flex-col"
                       >
                         <div className="relative h-32 w-full bg-background-tertiary">
                           <Image src={product.imageUrl} alt={product.name} fill className="object-cover" />
@@ -404,7 +408,7 @@ export default function ClubProfilePage() {
                     <MotionDiv 
                       key={review.id} 
                       {...(shouldAnimate ? { variants: fadeUp } : {})}
-                      className="bg-background-secondary border border-border-primary rounded-2xl p-5"
+                      className="glass-card p-5"
                     >
                       <div className="flex items-center gap-3 mb-3">
                         <div className="h-10 w-10 bg-background-tertiary rounded-full flex items-center justify-center font-bold text-accent-primary">
@@ -425,7 +429,7 @@ export default function ClubProfilePage() {
                 </div>
 
                 {/* Leave a review */}
-                <MotionDiv {...(shouldAnimate ? { variants: fadeUp } : {})} className="bg-background-secondary border border-border-primary rounded-2xl p-6">
+                <MotionDiv {...(shouldAnimate ? { variants: fadeUp } : {})} className="glass-card p-6">
                   <h3 className="font-bold text-lg mb-4">Sharh qoldirish</h3>
                   <form onSubmit={handleReviewSubmit}>
                     <div className="flex gap-1 mb-4">
@@ -460,7 +464,7 @@ export default function ClubProfilePage() {
             <div className="space-y-6">
               <MotionDiv
                 {...(shouldAnimate ? { variants: fadeUp, initial: "hidden", whileInView: "visible", viewport: viewportOnce } : {})}
-                className={cn("bg-background-secondary border border-border-primary rounded-2xl p-6", !shouldAnimate && "animate-in fade-in slide-in-from-bottom-8")}
+                className={cn("glass-card p-6", !shouldAnimate && "animate-in fade-in slide-in-from-bottom-8")}
               >
                 <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
                   <MapPin className="h-5 w-5 text-accent-primary" />
@@ -521,7 +525,7 @@ export default function ClubProfilePage() {
                 animate: "visible",
                 exit: "hidden"
               } : {})}
-              className="bg-background-secondary border border-border-primary rounded-3xl p-6 md:p-8 w-full max-w-md shadow-2xl relative flex flex-col max-h-[90vh]"
+              className="glass-card rounded-3xl p-6 md:p-8 w-full max-w-md shadow-2xl relative flex flex-col max-h-[90vh]"
             >
               <button 
                 onClick={() => setIsBarModalOpen(false)}
@@ -598,7 +602,7 @@ export default function ClubProfilePage() {
                 animate: "visible",
                 exit: "hidden"
               } : {})}
-              className="bg-background-secondary border border-border-primary rounded-3xl p-6 md:p-8 w-full max-w-2xl shadow-2xl relative flex flex-col max-h-[90vh]"
+              className="glass-card rounded-3xl p-6 md:p-8 w-full max-w-2xl shadow-2xl relative flex flex-col max-h-[90vh]"
             >
               <button 
                 onClick={() => setIsModalOpen(false)}
@@ -860,7 +864,7 @@ export default function ClubProfilePage() {
                 animate: "visible",
                 exit: "hidden"
               } : {})}
-              className="bg-background-secondary border border-border-primary rounded-3xl p-6 md:p-8 w-full max-w-sm shadow-2xl relative flex flex-col items-center text-center"
+              className="glass-card rounded-3xl p-6 md:p-8 w-full max-w-sm shadow-2xl relative flex flex-col items-center text-center"
             >
               <button 
                 onClick={() => setIsAuthModalOpen(false)}

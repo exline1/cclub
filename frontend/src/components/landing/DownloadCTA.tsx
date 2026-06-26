@@ -27,15 +27,15 @@ export function DownloadCTA() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <Section
           {...sectionProps}
-          className="bg-background-tertiary border border-border-primary rounded-[32px] p-8 md:p-16 flex flex-col md:flex-row items-center justify-between gap-12 relative overflow-hidden shadow-2xl"
+          className="glass-card p-8 md:p-16 flex flex-col md:flex-row items-center justify-between gap-12 relative overflow-hidden shadow-2xl"
         >
           
           {/* Decorative glow inside card */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-accent-primary/10 blur-[100px] rounded-full pointer-events-none" />
 
           <div className="flex-1 text-center md:text-left z-10">
-            <h2 className="font-heading text-3xl font-bold text-text-primary sm:text-4xl lg:text-5xl mb-6">
-              Biznesingizni yangi <br className="hidden md:block" /> bosqichga olib chiqing
+            <h2 className="font-heading text-3xl font-bold sm:text-4xl lg:text-5xl mb-6">
+              <span className="gradient-text">Biznesingizni yangi <br className="hidden md:block" /> bosqichga olib chiqing</span>
             </h2>
             <p className="text-base text-text-secondary mb-8 max-w-xl">
               Platformamizga ulanish orqali jarayonlarni avtomatlashtiring, xarajatlarni kamaytiring va mijozlar bazangizni kengaytiring.

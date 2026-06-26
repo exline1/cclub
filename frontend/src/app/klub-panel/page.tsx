@@ -6,6 +6,7 @@ import { Settings, LogOut, LayoutDashboard, Users, Monitor, BarChart } from "luc
 import { Navbar } from "@/components/landing/Navbar";
 import { Button } from "@/components/ui/button";
 import dynamic from "next/dynamic";
+import { useDesktopAnimation } from "@/hooks/useDesktopAnimation";
 
 const SceneWrapper = dynamic(
   () => import("@/components/three/SceneWrapper").then((mod) => ({ default: mod.SceneWrapper })),
@@ -13,15 +14,19 @@ const SceneWrapper = dynamic(
 );
 
 export default function KlubPanelPage() {
+  const { isDesktop } = useDesktopAnimation();
+
   useEffect(() => {
     document.title = "Klub Panel — CClub";
   }, []);
 
   return (
-    <div className="min-h-screen bg-background-primary text-text-primary flex flex-col relative">
-      <Suspense fallback={null}>
-        <SceneWrapper variant="minimal" />
-      </Suspense>
+    <div className="min-h-screen bg-background-primary text-text-primary flex flex-col relative md:bg-stripe-gradient">
+      {isDesktop && (
+        <Suspense fallback={null}>
+          <SceneWrapper variant="minimal" />
+        </Suspense>
+      )}
       <Navbar />
       <main className="flex-grow pt-24 pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

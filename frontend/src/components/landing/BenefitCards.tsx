@@ -56,12 +56,12 @@ export function BenefitCards() {
   return (
     <section id="benefits" className="py-20 lg:py-28 bg-background-secondary relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Header {...headerProps} className="mb-14 text-center sm:mb-16">
-          <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-accent-primary mb-3">
+        <Header {...headerProps} className="mb-14 text-center sm:mb-16 flex flex-col items-center">
+          <div className="section-badge mb-3">
             Afzalliklar
-          </p>
-          <h2 className="font-heading text-3xl font-bold text-text-primary sm:text-4xl lg:text-5xl">
-            Nima uchun CClub?
+          </div>
+          <h2 className="font-heading text-3xl font-bold sm:text-4xl lg:text-5xl">
+            <span className="gradient-text">Nima uchun CClub?</span>
           </h2>
         </Header>
 
@@ -76,7 +76,7 @@ export function BenefitCards() {
               <Card 
                 key={benefit.title} 
                 {...cardMotionProps}
-                className={`group relative flex flex-col p-8 rounded-[20px] bg-background-primary border border-border-primary hover:border-accent-primary transition-all duration-300 hover:shadow-card-hover ${
+                className={`group relative flex flex-col p-8 glass-card hover:border-accent-primary transition-all duration-300 hover:shadow-card-hover ${
                   !shouldAnimate ? "animate-in fade-in slide-in-from-bottom-8 fill-mode-both" : ""
                 }`}
                 style={!shouldAnimate ? { animationDelay: `${index * 150}ms` } : undefined}

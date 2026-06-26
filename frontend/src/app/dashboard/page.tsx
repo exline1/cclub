@@ -27,7 +27,7 @@ const SceneWrapper = dynamic(
 
 export default function DashboardPage() {
   const router = useRouter();
-  const { shouldAnimate } = useDesktopAnimation();
+  const { shouldAnimate, isDesktop } = useDesktopAnimation();
   
   const MotionDiv = shouldAnimate ? motion.div : "div";
   const MotionSection = shouldAnimate ? motion.section : "section";
@@ -85,10 +85,12 @@ export default function DashboardPage() {
   const recommendedClubs = MOCK_CLUBS.slice(0, 3);
 
   return (
-    <main className="min-h-screen bg-background-primary pb-20 relative">
-      <Suspense fallback={null}>
-        <SceneWrapper variant="minimal" />
-      </Suspense>
+    <main className="min-h-screen bg-background-primary pb-20 relative md:bg-stripe-gradient">
+      {isDesktop && (
+        <Suspense fallback={null}>
+          <SceneWrapper variant="minimal" />
+        </Suspense>
+      )}
       <Header userName={user.name} />
 
       <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
@@ -100,11 +102,11 @@ export default function DashboardPage() {
         >
           <MotionDiv 
             {...(shouldAnimate ? { variants: fadeUp } : {})}
-            className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-gradient-to-r from-background-secondary via-background-secondary to-accent-primary/5 border border-border-primary/50 rounded-3xl p-6 md:p-8"
+            className="flex flex-col md:flex-row md:items-center justify-between gap-6 glass-card p-6 md:p-8"
           >
             <div>
-              <h1 className="font-heading text-3xl md:text-4xl font-bold text-white mb-2">
-                Salom, {user.name}! 👋
+              <h1 className="font-heading text-3xl md:text-4xl font-bold mb-2">
+                <span className="gradient-text">Salom, {user.name}! 👋</span>
               </h1>
               <p className="text-text-secondary text-sm md:text-base">
                 Platformaga xush kelibsiz. Bugun qaysi klubda o&apos;ynamoqchisiz?
@@ -113,13 +115,13 @@ export default function DashboardPage() {
             
             <div className="flex gap-4">
               {/* Active Bookings Stat */}
-              <div className="bg-background-tertiary/60 border border-[#34D399]/20 rounded-2xl p-4 min-w-[140px] md:min-w-[160px] flex flex-col justify-between">
+              <div className="glass-card border-[#34D399]/20 p-4 min-w-[140px] md:min-w-[160px] flex flex-col justify-between">
                 <span className="text-xs text-text-secondary font-medium">Faol bronlar</span>
                 <span className="text-2xl font-bold text-[#34D399] mt-1">{activeBookingsCount} ta faol</span>
               </div>
               
               {/* Pending Orders Stat */}
-              <div className="bg-background-tertiary/60 border border-[#f59e0b]/20 rounded-2xl p-4 min-w-[140px] md:min-w-[160px] flex flex-col justify-between">
+              <div className="glass-card border-[#f59e0b]/20 p-4 min-w-[140px] md:min-w-[160px] flex flex-col justify-between">
                 <span className="text-xs text-text-secondary font-medium">Kutilayotgan buyurtmalar</span>
                 <span className="text-2xl font-bold text-[#f59e0b] mt-1">{pendingOrdersCount} ta buyurtma</span>
               </div>
@@ -136,7 +138,7 @@ export default function DashboardPage() {
             {/* BO'LIM 1 — Mening bronlarim */}
             <MotionSection
               {...(shouldAnimate ? { variants: staggerContainer, initial: "hidden", whileInView: "visible", viewport: viewportOnce } : {})}
-              className="bg-background-secondary border border-border-primary rounded-3xl p-6 md:p-8"
+              className="glass-card p-6 md:p-8"
             >
               <div className="flex items-center justify-between mb-6">
                 <h2 className="font-heading text-xl font-bold flex items-center gap-2 text-white">
@@ -163,7 +165,7 @@ export default function DashboardPage() {
                     <MotionDiv 
                       key={booking.id}
                       {...(shouldAnimate ? { variants: fadeUp } : {})}
-                      className="bg-background-tertiary border border-border-primary/50 hover:border-accent-primary/30 transition-colors rounded-2xl p-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4"
+                      className="glass-card p-5 flex flex-col sm:flex-row justify-between sm:items-center gap-4"
                     >
                       <div className="space-y-1">
                         <h4 className="font-bold text-white text-base">{booking.clubName}</h4>
@@ -200,7 +202,7 @@ export default function DashboardPage() {
             {/* BO'LIM 2 — Mening buyurtmalarim (Bar) */}
             <MotionSection
               {...(shouldAnimate ? { variants: staggerContainer, initial: "hidden", whileInView: "visible", viewport: viewportOnce } : {})}
-              className="bg-background-secondary border border-border-primary rounded-3xl p-6 md:p-8"
+              className="glass-card p-6 md:p-8"
             >
               <h2 className="font-heading text-xl font-bold flex items-center gap-2 text-white mb-6">
                 <ShoppingCart className="h-5 w-5 text-accent-primary" />
@@ -217,7 +219,7 @@ export default function DashboardPage() {
                     <MotionDiv 
                       key={order.id} 
                       {...(shouldAnimate ? { variants: fadeUp } : {})}
-                      className="bg-background-tertiary border border-border-primary/50 rounded-2xl p-5 flex flex-col justify-between gap-4"
+                      className="glass-card p-5 flex flex-col justify-between gap-4"
                     >
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-border-primary/30">
                         <div>
@@ -258,7 +260,7 @@ export default function DashboardPage() {
             {/* BO'LIM 3 — Yaqin klublar (Tavsiya) */}
             <MotionSection
               {...(shouldAnimate ? { variants: staggerContainer, initial: "hidden", whileInView: "visible", viewport: viewportOnce } : {})}
-              className="bg-background-secondary border border-border-primary rounded-3xl p-6 md:p-8"
+              className="glass-card p-6 md:p-8"
             >
               <div className="flex items-center justify-between mb-6">
                 <h2 className="font-heading text-xl font-bold flex items-center gap-2 text-white">
@@ -279,7 +281,7 @@ export default function DashboardPage() {
                     <MotionDiv 
                       key={club.id} 
                       {...(shouldAnimate ? { variants: fadeUp } : {})}
-                      className="bg-background-tertiary border border-border-primary/50 hover:border-accent-primary/30 transition-all duration-300 rounded-2xl overflow-hidden flex flex-col group"
+                      className="glass-card overflow-hidden flex flex-col group"
                     >
                       <div className="relative h-28 w-full">
                         <img src={club.image} alt={club.name} className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" />
@@ -323,7 +325,7 @@ export default function DashboardPage() {
             {/* BO'LIM 4 — Mening kabinetim */}
             <MotionSection
               {...(shouldAnimate ? { variants: fadeUp, initial: "hidden", whileInView: "visible", viewport: viewportOnce } : {})}
-              className={cn("bg-background-secondary border border-border-primary rounded-3xl p-6 md:p-8", !shouldAnimate && "animate-in fade-in slide-in-from-right-4 duration-500")}
+              className={cn("glass-card p-6 md:p-8", !shouldAnimate && "animate-in fade-in slide-in-from-right-4 duration-500")}
             >
               <h2 className="font-heading text-lg font-bold flex items-center gap-2 text-white mb-6">
                 <UserIcon className="h-5 w-5 text-accent-primary" />

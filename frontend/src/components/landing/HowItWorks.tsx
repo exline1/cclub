@@ -74,8 +74,8 @@ export function HowItWorks() {
       
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 z-10">
         <SectionHeader {...headerProps} className="mb-12 text-center max-w-2xl mx-auto">
-          <h2 className="font-heading text-3xl font-bold text-text-primary sm:text-4xl lg:text-5xl mb-6">
-            Qanday ishlaydi?
+          <h2 className="font-heading text-3xl font-bold sm:text-4xl lg:text-5xl mb-6">
+            <span className="gradient-text">Qanday ishlaydi?</span>
           </h2>
           
           <div className="inline-flex rounded-lg bg-background-secondary p-1 border border-border-primary mx-auto mb-6">
@@ -121,10 +121,10 @@ export function HowItWorks() {
                 const Icon = step.icon;
                 return (
                   <motion.div key={step.id} variants={fadeUp} className="relative group">
-                    <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-background-secondary border border-border-primary hover:border-accent-primary/50 transition-colors duration-300 relative z-10 hover:shadow-card-hover hover:-translate-y-1">
+                    <div className="flex flex-col items-center text-center p-6 glass-card hover:border-accent-primary/50 transition-colors duration-300 relative z-10 hover:shadow-card-hover hover:-translate-y-1">
                       
                       {/* Step Label */}
-                      <div className="absolute -top-4 bg-background-tertiary border border-border-primary px-3 py-1 rounded-md font-mono text-xs font-semibold text-accent-primary tracking-widest shadow-sm">
+                      <div className="absolute -top-4 section-badge">
                         {step.id}
                       </div>
 
@@ -154,9 +154,9 @@ export function HowItWorks() {
               const Icon = step.icon;
               return (
                 <div key={step.id} className="relative group animate-in fade-in slide-in-from-bottom-8 fill-mode-both" style={{ animationDelay: `${index * 150}ms` }}>
-                  <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-background-secondary border border-border-primary hover:border-accent-primary/50 transition-colors duration-300 relative z-10 hover:shadow-card-hover hover:-translate-y-1">
+                  <div className="flex flex-col items-center text-center p-6 glass-card hover:border-accent-primary/50 transition-colors duration-300 relative z-10 hover:shadow-card-hover hover:-translate-y-1">
                     
-                    <div className="absolute -top-4 bg-background-tertiary border border-border-primary px-3 py-1 rounded-md font-mono text-xs font-semibold text-accent-primary tracking-widest shadow-sm">
+                    <div className="absolute -top-4 section-badge">
                       {step.id}
                     </div>
 

@@ -25,7 +25,7 @@ export default function ClubsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
-  const { shouldAnimate } = useDesktopAnimation();
+  const { shouldAnimate, isDesktop } = useDesktopAnimation();
   
   // Basic filtering based on search query and region/district
   const filteredClubs = MOCK_CLUBS.filter(club => {
@@ -55,10 +55,12 @@ export default function ClubsPage() {
   const Card = shouldAnimate ? motion.div : "div";
 
   return (
-    <div className="min-h-screen bg-background-primary text-text-primary flex flex-col relative">
-      <Suspense fallback={null}>
-        <SceneWrapper variant="light" />
-      </Suspense>
+    <div className="min-h-screen bg-background-primary text-text-primary flex flex-col relative md:bg-stripe-gradient">
+      {isDesktop && (
+        <Suspense fallback={null}>
+          <SceneWrapper variant="light" />
+        </Suspense>
+      )}
       <Navbar />
 
       <main className="flex-grow pt-24 pb-20">
@@ -72,8 +74,8 @@ export default function ClubsPage() {
               !shouldAnimate && "animate-in fade-in slide-in-from-bottom-4 duration-500"
             )}
           >
-            <h1 className="font-heading text-3xl font-bold text-text-primary sm:text-4xl">
-              Barcha game clublar
+            <h1 className="font-heading text-3xl font-bold sm:text-4xl">
+              <span className="gradient-text">Barcha game clublar</span>
             </h1>
             <p className="mt-2 text-text-secondary">
               Shahringizdagi eng yaxshi kompyuter klublarini toping va joy band qiling.
@@ -83,7 +85,7 @@ export default function ClubsPage() {
           {/* Filters & Search */}
           <FilterBar
             {...filterBarProps}
-            className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between sticky top-20 z-30 bg-background-primary/95 backdrop-blur-md py-4 border-b border-border-primary"
+            className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between sticky top-20 z-30 bg-background-primary/95 backdrop-blur-md py-4 border-b border-border-primary md:glass-card md:rounded-2xl md:px-6 md:py-4 md:border-none md:shadow-glass"
           >
             <div className="relative flex-grow max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-text-secondary" />
@@ -158,7 +160,7 @@ export default function ClubsPage() {
                     key={club.id} 
                     {...cardMotionProps}
                     className={cn(
-                      "group flex flex-col bg-background-secondary border border-border-primary rounded-[24px] overflow-hidden hover:border-accent-primary/50 transition-all duration-300 hover:shadow-accent-glow-sm",
+                      "group flex flex-col glass-card overflow-hidden hover:border-accent-primary/50 transition-all duration-300 hover:shadow-accent-glow-sm",
                       !shouldAnimate && "animate-in fade-in slide-in-from-bottom-8 fill-mode-both"
                     )}
                     style={!shouldAnimate ? { animationDelay: `${index * 100}ms` } : undefined}

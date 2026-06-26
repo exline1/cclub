@@ -78,12 +78,12 @@ export function Pricing() {
   return (
     <section id="pricing" className="py-20 lg:py-28 bg-background-primary relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-        <Header {...headerProps} className="mb-14 text-center sm:mb-16">
-          <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-accent-primary mb-3">
+        <Header {...headerProps} className="mb-14 text-center sm:mb-16 flex flex-col items-center">
+          <div className="section-badge mb-3">
             Tariflar
-          </p>
-          <h2 className="font-heading text-3xl font-bold text-text-primary sm:text-4xl lg:text-5xl">
-            Klub egalari uchun tarif rejalari
+          </div>
+          <h2 className="font-heading text-3xl font-bold sm:text-4xl lg:text-5xl">
+            <span className="gradient-text">Klub egalari uchun tarif rejalari</span>
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-base text-text-secondary">
             Klubingizni platformaga ulash va avtomatlashtirish uchun o&apos;zingizga mos tarifni tanlang.
@@ -101,10 +101,10 @@ export function Pricing() {
                 key={plan.id}
                 {...cardMotionProps}
                 className={cn(
-                  "relative flex flex-col p-8 rounded-[24px] transition-all duration-300",
+                  "relative flex flex-col p-8 glass-card transition-all duration-300",
                   plan.recommended 
-                    ? "bg-background-tertiary border-2 border-accent-primary shadow-accent-glow transform md:-translate-y-4" 
-                    : "bg-background-secondary border border-border-primary hover:border-accent-primary/50"
+                    ? "border-2 border-accent-primary shadow-accent-glow transform md:-translate-y-4" 
+                    : "hover:border-accent-primary/50"
                 )}
               >
                 {plan.recommended && (

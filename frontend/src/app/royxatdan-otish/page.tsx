@@ -5,6 +5,7 @@ import Link from "next/link";
 import { User, Building2, ArrowLeft } from "lucide-react";
 import { Logo } from "@/components/shared/Logo";
 import dynamic from "next/dynamic";
+import { useDesktopAnimation } from "@/hooks/useDesktopAnimation";
 
 const SceneWrapper = dynamic(
   () => import("@/components/three/SceneWrapper").then((mod) => ({ default: mod.SceneWrapper })),
@@ -12,11 +13,14 @@ const SceneWrapper = dynamic(
 );
 
 export default function RegisterChoicePage() {
+  const { isDesktop } = useDesktopAnimation();
   return (
-    <div className="min-h-screen bg-background-primary flex flex-col relative overflow-hidden">
-      <Suspense fallback={null}>
-        <SceneWrapper variant="minimal" />
-      </Suspense>
+    <div className="min-h-screen bg-background-primary flex flex-col relative overflow-hidden md:bg-stripe-gradient">
+      {isDesktop && (
+        <Suspense fallback={null}>
+          <SceneWrapper variant="minimal" />
+        </Suspense>
+      )}
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent-primary/5 rounded-full blur-[150px] pointer-events-none" />
 
