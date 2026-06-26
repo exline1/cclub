@@ -13,5 +13,8 @@
     "start:frontend": "npm run start --prefix frontend",
     "start:backend": "npm run start --prefix backend",
     "lint": "npm run lint --prefix frontend"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }

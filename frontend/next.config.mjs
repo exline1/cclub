@@ -3,7 +3,9 @@ const require = createRequire(import.meta.url);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export', // <<< MANA SHU QATOR QO'SHILDI (Statik eksport uchun)
   images: {
+    unoptimized: true, // <<< MANA SHU QATOR QO'SHILDI (GitHub Pages rasmlarni o'qishi uchun)
     formats: ["image/webp"],
     remotePatterns: [
       {
