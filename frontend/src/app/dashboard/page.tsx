@@ -85,7 +85,7 @@ export default function DashboardPage() {
   const recommendedClubs = MOCK_CLUBS.slice(0, 3);
 
   return (
-    <main className="min-h-screen bg-background-primary pb-20 relative md:bg-stripe-gradient">
+    <main className="min-h-screen bg-background-primary md:bg-transparent pb-20 relative md:bg-stripe-gradient">
       {isDesktop && (
         <Suspense fallback={null}>
           <SceneWrapper variant="minimal" />

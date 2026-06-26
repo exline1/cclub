@@ -74,7 +74,7 @@ export default function ClubProfilePage() {
   
   if (!club) {
     return (
-      <div className="min-h-screen bg-background-primary text-text-primary flex flex-col relative md:bg-stripe-gradient">
+      <div className="min-h-screen text-text-primary flex flex-col relative md:bg-stripe-gradient bg-background-primary md:bg-transparent">
         {isDesktop && (
           <Suspense fallback={null}>
             <SceneWrapper variant="light" />
@@ -178,7 +178,7 @@ export default function ClubProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-background-primary text-text-primary flex flex-col relative md:bg-stripe-gradient">
+    <div className="min-h-screen bg-background-primary md:bg-transparent text-text-primary flex flex-col relative md:bg-stripe-gradient">
       {isDesktop && (
         <Suspense fallback={null}>
           <SceneWrapper variant="light" />
@@ -198,7 +198,7 @@ export default function ClubProfilePage() {
           {/* Hero Section */}
           <MotionDiv 
             {...(shouldAnimate ? { variants: fadeIn, initial: "hidden", animate: "visible" } : {})}
-            className={cn("relative h-64 sm:h-80 md:h-[400px] w-full rounded-[32px] overflow-hidden mb-8", !shouldAnimate && "animate-in fade-in slide-in-from-bottom-4")}
+            className={cn("relative h-64 sm:h-80 md:h-[400px] w-full rounded-50px overflow-hidden mb-8", !shouldAnimate && "animate-in fade-in slide-in-from-bottom-4")}
           >
             <Image 
               src={club.image} 

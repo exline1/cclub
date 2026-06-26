@@ -55,7 +55,7 @@ export default function ClubsPage() {
   const Card = shouldAnimate ? motion.div : "div";
 
   return (
-    <div className="min-h-screen bg-background-primary text-text-primary flex flex-col relative md:bg-stripe-gradient">
+    <div className="min-h-screen text-text-primary flex flex-col relative md:bg-stripe-gradient bg-background-primary md:bg-transparent">
       {isDesktop && (
         <Suspense fallback={null}>
           <SceneWrapper variant="light" />

@@ -56,7 +56,7 @@ export function DownloadCTA() {
             className="flex-1 hidden lg:flex justify-center z-10"
           >
             {/* Mockup dashboard representation */}
-            <div className="relative w-72 h-[450px] bg-background-primary rounded-xl border border-border-primary shadow-accent-glow flex flex-col overflow-hidden rotate-2 hover:rotate-0 transition-all duration-700">
+            <div className="relative w-72 h-[450px] bg-background-primary rounded-[32px] border border-border-primary shadow-accent-glow flex flex-col overflow-hidden rotate-2 hover:rotate-0 transition-all duration-700">
               <div className="h-12 border-b border-border-primary flex items-center px-4 bg-background-secondary">
                  <div className="flex gap-1.5">
                    <div className="h-3 w-3 rounded-full bg-red-500/80"></div>
@@ -67,9 +67,9 @@ export function DownloadCTA() {
               <div className="flex-1 bg-card-gradient flex flex-col items-center justify-center p-6">
                  <div className="font-heading text-2xl font-bold text-accent-primary mb-4">CClub Admin</div>
                  <div className="w-full space-y-4">
-                   <div className="h-20 w-full bg-background-tertiary rounded-xl border border-border-primary"></div>
-                   <div className="h-20 w-full bg-background-tertiary rounded-xl border border-border-primary"></div>
-                   <div className="h-20 w-full bg-background-tertiary rounded-xl border border-border-primary"></div>
+                   <div className="h-20 w-full bg-background-tertiary rounded-[24px] border border-border-primary"></div>
+                   <div className="h-20 w-full bg-background-tertiary rounded-[24px] border border-border-primary"></div>
+                   <div className="h-20 w-full bg-background-tertiary rounded-[24px] border border-border-primary"></div>
                  </div>
               </div>
             </div>

@@ -21,7 +21,7 @@ export default function RegisterPage() {
   }, []);
 
   return (
-    <main className="relative min-h-screen bg-background-primary md:bg-stripe-gradient">
+    <main className="relative min-h-screen bg-background-primary md:bg-transparent md:bg-stripe-gradient">
       {isDesktop && (
         <Suspense fallback={null}>
           <SceneWrapper variant="minimal" />

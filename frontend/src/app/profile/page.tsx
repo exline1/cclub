@@ -132,7 +132,7 @@ export default function ProfilePage() {
   const nameInitial = user.name ? user.name.charAt(0).toUpperCase() : "U";
 
   return (
-    <main className="min-h-screen bg-background-primary pb-16 relative md:bg-stripe-gradient">
+    <main className="min-h-screen bg-background-primary md:bg-transparent pb-16 relative md:bg-stripe-gradient">
       {isDesktop && (
         <Suspense fallback={null}>
           <SceneWrapper variant="minimal" />

@@ -53,7 +53,7 @@ export function FAQ() {
   const itemProps = shouldAnimate ? { variants: fadeUp } : {};
 
   return (
-    <section id="faq" className="py-20 lg:py-28 bg-background-primary">
+    <section id="faq" className="py-20 lg:py-28 bg-background-primary md:bg-transparent">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <Header {...headerProps} className="mb-14 text-center sm:mb-16 flex flex-col items-center">
           <div className="section-badge mb-3">

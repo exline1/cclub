@@ -76,7 +76,7 @@ export function Pricing() {
   const Card = shouldAnimate ? motion.div : "div";
 
   return (
-    <section id="pricing" className="py-20 lg:py-28 bg-background-primary relative">
+    <section id="pricing" className="py-20 lg:py-28 bg-background-primary md:bg-transparent relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <Header {...headerProps} className="mb-14 text-center sm:mb-16 flex flex-col items-center">
           <div className="section-badge mb-3">

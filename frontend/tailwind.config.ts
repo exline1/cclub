@@ -44,6 +44,9 @@ const config: Config = {
       borderColor: {
         'glass': 'rgba(255, 255, 255, 0.08)',
       },
+      borderRadius: {
+        '50px': '50px',
+      },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
         heading: ["var(--font-sora)", "var(--font-inter)", "system-ui", "sans-serif"],
@@ -57,8 +60,8 @@ const config: Config = {
         'glow': '0 0 60px rgba(99,102,241,0.15)',
       },
       backgroundImage: {
-        "hero-gradient": "radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.15) 0%, rgba(10, 14, 26, 1) 50%)",
-        "cta-gradient": "linear-gradient(135deg, #0A0E1A 0%, rgba(99, 102, 241, 0.15) 100%)",
+        "hero-gradient": "radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.25) 0%, transparent 70%)",
+        "cta-gradient": "linear-gradient(135deg, transparent 0%, rgba(99, 102, 241, 0.15) 100%)",
         "card-gradient": "linear-gradient(180deg, #12172A 0%, #0A0E1A 100%)",
         'stripe-gradient': 'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99,102,241,0.3) 0%, transparent 100%)',
       },

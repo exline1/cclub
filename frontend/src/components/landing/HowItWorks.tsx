@@ -68,7 +68,7 @@ export function HowItWorks() {
   const cardProps = shouldAnimate ? { variants: fadeUp } : {};
 
   return (
-    <section id="how-it-works" className="relative py-20 lg:py-28 bg-background-primary overflow-hidden">
+    <section id="how-it-works" className="relative py-20 lg:py-28 bg-background-primary md:bg-transparent overflow-hidden">
       {/* Decorative gradient element */}
       <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-accent-primary/5 rounded-full blur-[120px] pointer-events-none" />
       
@@ -78,10 +78,10 @@ export function HowItWorks() {
             <span className="gradient-text">Qanday ishlaydi?</span>
           </h2>
           
-          <div className="inline-flex rounded-lg bg-background-secondary p-1 border border-border-primary mx-auto mb-6">
+          <div className="inline-flex rounded-full bg-background-secondary p-1 border border-border-primary mx-auto mb-6">
             <button
               onClick={() => setActiveTab("mijoz")}
-              className={`px-6 py-2 rounded-md text-sm font-bold transition-all ${
+              className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${
                 activeTab === "mijoz" ? "bg-accent-primary text-white shadow-md" : "text-text-secondary hover:text-text-primary"
               }`}
             >
@@ -89,7 +89,7 @@ export function HowItWorks() {
             </button>
             <button
               onClick={() => setActiveTab("klub")}
-              className={`px-6 py-2 rounded-md text-sm font-bold transition-all ${
+              className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${
                 activeTab === "klub" ? "bg-accent-primary text-white shadow-md" : "text-text-secondary hover:text-text-primary"
               }`}
             >
@@ -128,7 +128,7 @@ export function HowItWorks() {
                         {step.id}
                       </div>
 
-                      <div className="mt-6 mb-5 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-accent-primary/10 text-accent-primary group-hover:scale-110 transition-transform duration-300">
+                      <div className="mt-6 mb-5 inline-flex h-16 w-16 items-center justify-center rounded-full bg-accent-primary/10 text-accent-primary group-hover:scale-110 transition-transform duration-300">
                         <Icon className="h-8 w-8" />
                       </div>
                       
@@ -160,7 +160,7 @@ export function HowItWorks() {
                       {step.id}
                     </div>
 
-                    <div className="mt-6 mb-5 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-accent-primary/10 text-accent-primary group-hover:scale-110 transition-transform duration-300">
+                    <div className="mt-6 mb-5 inline-flex h-16 w-16 items-center justify-center rounded-full bg-accent-primary/10 text-accent-primary group-hover:scale-110 transition-transform duration-300">
                       <Icon className="h-8 w-8" />
                     </div>
                     

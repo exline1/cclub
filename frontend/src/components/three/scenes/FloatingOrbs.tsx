@@ -23,7 +23,8 @@ export function FloatingOrbs({ count, size }: FloatingOrbsProps) {
 
   const orbConfigs = useMemo(() => {
     const configs: OrbConfig[] = [];
-    const colors = ["#6366f1", "#818cf8", "#a855f7", "#c084fc", "#4f46e5"];
+    // Strict indigo and purple shades only
+    const colors = ["#6366f1", "#818cf8", "#8b5cf6", "#a78bfa", "#4f46e5", "#7c3aed"];
 
     for (let i = 0; i < count; i++) {
       const radius =
@@ -51,6 +52,15 @@ export function FloatingOrbs({ count, size }: FloatingOrbsProps) {
         orb.position.x = Math.sin(elapsed * config.speed + config.offset) * config.orbitRadius;
         orb.position.y = Math.cos(elapsed * config.speed * 0.7 + config.offset) * config.orbitRadius * 0.5;
         orb.position.z = config.zBase + Math.sin(elapsed * 0.1 + config.offset) * 0.2;
+
+        // Size pulsing (Shimmer)
+        const scaleVal = 1 + Math.sin(elapsed * 2 + config.offset) * 0.2;
+        orb.scale.set(scaleVal, scaleVal, scaleVal);
+
+        // Opacity pulsing (Shimmer)
+        if (orb.material && !Array.isArray(orb.material)) {
+          orb.material.opacity = 0.6 + Math.sin(elapsed * 3.5 + config.offset) * 0.3;
+        }
       }
     });
   });
@@ -73,6 +83,8 @@ export function FloatingOrbs({ count, size }: FloatingOrbsProps) {
             roughness={0.0}
             clearcoat={1.0}
             clearcoatRoughness={0.05}
+            transparent={true}
+            opacity={0.8}
           />
         </mesh>
       ))}

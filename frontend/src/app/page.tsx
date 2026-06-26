@@ -35,7 +35,7 @@ const SceneWrapper = dynamic(
 export default function HomePage() {
   const { isDesktop } = useDesktopAnimation();
   return (
-    <main className="bg-background-primary text-text-primary min-h-screen relative md:bg-stripe-gradient">
+    <main className="text-text-primary min-h-screen relative md:bg-stripe-gradient bg-background-primary md:bg-transparent">
       {isDesktop && (
         <Suspense fallback={null}>
           <SceneWrapper variant="hero" />

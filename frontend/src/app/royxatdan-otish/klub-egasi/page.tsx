@@ -40,7 +40,7 @@ export default function ClubOwnerRegistrationPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background-primary flex flex-col relative pb-20 md:bg-stripe-gradient">
+    <div className="min-h-screen bg-background-primary md:bg-transparent flex flex-col relative pb-20 md:bg-stripe-gradient">
       {isDesktop && (
         <Suspense fallback={null}>
           <SceneWrapper variant="minimal" />

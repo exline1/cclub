@@ -15,7 +15,7 @@ const SceneWrapper = dynamic(
 export default function RegisterChoicePage() {
   const { isDesktop } = useDesktopAnimation();
   return (
-    <div className="min-h-screen bg-background-primary flex flex-col relative overflow-hidden md:bg-stripe-gradient">
+    <div className="min-h-screen bg-background-primary md:bg-transparent flex flex-col relative overflow-hidden md:bg-stripe-gradient">
       {isDesktop && (
         <Suspense fallback={null}>
           <SceneWrapper variant="minimal" />

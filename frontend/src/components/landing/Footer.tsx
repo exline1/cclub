@@ -57,7 +57,7 @@ export function Footer() {
   const colProps = shouldAnimate ? { variants: fadeUp } : {};
 
   return (
-    <footer id="contact" className="border-t border-border-primary bg-background-primary py-12 sm:py-16">
+    <footer id="contact" className="border-t border-border-primary bg-background-primary md:bg-transparent py-12 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Grid {...gridProps} className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}

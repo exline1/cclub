@@ -21,7 +21,7 @@ export default function KlubPanelPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background-primary text-text-primary flex flex-col relative md:bg-stripe-gradient">
+    <div className="min-h-screen bg-background-primary md:bg-transparent text-text-primary flex flex-col relative md:bg-stripe-gradient">
       {isDesktop && (
         <Suspense fallback={null}>
           <SceneWrapper variant="minimal" />

@@ -54,7 +54,7 @@ export function BenefitCards() {
   const Card = shouldAnimate ? motion.div : "div";
 
   return (
-    <section id="benefits" className="py-20 lg:py-28 bg-background-secondary relative">
+    <section id="benefits" className="py-20 lg:py-28 bg-background-secondary md:bg-transparent relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Header {...headerProps} className="mb-14 text-center sm:mb-16 flex flex-col items-center">
           <div className="section-badge mb-3">
@@ -81,7 +81,7 @@ export function BenefitCards() {
                 }`}
                 style={!shouldAnimate ? { animationDelay: `${index * 150}ms` } : undefined}
               >
-                <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-accent-deep text-accent-primary group-hover:scale-110 transition-transform duration-300">
+                <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-full bg-accent-deep text-accent-primary group-hover:scale-110 transition-transform duration-300">
                   <Icon className="h-7 w-7" aria-hidden="true" />
                 </div>
                 <h3 className="font-heading text-xl font-bold text-text-primary mb-3">
