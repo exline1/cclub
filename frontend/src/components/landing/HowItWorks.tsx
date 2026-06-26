@@ -2,18 +2,21 @@
 
 import { useState } from "react";
 import { MonitorPlay, QrCode, MousePointerClick, Building2, Settings2, Sparkles } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useDesktopAnimation } from "@/hooks/useDesktopAnimation";
+import { fadeUp, fadeIn, staggerContainer, viewportOnceMore } from "@/lib/animations";
 
 const STEPS_MIJOZ = [
   {
     id: "01",
-    title: "Ro'yxatdan o't",
-    description: "Platformada o'z profilingizni yarating.",
+    title: "Ro\u2018yxatdan o\u2018t",
+    description: "Platformada o\u2018z profilingizni yarating.",
     icon: MousePointerClick,
   },
   {
     id: "02",
     title: "Klubni top",
-    description: "Yaqin atrofdagi klublarni qidiring va o'zingizga qulayini tanlang.",
+    description: "Yaqin atrofdagi klublarni qidiring va o\u2018zingizga qulayini tanlang.",
     icon: QrCode,
   },
   {
@@ -27,8 +30,8 @@ const STEPS_MIJOZ = [
 const STEPS_KLUB = [
   {
     id: "01",
-    title: "Klubni ro'yxatdan o'tkaz",
-    description: "Klubingiz haqida to'liq ma'lumotlarni kiriting va profil yarating.",
+    title: "Klubni ro\u2018yxatdan o\u2018tkaz",
+    description: "Klubingiz haqida to\u2018liq ma\u2018lumotlarni kiriting va profil yarating.",
     icon: Building2,
   },
   {
@@ -47,8 +50,22 @@ const STEPS_KLUB = [
 
 export function HowItWorks() {
   const [activeTab, setActiveTab] = useState<"mijoz" | "klub">("mijoz");
+  const { shouldAnimate } = useDesktopAnimation();
   
   const steps = activeTab === "mijoz" ? STEPS_MIJOZ : STEPS_KLUB;
+
+  const SectionHeader = shouldAnimate ? motion.div : "div";
+  const headerProps = shouldAnimate
+    ? { variants: fadeUp, initial: "hidden", whileInView: "visible", viewport: viewportOnceMore }
+    : {};
+
+  const Grid = shouldAnimate ? motion.div : "div";
+  const gridProps = shouldAnimate
+    ? { variants: staggerContainer, initial: "hidden", whileInView: "visible", viewport: viewportOnceMore }
+    : {};
+
+  const Card = shouldAnimate ? motion.div : "div";
+  const cardProps = shouldAnimate ? { variants: fadeUp } : {};
 
   return (
     <section id="how-it-works" className="relative py-20 lg:py-28 bg-background-primary overflow-hidden">
@@ -56,7 +73,7 @@ export function HowItWorks() {
       <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-accent-primary/5 rounded-full blur-[120px] pointer-events-none" />
       
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 z-10">
-        <div className="mb-12 text-center max-w-2xl mx-auto">
+        <SectionHeader {...headerProps} className="mb-12 text-center max-w-2xl mx-auto">
           <h2 className="font-heading text-3xl font-bold text-text-primary sm:text-4xl lg:text-5xl mb-6">
             Qanday ishlaydi?
           </h2>
@@ -82,42 +99,84 @@ export function HowItWorks() {
           
           <p className="mt-4 text-base text-text-secondary h-12">
             {activeTab === "mijoz" 
-              ? "CClub orqali o'z joyingizni band qilish juda oson. 3 ta oddiy qadam bilan o'yinga tayyor bo'ling."
-              : "Platformaga qo'shiling va biznesingizni avtomatlashtiring."}
+              ? "CClub orqali o\u2018z joyingizni band qilish juda oson. 3 ta oddiy qadam bilan o\u2018yinga tayyor bo\u2018ling."
+              : "Platformaga qo\u2018shiling va biznesingizni avtomatlashtiring."}
           </p>
-        </div>
+        </SectionHeader>
 
-        <div className="relative grid grid-cols-1 gap-8 md:grid-cols-3 lg:gap-12" key={activeTab}>
-          {/* Connecting line for desktop */}
-          <div className="hidden md:block absolute top-1/2 left-[15%] right-[15%] h-px bg-gradient-to-r from-transparent via-border-primary to-transparent -translate-y-1/2" />
+        {shouldAnimate ? (
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              variants={staggerContainer}
+              initial="hidden"
+              animate="visible"
+              exit={{ opacity: 0, transition: { duration: 0.2 } }}
+              className="relative grid grid-cols-1 gap-8 md:grid-cols-3 lg:gap-12"
+            >
+              {/* Connecting line for desktop */}
+              <div className="hidden md:block absolute top-1/2 left-[15%] right-[15%] h-px bg-gradient-to-r from-transparent via-border-primary to-transparent -translate-y-1/2" />
 
-          {steps.map((step, index) => {
-            const Icon = step.icon;
-            return (
-              <div key={step.id} className="relative group animate-in fade-in slide-in-from-bottom-8 fill-mode-both" style={{ animationDelay: `${index * 150}ms` }}>
-                <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-background-secondary border border-border-primary hover:border-accent-primary/50 transition-colors duration-300 relative z-10 hover:shadow-card-hover hover:-translate-y-1">
-                  
-                  {/* Step Label (JetBrains Mono) */}
-                  <div className="absolute -top-4 bg-background-tertiary border border-border-primary px-3 py-1 rounded-md font-mono text-xs font-semibold text-accent-primary tracking-widest shadow-sm">
-                    {step.id}
+              {steps.map((step) => {
+                const Icon = step.icon;
+                return (
+                  <motion.div key={step.id} variants={fadeUp} className="relative group">
+                    <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-background-secondary border border-border-primary hover:border-accent-primary/50 transition-colors duration-300 relative z-10 hover:shadow-card-hover hover:-translate-y-1">
+                      
+                      {/* Step Label */}
+                      <div className="absolute -top-4 bg-background-tertiary border border-border-primary px-3 py-1 rounded-md font-mono text-xs font-semibold text-accent-primary tracking-widest shadow-sm">
+                        {step.id}
+                      </div>
+
+                      <div className="mt-6 mb-5 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-accent-primary/10 text-accent-primary group-hover:scale-110 transition-transform duration-300">
+                        <Icon className="h-8 w-8" />
+                      </div>
+                      
+                      <h3 className="mb-3 font-heading text-xl font-semibold text-text-primary">
+                        {step.title}
+                      </h3>
+                      
+                      <p className="text-sm text-text-secondary leading-relaxed">
+                        {step.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </AnimatePresence>
+        ) : (
+          <div className="relative grid grid-cols-1 gap-8 md:grid-cols-3 lg:gap-12" key={activeTab}>
+            {/* Connecting line for desktop */}
+            <div className="hidden md:block absolute top-1/2 left-[15%] right-[15%] h-px bg-gradient-to-r from-transparent via-border-primary to-transparent -translate-y-1/2" />
+
+            {steps.map((step, index) => {
+              const Icon = step.icon;
+              return (
+                <div key={step.id} className="relative group animate-in fade-in slide-in-from-bottom-8 fill-mode-both" style={{ animationDelay: `${index * 150}ms` }}>
+                  <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-background-secondary border border-border-primary hover:border-accent-primary/50 transition-colors duration-300 relative z-10 hover:shadow-card-hover hover:-translate-y-1">
+                    
+                    <div className="absolute -top-4 bg-background-tertiary border border-border-primary px-3 py-1 rounded-md font-mono text-xs font-semibold text-accent-primary tracking-widest shadow-sm">
+                      {step.id}
+                    </div>
+
+                    <div className="mt-6 mb-5 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-accent-primary/10 text-accent-primary group-hover:scale-110 transition-transform duration-300">
+                      <Icon className="h-8 w-8" />
+                    </div>
+                    
+                    <h3 className="mb-3 font-heading text-xl font-semibold text-text-primary">
+                      {step.title}
+                    </h3>
+                    
+                    <p className="text-sm text-text-secondary leading-relaxed">
+                      {step.description}
+                    </p>
                   </div>
-
-                  <div className="mt-6 mb-5 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-accent-primary/10 text-accent-primary group-hover:scale-110 transition-transform duration-300">
-                    <Icon className="h-8 w-8" />
-                  </div>
-                  
-                  <h3 className="mb-3 font-heading text-xl font-semibold text-text-primary">
-                    {step.title}
-                  </h3>
-                  
-                  <p className="text-sm text-text-secondary leading-relaxed">
-                    {step.description}
-                  </p>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </section>
   );

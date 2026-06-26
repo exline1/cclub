@@ -1,7 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { motion } from "framer-motion";
 
 import { Logo } from "@/components/shared/Logo";
+import { useDesktopAnimation } from "@/hooks/useDesktopAnimation";
+import { fadeUp, staggerContainer, viewportOnce } from "@/lib/animations";
 
 interface SocialLink {
   name: string;
@@ -41,22 +46,31 @@ const SOCIAL_LINKS: SocialLink[] = [
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const { shouldAnimate } = useDesktopAnimation();
+
+  const Grid = shouldAnimate ? motion.div : "div";
+  const gridProps = shouldAnimate
+    ? { variants: staggerContainer, initial: "hidden", whileInView: "visible", viewport: viewportOnce }
+    : {};
+
+  const Col = shouldAnimate ? motion.div : "div";
+  const colProps = shouldAnimate ? { variants: fadeUp } : {};
 
   return (
     <footer id="contact" className="border-t border-border-primary bg-background-primary py-12 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
+        <Grid {...gridProps} className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
-          <div className="space-y-4">
+          <Col {...colProps} className="space-y-4">
             <Logo href="/" />
             <p className="text-sm leading-relaxed text-text-secondary mt-4">
               Kompyuter o&apos;yinlari markazlari uchun zamonaviy buyurtma va boshqaruv
               platformasi.
             </p>
-          </div>
+          </Col>
 
           {/* Contact */}
-          <div className="space-y-4">
+          <Col {...colProps} className="space-y-4">
             <h3 className="font-heading text-sm font-bold uppercase tracking-wider text-text-primary">
               Aloqa
             </h3>
@@ -84,10 +98,10 @@ export function Footer() {
                 </a>
               </li>
             </ul>
-          </div>
+          </Col>
 
           {/* Working hours */}
-          <div className="space-y-4">
+          <Col {...colProps} className="space-y-4">
             <h3 className="font-heading text-sm font-bold uppercase tracking-wider text-text-primary">
               Ish vaqti
             </h3>
@@ -100,10 +114,10 @@ export function Footer() {
                 <span>Shanba — Yakshanba: 09:00 — 03:00</span>
               </li>
             </ul>
-          </div>
+          </Col>
 
           {/* Social */}
-          <div className="space-y-4">
+          <Col {...colProps} className="space-y-4">
             <h3 className="font-heading text-sm font-bold uppercase tracking-wider text-text-primary">
               Ijtimoiy tarmoqlar
             </h3>
@@ -121,8 +135,8 @@ export function Footer() {
                 </Link>
               ))}
             </div>
-          </div>
-        </div>
+          </Col>
+        </Grid>
 
         <div className="mt-10 border-t border-border-primary pt-6 text-center text-xs text-text-secondary sm:text-sm">
           <p>&copy; {currentYear} CClub. Barcha huquqlar himoyalangan.</p>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 
@@ -25,6 +25,8 @@ interface LoginFormErrors {
 
 export function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const returnUrl = searchParams.get("returnUrl");
   const [loginMethod, setLoginMethod] = useState<"email" | "phone">("phone");
   const [role, setRole] = useState<"mijoz" | "klub">("mijoz");
   const [identifier, setIdentifier] = useState("");
@@ -91,7 +93,7 @@ export function LoginForm() {
     };
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    localStorage.setItem("gameclub_user", JSON.stringify(mockUser));
+    localStorage.setItem("cclub_user", JSON.stringify(mockUser));
     
     toast.success("Muvaffaqiyatli!", {
       description: "Tizimga kirildi. Kabinetga yo'naltirilmoqdasiz...",
@@ -101,7 +103,7 @@ export function LoginForm() {
     if (role === "klub") {
       router.push("/klub-panel");
     } else {
-      router.push("/dashboard");
+      router.push(returnUrl || "/dashboard");
     }
   };
 

@@ -1,18 +1,32 @@
-import Link from "next/link";
+"use client";
 
+import { Suspense, useEffect } from "react";
+import Link from "next/link";
 import { LoginForm } from "@/components/auth/LoginForm";
 import { Logo } from "@/components/shared/Logo";
-
-export const metadata = {
-  title: "Kirish — cclub",
-  description: "cclub hisobingizga kiring",
-};
+import { motion } from "framer-motion";
+import { useDesktopAnimation } from "@/hooks/useDesktopAnimation";
+import { fadeIn } from "@/lib/animations";
+import { cn } from "@/lib/utils";
 
 export default function LoginPage() {
+  const { shouldAnimate } = useDesktopAnimation();
+
+  useEffect(() => {
+    document.title = "Kirish — cclub";
+  }, []);
+
+  const BackgroundWrapper = shouldAnimate ? motion.div : "div";
+
   return (
     <main className="relative min-h-screen bg-background-primary">
-      {/* Oddiy statik gradient — og'ir blur/animatsiyasiz */}
-      <div
+      {/* Animated gradient on desktop */}
+      <BackgroundWrapper
+        {...(shouldAnimate ? {
+          variants: fadeIn,
+          initial: "hidden",
+          animate: "visible"
+        } : {})}
         className="pointer-events-none absolute inset-0 bg-hero-gradient opacity-60"
         aria-hidden="true"
       />
@@ -23,7 +37,14 @@ export default function LoginPage() {
         </div>
 
         <div className="flex flex-1 flex-col items-center justify-center pb-8">
-          <LoginForm />
+          <Suspense fallback={
+            <div className="flex flex-col items-center gap-3">
+              <div className="h-8 w-8 animate-spin rounded-full border-2 border-accent-glow/20 border-t-accent-glow" />
+              <p className="text-xs text-text-secondary">Yuklanmoqda...</p>
+            </div>
+          }>
+            <LoginForm />
+          </Suspense>
         </div>
 
         <p className="text-center text-xs text-text-secondary">

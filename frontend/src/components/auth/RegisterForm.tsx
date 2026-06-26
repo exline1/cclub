@@ -83,7 +83,7 @@ export function RegisterForm() {
     };
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    localStorage.setItem("gameclub_user", JSON.stringify(mockUser));
+    localStorage.setItem("cclub_user", JSON.stringify(mockUser));
 
     toast.success("Muvaffaqiyatli ro'yxatdan o'tdingiz!", {
       description: "Kabinetga yo'naltirilmoqdasiz...",

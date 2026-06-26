@@ -1,14 +1,34 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Building2 } from "lucide-react";
+import { useDesktopAnimation } from "@/hooks/useDesktopAnimation";
+import { fadeUp, slideInRight, scaleIn, viewportOnce } from "@/lib/animations";
 
 export function DownloadCTA() {
+  const { shouldAnimate } = useDesktopAnimation();
+
+  const Section = shouldAnimate ? motion.div : "div";
+  const sectionProps = shouldAnimate
+    ? { variants: fadeUp, initial: "hidden", whileInView: "visible", viewport: viewportOnce }
+    : {};
+
+  const Mockup = shouldAnimate ? motion.div : "div";
+  const mockupProps = shouldAnimate
+    ? { variants: slideInRight, initial: "hidden", whileInView: "visible", viewport: viewportOnce }
+    : {};
+
   return (
     <section className="py-20 lg:py-28 relative overflow-hidden">
       <div className="absolute inset-0 bg-cta-gradient" aria-hidden="true" />
       
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="bg-background-tertiary border border-border-primary rounded-[32px] p-8 md:p-16 flex flex-col md:flex-row items-center justify-between gap-12 relative overflow-hidden shadow-2xl">
+        <Section
+          {...sectionProps}
+          className="bg-background-tertiary border border-border-primary rounded-[32px] p-8 md:p-16 flex flex-col md:flex-row items-center justify-between gap-12 relative overflow-hidden shadow-2xl"
+        >
           
           {/* Decorative glow inside card */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-accent-primary/10 blur-[100px] rounded-full pointer-events-none" />
@@ -25,13 +45,16 @@ export function DownloadCTA() {
               <Button asChild size="lg" className="h-14 px-8 bg-accent-primary hover:bg-accent-glow text-white rounded-xl shadow-accent-glow-sm transition-transform active:scale-95 group">
                 <Link href="/royxatdan-otish/klub-egasi" className="flex items-center gap-3">
                   <Building2 className="h-5 w-5" />
-                  Klubingizni hoziroq qo'shing
+                  Klubingizni hoziroq qo&apos;shing
                 </Link>
               </Button>
             </div>
           </div>
           
-          <div className="flex-1 hidden lg:flex justify-center z-10">
+          <Mockup
+            {...mockupProps}
+            className="flex-1 hidden lg:flex justify-center z-10"
+          >
             {/* Mockup dashboard representation */}
             <div className="relative w-72 h-[450px] bg-background-primary rounded-xl border border-border-primary shadow-accent-glow flex flex-col overflow-hidden rotate-2 hover:rotate-0 transition-all duration-700">
               <div className="h-12 border-b border-border-primary flex items-center px-4 bg-background-secondary">
@@ -50,8 +73,8 @@ export function DownloadCTA() {
                  </div>
               </div>
             </div>
-          </div>
-        </div>
+          </Mockup>
+        </Section>
       </div>
     </section>
   );

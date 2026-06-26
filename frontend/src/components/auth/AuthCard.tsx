@@ -1,4 +1,7 @@
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
+import { useDesktopAnimation } from "@/hooks/useDesktopAnimation";
+import { scaleIn, fadeUp, staggerContainer } from "@/lib/animations";
 
 export interface AuthCardProps {
   title: string;
@@ -12,22 +15,47 @@ export interface AuthCardProps {
  * backdrop-blur faqat shu kichik elementda ishlatiladi.
  */
 export function AuthCard({ title, subtitle, children, className }: AuthCardProps) {
+  const { shouldAnimate } = useDesktopAnimation();
+
+  const CardWrapper = shouldAnimate ? motion.div : "div";
+  const ContentWrapper = shouldAnimate ? motion.div : "div";
+
   return (
-    <div
+    <CardWrapper
+      {...(shouldAnimate ? {
+        variants: scaleIn,
+        initial: "hidden",
+        animate: "visible"
+      } : {})}
       className={cn(
         "glass-card w-full max-w-md rounded-2xl border border-border-glass p-6 shadow-lg sm:p-8",
         className
       )}
     >
-      <div className="mb-6 space-y-2 text-center sm:mb-8">
-        <h1 className="font-heading text-2xl font-bold text-text-primary sm:text-3xl">
+      <ContentWrapper
+        {...(shouldAnimate ? {
+          variants: staggerContainer,
+          initial: "hidden",
+          animate: "visible"
+        } : {})}
+        className="mb-6 space-y-2 text-center sm:mb-8"
+      >
+        <motion.h1 
+          {...(shouldAnimate ? { variants: fadeUp } : {})}
+          className="font-heading text-2xl font-bold text-text-primary sm:text-3xl"
+        >
           {title}
-        </h1>
+        </motion.h1>
         {subtitle && (
-          <p className="text-sm text-text-secondary sm:text-base">{subtitle}</p>
+          <motion.p 
+            {...(shouldAnimate ? { variants: fadeUp } : {})}
+            className="text-sm text-text-secondary sm:text-base"
+          >
+            {subtitle}
+          </motion.p>
         )}
-      </div>
+      </ContentWrapper>
       {children}
-    </div>
+    </CardWrapper>
   );
 }
