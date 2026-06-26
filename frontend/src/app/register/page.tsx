@@ -1,16 +1,27 @@
+"use client";
+
+import React, { useEffect, Suspense } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 
 import { RegisterForm } from "@/components/auth/RegisterForm";
 import { Logo } from "@/components/shared/Logo";
 
-export const metadata = {
-  title: "Ro'yxatdan o'tish — cclub",
-  description: "cclub ga ro'yxatdan o'ting",
-};
+const SceneWrapper = dynamic(
+  () => import("@/components/three/SceneWrapper").then((mod) => ({ default: mod.SceneWrapper })),
+  { ssr: false, loading: () => null }
+);
 
 export default function RegisterPage() {
+  useEffect(() => {
+    document.title = "Ro'yxatdan o'tish — cclub";
+  }, []);
+
   return (
     <main className="relative min-h-screen bg-background-primary">
+      <Suspense fallback={null}>
+        <SceneWrapper variant="minimal" />
+      </Suspense>
       <div
         className="pointer-events-none absolute inset-0 bg-hero-gradient opacity-60"
         aria-hidden="true"

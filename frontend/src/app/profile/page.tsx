@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Bell, Key, LogOut, Save, User, Smartphone, Mail, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,12 @@ import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { useDesktopAnimation } from "@/hooks/useDesktopAnimation";
 import { fadeUp, scaleIn, staggerContainer } from "@/lib/animations";
+import dynamic from "next/dynamic";
+
+const SceneWrapper = dynamic(
+  () => import("@/components/three/SceneWrapper").then((mod) => ({ default: mod.SceneWrapper })),
+  { ssr: false, loading: () => null }
+);
 
 interface UserProfile {
   name: string;
@@ -126,7 +132,10 @@ export default function ProfilePage() {
   const nameInitial = user.name ? user.name.charAt(0).toUpperCase() : "U";
 
   return (
-    <main className="min-h-screen bg-background-primary pb-16">
+    <main className="min-h-screen bg-background-primary pb-16 relative">
+      <Suspense fallback={null}>
+        <SceneWrapper variant="minimal" />
+      </Suspense>
       {/* Header */}
       <header className="border-b border-border-glass bg-background-secondary py-4 sticky top-0 z-40">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between">

@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Search, MapPin, Star, ChevronDown, Filter } from "lucide-react";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 
 import { Navbar } from "@/components/landing/Navbar";
 import { Footer } from "@/components/landing/Footer";
@@ -14,6 +15,11 @@ import { useDesktopAnimation } from "@/hooks/useDesktopAnimation";
 import { fadeUp, slideInLeft, staggerContainer, cardHover, viewportOnce } from "@/lib/animations";
 
 import { MOCK_CLUBS, REGIONS, DISTRICTS } from "@/lib/mock-data";
+
+const SceneWrapper = dynamic(
+  () => import("@/components/three/SceneWrapper").then((mod) => ({ default: mod.SceneWrapper })),
+  { ssr: false, loading: () => null }
+);
 
 export default function ClubsPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -49,7 +55,10 @@ export default function ClubsPage() {
   const Card = shouldAnimate ? motion.div : "div";
 
   return (
-    <div className="min-h-screen bg-background-primary text-text-primary flex flex-col">
+    <div className="min-h-screen bg-background-primary text-text-primary flex flex-col relative">
+      <Suspense fallback={null}>
+        <SceneWrapper variant="light" />
+      </Suspense>
       <Navbar />
 
       <main className="flex-grow pt-24 pb-20">

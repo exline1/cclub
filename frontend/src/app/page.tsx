@@ -1,3 +1,6 @@
+"use client";
+
+import React, { Suspense } from "react";
 import dynamic from "next/dynamic";
 
 import { Hero } from "@/components/landing/Hero";
@@ -17,9 +20,17 @@ const Footer = dynamic(() =>
   import("@/components/landing/Footer").then((mod) => mod.Footer)
 );
 
+const SceneWrapper = dynamic(
+  () => import("@/components/three/SceneWrapper").then((mod) => ({ default: mod.SceneWrapper })),
+  { ssr: false, loading: () => null }
+);
+
 export default function HomePage() {
   return (
-    <main className="bg-background-primary text-text-primary min-h-screen">
+    <main className="bg-background-primary text-text-primary min-h-screen relative">
+      <Suspense fallback={null}>
+        <SceneWrapper variant="hero" />
+      </Suspense>
       <Navbar />
       <Hero />
       <HowItWorks />

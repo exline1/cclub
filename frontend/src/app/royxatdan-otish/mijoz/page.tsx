@@ -1,10 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
 import { ArrowLeft, Check, Loader2 } from "lucide-react";
 import { Logo } from "@/components/shared/Logo";
 import { Button } from "@/components/ui/button";
+import dynamic from "next/dynamic";
+
+const SceneWrapper = dynamic(
+  () => import("@/components/three/SceneWrapper").then((mod) => ({ default: mod.SceneWrapper })),
+  { ssr: false, loading: () => null }
+);
 
 export default function ClientRegistrationPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,6 +27,9 @@ export default function ClientRegistrationPage() {
 
   return (
     <div className="min-h-screen bg-background-primary flex flex-col relative">
+      <Suspense fallback={null}>
+        <SceneWrapper variant="minimal" />
+      </Suspense>
       <header className="p-6 flex items-center justify-between border-b border-border-primary/50 bg-background-primary/80 backdrop-blur-md sticky top-0 z-50">
         <Logo />
         <Link 

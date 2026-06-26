@@ -1,15 +1,27 @@
+"use client";
+
+import React, { useEffect, Suspense } from "react";
 import Link from "next/link";
 import { Settings, LogOut, LayoutDashboard, Users, Monitor, BarChart } from "lucide-react";
 import { Navbar } from "@/components/landing/Navbar";
 import { Button } from "@/components/ui/button";
+import dynamic from "next/dynamic";
 
-export const metadata = {
-  title: "Klub Panel — CClub",
-};
+const SceneWrapper = dynamic(
+  () => import("@/components/three/SceneWrapper").then((mod) => ({ default: mod.SceneWrapper })),
+  { ssr: false, loading: () => null }
+);
 
 export default function KlubPanelPage() {
+  useEffect(() => {
+    document.title = "Klub Panel — CClub";
+  }, []);
+
   return (
-    <div className="min-h-screen bg-background-primary text-text-primary flex flex-col">
+    <div className="min-h-screen bg-background-primary text-text-primary flex flex-col relative">
+      <Suspense fallback={null}>
+        <SceneWrapper variant="minimal" />
+      </Suspense>
       <Navbar />
       <main className="flex-grow pt-24 pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

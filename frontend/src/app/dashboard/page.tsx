@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { 
@@ -18,6 +18,12 @@ import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useDesktopAnimation } from "@/hooks/useDesktopAnimation";
 import { fadeUp, staggerContainer, viewportOnce } from "@/lib/animations";
+import dynamic from "next/dynamic";
+
+const SceneWrapper = dynamic(
+  () => import("@/components/three/SceneWrapper").then((mod) => ({ default: mod.SceneWrapper })),
+  { ssr: false, loading: () => null }
+);
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -79,7 +85,10 @@ export default function DashboardPage() {
   const recommendedClubs = MOCK_CLUBS.slice(0, 3);
 
   return (
-    <main className="min-h-screen bg-background-primary pb-20">
+    <main className="min-h-screen bg-background-primary pb-20 relative">
+      <Suspense fallback={null}>
+        <SceneWrapper variant="minimal" />
+      </Suspense>
       <Header userName={user.name} />
 
       <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">

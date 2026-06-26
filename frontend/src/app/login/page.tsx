@@ -8,6 +8,12 @@ import { motion } from "framer-motion";
 import { useDesktopAnimation } from "@/hooks/useDesktopAnimation";
 import { fadeIn } from "@/lib/animations";
 import { cn } from "@/lib/utils";
+import dynamic from "next/dynamic";
+
+const SceneWrapper = dynamic(
+  () => import("@/components/three/SceneWrapper").then((mod) => ({ default: mod.SceneWrapper })),
+  { ssr: false, loading: () => null }
+);
 
 export default function LoginPage() {
   const { shouldAnimate } = useDesktopAnimation();
@@ -20,6 +26,9 @@ export default function LoginPage() {
 
   return (
     <main className="relative min-h-screen bg-background-primary">
+      <Suspense fallback={null}>
+        <SceneWrapper variant="minimal" />
+      </Suspense>
       {/* Animated gradient on desktop */}
       <BackgroundWrapper
         {...(shouldAnimate ? {

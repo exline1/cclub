@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { ArrowLeft, MapPin, Star, Monitor, Gamepad2, Clock, Wallet, ChevronRight, CheckCircle2, ShoppingCart, Plus, Minus, X, Info, Coffee } from "lucide-react";
 import { toast } from "sonner";
+import dynamic from "next/dynamic";
 
 import { Navbar } from "@/components/landing/Navbar";
 import { Footer } from "@/components/landing/Footer";
@@ -15,6 +16,11 @@ import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDesktopAnimation } from "@/hooks/useDesktopAnimation";
 import { fadeUp, fadeIn, scaleIn, staggerContainer, viewportOnce } from "@/lib/animations";
+
+const SceneWrapper = dynamic(
+  () => import("@/components/three/SceneWrapper").then((mod) => ({ default: mod.SceneWrapper })),
+  { ssr: false, loading: () => null }
+);
 
 export default function ClubProfilePage() {
   const params = useParams();
@@ -68,7 +74,10 @@ export default function ClubProfilePage() {
   
   if (!club) {
     return (
-      <div className="min-h-screen bg-background-primary text-text-primary flex flex-col">
+      <div className="min-h-screen bg-background-primary text-text-primary flex flex-col relative">
+        <Suspense fallback={null}>
+          <SceneWrapper variant="light" />
+        </Suspense>
         <Navbar />
         <main className="flex-grow pt-32 pb-20 flex flex-col items-center justify-center">
           <h1 className="text-2xl font-bold mb-4">Klub topilmadi</h1>
@@ -167,7 +176,10 @@ export default function ClubProfilePage() {
   };
 
   return (
-    <div className="min-h-screen bg-background-primary text-text-primary flex flex-col">
+    <div className="min-h-screen bg-background-primary text-text-primary flex flex-col relative">
+      <Suspense fallback={null}>
+        <SceneWrapper variant="light" />
+      </Suspense>
       <Navbar />
 
       <main className="flex-grow pt-24 pb-20 relative">

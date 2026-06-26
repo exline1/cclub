@@ -1,3 +1,6 @@
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -16,6 +19,21 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  transpilePackages: [
+    "three",
+    "@react-three/fiber",
+    "@react-three/drei"
+  ],
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "three": require.resolve("three"),
+    };
+    return config;
+  },
+  experimental: {
+    optimizePackageImports: ["three"]
+  }
 };
 
 export default nextConfig;
