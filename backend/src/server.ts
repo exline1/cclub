@@ -33,6 +33,10 @@ registerSocketHandlers(io);
 // Start background cron jobs
 initSessionCheckerJob();
 
+// Init Telegram bot polling
+import { initTelegramBot } from "./telegram/bot";
+initTelegramBot();
+
 server.listen(PORT, () => {
   console.log(`Server ${PORT} da ishga tushdi`);
 });

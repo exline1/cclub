@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { TelegramOTP } from "@/components/auth/TelegramOTP";
 import {
   validateEmail,
   validatePassword,
@@ -37,6 +38,7 @@ export function RegisterForm() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [phoneVerified, setPhoneVerified] = useState(false);
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -229,7 +231,26 @@ export function RegisterForm() {
           )}
         </div>
 
-        <Button type="submit" className="w-full flex items-center justify-center gap-2" disabled={isSubmitting}>
+        {!phoneVerified ? (
+          <div className="w-full">
+            <TelegramOTP 
+              onVerified={(verifiedPhone) => {
+                setPhone(verifiedPhone);
+                setPhoneVerified(true);
+              }} 
+            />
+          </div>
+        ) : (
+          <div className="rounded-md bg-status-free/10 border border-status-free/20 p-3 text-center text-sm text-status-free font-medium">
+            Telefon raqami tasdiqlandi ✓
+          </div>
+        )}
+
+        <Button 
+          type="submit" 
+          className="w-full flex items-center justify-center gap-2" 
+          disabled={isSubmitting || !phoneVerified}
+        >
           {isSubmitting ? (
             <>
               <Loader2 className="h-4.5 w-4.5 animate-spin" />

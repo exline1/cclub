@@ -14,12 +14,6 @@ const HowItWorks = dynamic(() =>
 const BenefitCards = dynamic(() =>
   import("@/components/landing/BenefitCards").then((mod) => mod.BenefitCards)
 );
-const Pricing = dynamic(() =>
-  import("@/components/landing/Pricing").then((mod) => mod.Pricing)
-);
-const FAQ = dynamic(() =>
-  import("@/components/landing/FAQ").then((mod) => mod.FAQ)
-);
 const DownloadCTA = dynamic(() =>
   import("@/components/landing/DownloadCTA").then((mod) => mod.DownloadCTA)
 );
@@ -45,8 +39,6 @@ export default function HomePage() {
       <Hero />
       <HowItWorks />
       <BenefitCards />
-      <Pricing />
-      <FAQ />
       <DownloadCTA />
       <Footer />
     </main>

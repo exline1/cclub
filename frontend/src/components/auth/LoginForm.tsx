@@ -82,28 +82,54 @@ export function LoginForm() {
 
     setIsSubmitting(true);
 
-    // Save mock user session to localStorage for dashboard retrieval
-    const cleanPhone = loginMethod === "phone" ? identifier : "+998 90 999 88 77";
-    const cleanEmail = loginMethod === "email" ? identifier : "guest@cclub.uz";
-    const mockUser = {
-      name: "Ali",
-      phone: cleanPhone,
-      email: cleanEmail,
-      joinDate: "19-iyun, 2026-yil",
-    };
+    try {
+      // Import qilinmagan bo'lsa next-auth ni chaqirish
+      const { signIn, getSession } = await import("next-auth/react");
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    localStorage.setItem("cclub_user", JSON.stringify(mockUser));
-    
-    toast.success("Muvaffaqiyatli!", {
-      description: "Tizimga kirildi. Kabinetga yo'naltirilmoqdasiz...",
-    });
+      const res = await signIn("credentials", {
+        redirect: false,
+        identifier: loginMethod === "email" ? identifier : identifier.replace(/[\s()-]/g, ""),
+        password,
+      });
 
-    setIsSubmitting(false);
-    if (role === "klub") {
-      router.push("/klub-panel");
-    } else {
-      router.push(returnUrl || "/dashboard");
+      if (res?.error) {
+        if (res.error === "PENDING_APPROVAL") {
+          toast.error("Ruxsat etilmadi", {
+            description: "Arizangiz hali ko'rib chiqilmoqda. Iltimos kuting.",
+          });
+        } else if (res.error.startsWith("APPLICATION_REJECTED")) {
+          const reason = res.error.split(":")[1] || "Noma'lum sabab";
+          toast.error("Ariza rad etildi", {
+            description: `Arizangiz rad etildi. Sabab: ${reason}`,
+          });
+        } else {
+          toast.error("Xatolik", {
+            description: res.error || "Parol yoki login noto'g'ri",
+          });
+        }
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Sessiyani olish orqali role ni tekshirish
+      const session = await getSession();
+
+      toast.success("Muvaffaqiyatli!", {
+        description: "Tizimga kirildi. Kabinetga yo'naltirilmoqdasiz...",
+      });
+
+      // Role bo'yicha yo'naltirish
+      if (session?.user?.role === "ADMIN") {
+        router.push("/admin");
+      } else if (session?.user?.role === "CLUB_OWNER") {
+        router.push("/klub-panel");
+      } else {
+        router.push(returnUrl || "/dashboard");
+      }
+    } catch (err) {
+      toast.error("Xatolik yuz berdi");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 

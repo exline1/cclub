@@ -58,7 +58,7 @@ app.use((err: Error & { status?: number }, _req: Request, res: Response, _next: 
     status = 401;
   } else if (message.includes("allaqachon ro'yxatdan o'tgan")) {
     status = 400;
-  } else if (message.includes("Ruxsat etilmagan")) {
+  } else if (message.includes("Ruxsat etilmagan") || message.includes("PENDING_APPROVAL") || message.includes("APPLICATION_REJECTED")) {
     status = 403;
   }
 

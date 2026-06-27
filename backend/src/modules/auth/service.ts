@@ -83,6 +83,22 @@ export class AuthService {
       throw new Error("Login yoki parol noto'g'ri");
     }
 
+    if (user.role === "CLUB_OWNER") {
+      const club = await prisma.club.findFirst({ where: { ownerId: user.id } });
+      if (club) {
+        if (club.approvalStatus === "PENDING") {
+          const error: any = new Error("PENDING_APPROVAL");
+          error.status = 403;
+          throw error;
+        }
+        if (club.approvalStatus === "REJECTED") {
+          const error: any = new Error(`APPLICATION_REJECTED:${club.rejectionReason || ""}`);
+          error.status = 403;
+          throw error;
+        }
+      }
+    }
+
     const accessToken = this.generateAccessToken(user.id, user.role);
     const refreshToken = this.generateRefreshToken(user.id);
 
