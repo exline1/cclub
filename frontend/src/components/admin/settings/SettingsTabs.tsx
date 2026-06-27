@@ -135,7 +135,7 @@ export default function SettingsTabs() {
   return (
     <div className="flex flex-col lg:flex-row gap-6 items-start text-left select-none animate-in fade-in duration-300">
       {/* Sidebar Tabs Links */}
-      <div className="flex lg:flex-col bg-background-secondary/50 border border-border-glass/40 p-1.5 rounded-xl w-full lg:w-56 shrink-0 gap-1.5">
+      <div className="flex lg:flex-col bg-background-secondary/50 border border-border-glass/40 p-1.5 rounded-3xl w-full lg:w-56 shrink-0 gap-1.5">
         {TABS.map((tab) => {
           const Icon = tab.icon;
           return (
@@ -143,7 +143,7 @@ export default function SettingsTabs() {
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
               className={cn(
-                "flex-1 lg:flex-none flex items-center justify-center lg:justify-start gap-2.5 px-4 py-2.5 rounded-lg text-xs font-semibold tracking-wide transition-all active:scale-95",
+                "flex-1 lg:flex-none flex items-center justify-center lg:justify-start gap-2.5 px-4 py-2.5 rounded-2xl text-xs font-semibold tracking-wide transition-all active:scale-95",
                 activeTab === tab.key
                   ? "bg-accent-primary text-white shadow-accent-glow-sm"
                   : "text-text-secondary hover:text-text-primary hover:bg-background-primary/20"
@@ -157,7 +157,7 @@ export default function SettingsTabs() {
       </div>
 
       {/* Tab Form Containers */}
-      <div className="flex-1 w-full bg-background-secondary/30 border border-border-glass/40 rounded-2xl p-5 sm:p-6 glass-card">
+      <div className="flex-1 w-full /30 /40  p-5 sm:p-6 glass-card">
         {activeTab === "pricing" && (
           <form onSubmit={handleSavePricing} className="space-y-4">
             <h3 className="font-heading text-sm sm:text-base font-bold text-text-primary border-b border-border-glass/25 pb-2 mb-4">
@@ -176,7 +176,7 @@ export default function SettingsTabs() {
                     min="0"
                     value={standardPrice}
                     onChange={(e) => setStandardPrice(e.target.value)}
-                    className="w-full bg-background-primary border border-border-glass/60 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:border-accent-glow transition-all"
+                    className="w-full bg-background-primary border border-border-glass/60 rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:border-accent-glow transition-all"
                     required
                   />
                 </div>
@@ -193,7 +193,7 @@ export default function SettingsTabs() {
                     min="0"
                     value={vipPrice}
                     onChange={(e) => setVipPrice(e.target.value)}
-                    className="w-full bg-background-primary border border-border-glass/60 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:border-accent-glow transition-all"
+                    className="w-full bg-background-primary border border-border-glass/60 rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:border-accent-glow transition-all"
                     required
                   />
                 </div>
@@ -210,7 +210,7 @@ export default function SettingsTabs() {
                     min="0"
                     value={ps5Price}
                     onChange={(e) => setPs5Price(e.target.value)}
-                    className="w-full bg-background-primary border border-border-glass/60 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:border-accent-glow transition-all"
+                    className="w-full bg-background-primary border border-border-glass/60 rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:border-accent-glow transition-all"
                     required
                   />
                 </div>
@@ -219,7 +219,7 @@ export default function SettingsTabs() {
 
             <button
               type="submit"
-              className="mt-6 flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-accent-glow hover:bg-accent-glow/90 border border-accent-glow/50 text-white text-xs font-bold transition-all duration-200 active:scale-95 shadow-lg shadow-accent-glow/15"
+              className="mt-6 flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-2xl bg-accent-glow hover:bg-accent-glow/90 border border-accent-glow/50 text-white text-xs font-bold transition-all duration-200 active:scale-95 shadow-lg shadow-accent-glow/15"
             >
               <Save className="h-4 w-4" />
               Narxlarni Saqlash
@@ -243,7 +243,7 @@ export default function SettingsTabs() {
                   type="time"
                   value={openTime}
                   onChange={(e) => setOpenTime(e.target.value)}
-                  className="w-full bg-background-primary border border-border-glass/60 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:border-accent-glow transition-all"
+                  className="w-full bg-background-primary border border-border-glass/60 rounded-2xl px-3 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:border-accent-glow transition-all"
                   required
                 />
               </div>
@@ -257,7 +257,7 @@ export default function SettingsTabs() {
                   type="time"
                   value={closeTime}
                   onChange={(e) => setCloseTime(e.target.value)}
-                  className="w-full bg-background-primary border border-border-glass/60 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:border-accent-glow transition-all"
+                  className="w-full bg-background-primary border border-border-glass/60 rounded-2xl px-3 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:border-accent-glow transition-all"
                   required
                 />
               </div>
@@ -265,7 +265,7 @@ export default function SettingsTabs() {
 
             <button
               type="submit"
-              className="mt-6 flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-accent-glow hover:bg-accent-glow/90 border border-accent-glow/50 text-white text-xs font-bold transition-all duration-200 active:scale-95 shadow-lg shadow-accent-glow/15"
+              className="mt-6 flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-2xl bg-accent-glow hover:bg-accent-glow/90 border border-accent-glow/50 text-white text-xs font-bold transition-all duration-200 active:scale-95 shadow-lg shadow-accent-glow/15"
             >
               <Save className="h-4 w-4" />
               Ish Vaqtini Saqlash
@@ -289,7 +289,7 @@ export default function SettingsTabs() {
                   type="text"
                   value={clubName}
                   onChange={(e) => setClubName(e.target.value)}
-                  className="w-full bg-background-primary border border-border-glass/60 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:border-accent-glow transition-all"
+                  className="w-full bg-background-primary border border-border-glass/60 rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:border-accent-glow transition-all"
                   required
                 />
               </div>
@@ -303,7 +303,7 @@ export default function SettingsTabs() {
                   type="text"
                   value={clubAddress}
                   onChange={(e) => setClubAddress(e.target.value)}
-                  className="w-full bg-background-primary border border-border-glass/60 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:border-accent-glow transition-all"
+                  className="w-full bg-background-primary border border-border-glass/60 rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:border-accent-glow transition-all"
                   required
                 />
               </div>
@@ -317,7 +317,7 @@ export default function SettingsTabs() {
                   type="text"
                   value={clubPhone}
                   onChange={(e) => setClubPhone(e.target.value)}
-                  className="w-full bg-background-primary border border-border-glass/60 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:border-accent-glow transition-all"
+                  className="w-full bg-background-primary border border-border-glass/60 rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:border-accent-glow transition-all"
                   required
                 />
               </div>
@@ -325,7 +325,7 @@ export default function SettingsTabs() {
 
             <button
               type="submit"
-              className="mt-6 flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-accent-glow hover:bg-accent-glow/90 border border-accent-glow/50 text-white text-xs font-bold transition-all duration-200 active:scale-95 shadow-lg shadow-accent-glow/15"
+              className="mt-6 flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-2xl bg-accent-glow hover:bg-accent-glow/90 border border-accent-glow/50 text-white text-xs font-bold transition-all duration-200 active:scale-95 shadow-lg shadow-accent-glow/15"
             >
               <Save className="h-4 w-4" />
               Ma&apos;lumotlarni Saqlash

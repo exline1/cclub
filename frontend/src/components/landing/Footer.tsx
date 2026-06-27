@@ -129,7 +129,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.name}
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-border-primary text-text-secondary transition-all duration-200 hover:border-accent-secondary hover:text-accent-secondary hover:shadow-accent-glow-sm bg-background-secondary hover:bg-background-tertiary"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border-primary text-text-secondary transition-all duration-200 hover:border-accent-secondary hover:text-accent-secondary hover:shadow-accent-glow-sm bg-background-secondary hover:bg-background-tertiary"
                 >
                   {social.icon}
                 </Link>

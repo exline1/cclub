@@ -85,7 +85,7 @@ export default function ClubsPage() {
           {/* Filters & Search */}
           <FilterBar
             {...filterBarProps}
-            className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between sticky top-20 z-30 bg-background-primary/95 backdrop-blur-md py-4 border-b border-border-primary md:glass-card md:rounded-2xl md:px-6 md:py-4 md:border-none md:shadow-glass"
+            className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between sticky top-20 z-30 bg-background-primary/95 backdrop-blur-md py-4 border-b border-border-primary md:glass-card md: md:px-6 md:py-4 md:border-none md:shadow-glass"
           >
             <div className="relative flex-grow max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-text-secondary" />
@@ -94,7 +94,7 @@ export default function ClubsPage() {
                 placeholder="Klub nomi yoki manzil bo'yicha qidirish..." 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-background-secondary border border-border-primary rounded-xl py-3 pl-10 pr-4 text-sm focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-all text-text-primary placeholder:text-text-secondary"
+                className="w-full bg-background-secondary border border-border-primary rounded-2xl py-3 pl-10 pr-4 text-sm focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-all text-text-primary placeholder:text-text-secondary"
               />
             </div>
             
@@ -102,7 +102,7 @@ export default function ClubsPage() {
               <div className="relative min-w-[160px]">
                 <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-accent-primary" />
                 <select 
-                  className="w-full appearance-none bg-background-secondary border border-border-primary rounded-xl py-3 pl-10 pr-10 text-sm font-medium focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-colors cursor-pointer text-text-primary"
+                  className="w-full appearance-none bg-background-secondary border border-border-primary rounded-2xl py-3 pl-10 pr-10 text-sm font-medium focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-colors cursor-pointer text-text-primary"
                   value={selectedRegion}
                   onChange={(e) => {
                     setSelectedRegion(e.target.value);
@@ -119,7 +119,7 @@ export default function ClubsPage() {
               
               <div className="relative min-w-[160px]">
                 <select 
-                  className="w-full appearance-none bg-background-secondary border border-border-primary rounded-xl py-3 pl-4 pr-10 text-sm font-medium focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-colors cursor-pointer text-text-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full appearance-none bg-background-secondary border border-border-primary rounded-2xl py-3 pl-4 pr-10 text-sm font-medium focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-colors cursor-pointer text-text-primary disabled:opacity-50 disabled:cursor-not-allowed"
                   value={selectedDistrict}
                   onChange={(e) => setSelectedDistrict(e.target.value)}
                   disabled={!selectedRegion || availableDistricts.length === 0}
@@ -139,7 +139,7 @@ export default function ClubsPage() {
                     setSelectedRegion("");
                     setSelectedDistrict("");
                   }}
-                  className="flex items-center justify-center whitespace-nowrap bg-background-tertiary border border-border-primary rounded-xl px-4 py-3 text-sm font-medium hover:bg-background-secondary hover:text-accent-primary transition-colors text-text-secondary"
+                  className="flex items-center justify-center whitespace-nowrap bg-background-tertiary border border-border-primary rounded-2xl px-4 py-3 text-sm font-medium hover:bg-background-secondary hover:text-accent-primary transition-colors text-text-secondary"
                 >
                   Tozalash
                 </button>
@@ -194,7 +194,7 @@ export default function ClubsPage() {
                       </div>
 
                       {/* Price Badge */}
-                      <div className="absolute bottom-4 right-4 bg-background-secondary/90 backdrop-blur-md px-3 py-1.5 rounded-lg border border-border-primary text-sm font-bold text-text-primary">
+                      <div className="absolute bottom-4 right-4 bg-background-secondary/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-border-primary text-sm font-bold text-text-primary">
                         {club.price}
                       </div>
                     </div>
@@ -205,7 +205,7 @@ export default function ClubsPage() {
                         <h3 className="font-heading text-xl font-bold text-text-primary line-clamp-1" title={club.name}>
                           {club.name}
                         </h3>
-                        <div className="flex items-center gap-1 bg-background-tertiary px-2 py-1 rounded-md shrink-0">
+                        <div className="flex items-center gap-1 bg-background-tertiary px-2 py-1 rounded-full shrink-0">
                           <Star className="h-3.5 w-3.5 fill-accent-primary text-accent-primary" />
                           <span className="text-sm font-bold text-text-primary">{club.rating}</span>
                         </div>
@@ -219,14 +219,14 @@ export default function ClubsPage() {
 
                       <div className="flex flex-wrap gap-2 mb-6">
                         {club.tags.map(tag => (
-                          <span key={tag} className="text-xs font-medium px-2.5 py-1 rounded-md bg-background-tertiary text-text-secondary border border-border-primary">
+                          <span key={tag} className="text-xs font-medium px-2.5 py-1 rounded-full bg-background-tertiary text-text-secondary border border-border-primary">
                             {tag}
                           </span>
                         ))}
                       </div>
 
                       <div className="mt-auto pt-4 border-t border-border-primary/50">
-                        <Button asChild className="w-full bg-accent-primary hover:bg-accent-glow transition-all rounded-xl h-12">
+                        <Button asChild className="w-full bg-accent-primary hover:bg-accent-glow transition-all  h-12">
                           <Link href={`/clublar/${club.id}`}>
                             Batafsil
                           </Link>

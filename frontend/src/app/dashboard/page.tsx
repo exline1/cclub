@@ -153,9 +153,9 @@ export default function DashboardPage() {
               </div>
 
               {bookings.length === 0 ? (
-                <div className="text-center py-10 border border-dashed border-border-primary rounded-2xl">
+                <div className="text-center py-10 border border-dashed border-border-primary ">
                   <p className="text-text-secondary text-sm mb-4">Hali hech qanday bron yo&apos;q</p>
-                  <Button asChild className="bg-accent-primary hover:bg-accent-glow text-white rounded-xl px-5 h-10 text-xs">
+                  <Button asChild className="bg-accent-primary hover:bg-accent-glow text-white  px-5 h-10 text-xs">
                     <Link href="/clublar">Klub topish &rarr;</Link>
                   </Button>
                 </div>
@@ -210,7 +210,7 @@ export default function DashboardPage() {
               </h2>
 
               {orders.length === 0 ? (
-                <div className="text-center py-10 border border-dashed border-border-primary rounded-2xl">
+                <div className="text-center py-10 border border-dashed border-border-primary ">
                   <p className="text-text-secondary text-sm">Hali hech qanday buyurtma yo&apos;q</p>
                 </div>
               ) : (
@@ -296,7 +296,7 @@ export default function DashboardPage() {
                         </div>
 
                         <div className="flex items-center gap-2 mb-4 text-xs mt-auto">
-                          <div className="flex items-center gap-1 bg-[#34D399]/10 text-[#34D399] px-2 py-0.5 rounded border border-[#34D399]/10">
+                          <div className="flex items-center gap-1 bg-[#34D399]/10 text-[#34D399] px-2 py-0.5 rounded-full border border-[#34D399]/10">
                             {free} bo&apos;sh
                           </div>
                           <div className="flex items-center gap-0.5 text-[#f59e0b]">
@@ -305,7 +305,7 @@ export default function DashboardPage() {
                           </div>
                         </div>
 
-                        <Button asChild className="w-full h-9 bg-accent-primary hover:bg-accent-glow text-white text-xs rounded-xl mt-auto">
+                        <Button asChild className="w-full h-9 bg-accent-primary hover:bg-accent-glow text-white text-xs  mt-auto">
                           <Link href={`/clublar/${club.id}`}>
                             Ko&apos;rish &rarr;
                           </Link>
@@ -358,7 +358,7 @@ export default function DashboardPage() {
                   </div>
                 </div>
 
-                <Button asChild variant="outline" className="w-full h-11 border-border-primary hover:bg-background-tertiary text-text-primary rounded-xl mt-4 text-xs font-semibold">
+                <Button asChild variant="outline" className="w-full h-11 border-border-primary hover:bg-background-tertiary text-text-primary  mt-4 text-xs font-semibold">
                   <Link href="/profile">
                     Profilni ko&apos;rish &rarr;
                   </Link>

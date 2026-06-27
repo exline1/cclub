@@ -46,7 +46,7 @@ export default function ClientRegistrationPage() {
       </header>
 
       <main className="flex-grow flex items-center justify-center p-4 sm:p-6 lg:p-8">
-        <div className="w-full max-w-md bg-background-secondary border border-border-primary rounded-[24px] p-8 shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="w-full max-w-md bg-background-secondary border border-border-primary rounded-50px p-8 shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-500">
           <div className="mb-8 text-center">
             <h1 className="font-heading text-2xl font-bold text-text-primary mb-2">Mijoz sifatida qo'shiling</h1>
             <p className="text-sm text-text-secondary">Shaxsiy ma'lumotlaringizni kiriting.</p>
@@ -56,11 +56,11 @@ export default function ClientRegistrationPage() {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-text-primary">Ism <span className="text-status-occupied">*</span></label>
-                <input required type="text" className="w-full bg-background-tertiary border border-border-primary rounded-xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-all placeholder:text-text-secondary/50" placeholder="Ali" />
+                <input required type="text" className="w-full bg-background-tertiary border border-border-primary rounded-2xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-all placeholder:text-text-secondary/50" placeholder="Ali" />
               </div>
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-text-primary">Familiya <span className="text-status-occupied">*</span></label>
-                <input required type="text" className="w-full bg-background-tertiary border border-border-primary rounded-xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-all placeholder:text-text-secondary/50" placeholder="Valiyev" />
+                <input required type="text" className="w-full bg-background-tertiary border border-border-primary rounded-2xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-all placeholder:text-text-secondary/50" placeholder="Valiyev" />
               </div>
             </div>
 
@@ -68,23 +68,23 @@ export default function ClientRegistrationPage() {
               <label className="text-sm font-medium text-text-primary">Telefon raqam <span className="text-status-occupied">*</span></label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary text-sm">+998</span>
-                <input required type="tel" className="w-full bg-background-tertiary border border-border-primary rounded-xl pl-14 pr-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-all placeholder:text-text-secondary/50" placeholder="(90) 123-45-67" />
+                <input required type="tel" className="w-full bg-background-tertiary border border-border-primary rounded-2xl pl-14 pr-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-all placeholder:text-text-secondary/50" placeholder="(90) 123-45-67" />
               </div>
             </div>
 
             <div className="space-y-1.5">
               <label className="text-sm font-medium text-text-primary">Email (ixtiyoriy)</label>
-              <input type="email" className="w-full bg-background-tertiary border border-border-primary rounded-xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-all placeholder:text-text-secondary/50" placeholder="ali@example.com" />
+              <input type="email" className="w-full bg-background-tertiary border border-border-primary rounded-2xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-all placeholder:text-text-secondary/50" placeholder="ali@example.com" />
             </div>
 
             <div className="space-y-1.5">
               <label className="text-sm font-medium text-text-primary">Parol <span className="text-status-occupied">*</span></label>
-              <input required type="password" className="w-full bg-background-tertiary border border-border-primary rounded-xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-all placeholder:text-text-secondary/50" placeholder="••••••••" />
+              <input required type="password" className="w-full bg-background-tertiary border border-border-primary rounded-2xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-all placeholder:text-text-secondary/50" placeholder="••••••••" />
             </div>
 
             <div className="space-y-1.5">
               <label className="text-sm font-medium text-text-primary">Parolni tasdiqlang <span className="text-status-occupied">*</span></label>
-              <input required type="password" className="w-full bg-background-tertiary border border-border-primary rounded-xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-all placeholder:text-text-secondary/50" placeholder="••••••••" />
+              <input required type="password" className="w-full bg-background-tertiary border border-border-primary rounded-2xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-all placeholder:text-text-secondary/50" placeholder="••••••••" />
             </div>
 
             <div className="flex items-start gap-3 pt-2">
@@ -96,7 +96,7 @@ export default function ClientRegistrationPage() {
               </label>
             </div>
 
-            <Button type="submit" disabled={isLoading} className="w-full h-12 mt-4 bg-accent-primary hover:bg-accent-glow text-white text-base font-semibold rounded-xl transition-all">
+            <Button type="submit" disabled={isLoading} className="w-full h-12 mt-4 bg-accent-primary hover:bg-accent-glow text-white text-base font-semibold  transition-all">
               {isLoading ? (
                 <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Yuborilmoqda...</>
               ) : (

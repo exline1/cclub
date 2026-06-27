@@ -91,7 +91,7 @@ function ServiceCard({ service, shouldAnimate }: { service: ServiceItem; shouldA
     <Wrapper {...wrapperProps}>
       <Card className="transition-all duration-200 hover:border-accent-glow hover:shadow-accent-glow-sm h-full">
         <CardHeader className="pb-3">
-          <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-accent-deep text-accent-glow">
+          <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent-deep text-accent-glow">
             <Icon className="h-5 w-5" aria-hidden="true" />
           </div>
           <CardTitle className="text-lg">{service.title}</CardTitle>

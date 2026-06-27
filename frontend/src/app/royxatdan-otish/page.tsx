@@ -52,10 +52,10 @@ export default function RegisterChoicePage() {
             {/* Client Card */}
             <Link 
               href="/royxatdan-otish/mijoz"
-              className="group relative flex flex-col items-center text-center p-10 rounded-[32px] bg-background-secondary border-2 border-border-primary hover:border-accent-primary hover:-translate-y-2 transition-all duration-300 hover:shadow-accent-glow-sm animate-in fade-in slide-in-from-bottom-8 fill-mode-both"
+              className="group relative flex flex-col items-center text-center p-10 rounded-50px bg-background-secondary border-2 border-border-primary hover:border-accent-primary hover:-translate-y-2 transition-all duration-300 hover:shadow-accent-glow-sm animate-in fade-in slide-in-from-bottom-8 fill-mode-both"
               style={{ animationDelay: "100ms" }}
             >
-              <div className="mb-6 h-20 w-20 flex items-center justify-center rounded-2xl bg-accent-primary/10 text-accent-primary group-hover:scale-110 transition-transform duration-300">
+              <div className="mb-6 h-20 w-20 flex items-center justify-center rounded-full bg-accent-primary/10 text-accent-primary group-hover:scale-110 transition-transform duration-300">
                 <User className="h-10 w-10" />
               </div>
               <h2 className="font-heading text-2xl font-bold text-text-primary mb-3">
@@ -69,10 +69,10 @@ export default function RegisterChoicePage() {
             {/* Club Owner Card */}
             <Link 
               href="/royxatdan-otish/klub-egasi"
-              className="group relative flex flex-col items-center text-center p-10 rounded-[32px] bg-background-secondary border-2 border-border-primary hover:border-accent-secondary hover:-translate-y-2 transition-all duration-300 hover:shadow-accent-glow-sm animate-in fade-in slide-in-from-bottom-8 fill-mode-both"
+              className="group relative flex flex-col items-center text-center p-10 rounded-50px bg-background-secondary border-2 border-border-primary hover:border-accent-secondary hover:-translate-y-2 transition-all duration-300 hover:shadow-accent-glow-sm animate-in fade-in slide-in-from-bottom-8 fill-mode-both"
               style={{ animationDelay: "200ms" }}
             >
-              <div className="mb-6 h-20 w-20 flex items-center justify-center rounded-2xl bg-accent-secondary/10 text-accent-secondary group-hover:scale-110 transition-transform duration-300">
+              <div className="mb-6 h-20 w-20 flex items-center justify-center rounded-full bg-accent-secondary/10 text-accent-secondary group-hover:scale-110 transition-transform duration-300">
                 <Building2 className="h-10 w-10" />
               </div>
               <h2 className="font-heading text-2xl font-bold text-text-primary mb-3">

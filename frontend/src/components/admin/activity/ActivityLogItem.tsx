@@ -54,11 +54,11 @@ export default function ActivityLogItem({ log }: ActivityLogItemProps) {
   const Icon = style.icon;
 
   return (
-    <div className="glass-card bg-background-secondary/30 border border-border-glass/35 rounded-xl p-3.5 flex items-start gap-3.5 hover:border-border-glass/60 transition-colors animate-in fade-in slide-in-from-top-1.5 duration-200">
+    <div className="glass-card /30 /35  p-3.5 flex items-start gap-3.5 hover:border-border-glass/60 transition-colors animate-in fade-in slide-in-from-top-1.5 duration-200">
       {/* Icon frame */}
       <div
         className={cn(
-          "h-9 w-9 rounded-lg shrink-0 flex items-center justify-center text-xs border",
+          "h-9 w-9 rounded-full shrink-0 flex items-center justify-center text-xs border",
           style.bg
         )}
       >

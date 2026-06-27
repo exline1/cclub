@@ -69,7 +69,7 @@ export default function ClubOwnerRegistrationPage() {
         <form onSubmit={handleSubmit} className="w-full max-w-3xl space-y-10 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150">
           
           {/* SECTION 1: Personal Info */}
-          <section className="bg-background-secondary border border-border-primary rounded-[24px] p-6 sm:p-8 shadow-sm">
+          <section className="bg-background-secondary border border-border-primary rounded-50px p-6 sm:p-8 shadow-sm">
             <div className="flex items-center gap-3 mb-6 border-b border-border-primary pb-4">
               <div className="flex items-center justify-center h-8 w-8 rounded-full bg-accent-secondary/10 text-accent-secondary font-bold font-mono text-sm">1</div>
               <h2 className="font-heading text-xl font-bold text-text-primary">Akkaunt ma'lumotlari</h2>
@@ -78,36 +78,36 @@ export default function ClubOwnerRegistrationPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-text-primary">Ism <span className="text-status-occupied">*</span></label>
-                <input required type="text" className="w-full bg-background-tertiary border border-border-primary rounded-xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary focus:ring-1 focus:ring-accent-secondary transition-all" />
+                <input required type="text" className="w-full bg-background-tertiary border border-border-primary rounded-2xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary focus:ring-1 focus:ring-accent-secondary transition-all" />
               </div>
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-text-primary">Familiya <span className="text-status-occupied">*</span></label>
-                <input required type="text" className="w-full bg-background-tertiary border border-border-primary rounded-xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary focus:ring-1 focus:ring-accent-secondary transition-all" />
+                <input required type="text" className="w-full bg-background-tertiary border border-border-primary rounded-2xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary focus:ring-1 focus:ring-accent-secondary transition-all" />
               </div>
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-text-primary">Telefon <span className="text-status-occupied">*</span></label>
                 <div className="relative">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary text-sm">+998</span>
-                  <input required type="tel" className="w-full bg-background-tertiary border border-border-primary rounded-xl pl-14 pr-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary focus:ring-1 focus:ring-accent-secondary transition-all" />
+                  <input required type="tel" className="w-full bg-background-tertiary border border-border-primary rounded-2xl pl-14 pr-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary focus:ring-1 focus:ring-accent-secondary transition-all" />
                 </div>
               </div>
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-text-primary">Email <span className="text-status-occupied">*</span></label>
-                <input required type="email" className="w-full bg-background-tertiary border border-border-primary rounded-xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary focus:ring-1 focus:ring-accent-secondary transition-all" />
+                <input required type="email" className="w-full bg-background-tertiary border border-border-primary rounded-2xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary focus:ring-1 focus:ring-accent-secondary transition-all" />
               </div>
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-text-primary">Parol <span className="text-status-occupied">*</span></label>
-                <input required type="password" className="w-full bg-background-tertiary border border-border-primary rounded-xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary focus:ring-1 focus:ring-accent-secondary transition-all" />
+                <input required type="password" className="w-full bg-background-tertiary border border-border-primary rounded-2xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary focus:ring-1 focus:ring-accent-secondary transition-all" />
               </div>
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-text-primary">Parolni tasdiqlash <span className="text-status-occupied">*</span></label>
-                <input required type="password" className="w-full bg-background-tertiary border border-border-primary rounded-xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary focus:ring-1 focus:ring-accent-secondary transition-all" />
+                <input required type="password" className="w-full bg-background-tertiary border border-border-primary rounded-2xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary focus:ring-1 focus:ring-accent-secondary transition-all" />
               </div>
             </div>
           </section>
 
           {/* SECTION 2: Club Info */}
-          <section className="bg-background-secondary border border-border-primary rounded-[24px] p-6 sm:p-8 shadow-sm">
+          <section className="bg-background-secondary border border-border-primary rounded-50px p-6 sm:p-8 shadow-sm">
             <div className="flex items-center gap-3 mb-6 border-b border-border-primary pb-4">
               <div className="flex items-center justify-center h-8 w-8 rounded-full bg-accent-secondary/10 text-accent-secondary font-bold font-mono text-sm">2</div>
               <h2 className="font-heading text-xl font-bold text-text-primary">Klub ma'lumotlari</h2>
@@ -116,12 +116,12 @@ export default function ClubOwnerRegistrationPage() {
             <div className="space-y-5">
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-text-primary">Klub nomi (Brand) <span className="text-status-occupied">*</span></label>
-                <input required type="text" className="w-full bg-background-tertiary border border-border-primary rounded-xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary focus:ring-1 focus:ring-accent-secondary transition-all" placeholder="Masalan: Nexus Gaming" />
+                <input required type="text" className="w-full bg-background-tertiary border border-border-primary rounded-2xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary focus:ring-1 focus:ring-accent-secondary transition-all" placeholder="Masalan: Nexus Gaming" />
               </div>
               
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-text-primary">To'liq manzil <span className="text-status-occupied">*</span></label>
-                <input required type="text" className="w-full bg-background-tertiary border border-border-primary rounded-xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary focus:ring-1 focus:ring-accent-secondary transition-all" placeholder="Shahar, tuman, ko'cha, uy raqami" />
+                <input required type="text" className="w-full bg-background-tertiary border border-border-primary rounded-2xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary focus:ring-1 focus:ring-accent-secondary transition-all" placeholder="Shahar, tuman, ko'cha, uy raqami" />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -137,21 +137,21 @@ export default function ClubOwnerRegistrationPage() {
                 <div className="space-y-1.5">
                   <label className="text-sm font-medium text-text-primary text-transparent select-none hidden sm:block">_</label>
                   <div className="flex items-center gap-2">
-                    <input type="time" className="w-full bg-background-tertiary border border-border-primary rounded-xl px-3 py-2 text-sm text-text-primary focus:outline-none focus:border-accent-secondary" />
+                    <input type="time" className="w-full bg-background-tertiary border border-border-primary rounded-2xl px-3 py-2 text-sm text-text-primary focus:outline-none focus:border-accent-secondary" />
                     <span className="text-text-secondary">-</span>
-                    <input type="time" className="w-full bg-background-tertiary border border-border-primary rounded-xl px-3 py-2 text-sm text-text-primary focus:outline-none focus:border-accent-secondary" />
+                    <input type="time" className="w-full bg-background-tertiary border border-border-primary rounded-2xl px-3 py-2 text-sm text-text-primary focus:outline-none focus:border-accent-secondary" />
                   </div>
                 </div>
               </div>
 
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-text-primary">Qisqa tavsif</label>
-                <textarea rows={3} className="w-full bg-background-tertiary border border-border-primary rounded-xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary focus:ring-1 focus:ring-accent-secondary transition-all resize-none" placeholder="Mijozlar uchun klubingiz qulayliklari haqida..." />
+                <textarea rows={3} className="w-full bg-background-tertiary border border-border-primary rounded-2xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary focus:ring-1 focus:ring-accent-secondary transition-all resize-none" placeholder="Mijozlar uchun klubingiz qulayliklari haqida..." />
               </div>
 
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-text-primary">Klub rasmi yoki banneri <span className="text-status-occupied">*</span></label>
-                <div className="border-2 border-dashed border-border-primary rounded-xl p-6 flex flex-col items-center justify-center text-center hover:bg-background-tertiary/50 transition-colors cursor-pointer group">
+                <div className="border-2 border-dashed border-border-primary rounded-3xl p-6 flex flex-col items-center justify-center text-center hover:bg-background-tertiary/50 transition-colors cursor-pointer group">
                   <div className="h-12 w-12 rounded-full bg-background-tertiary flex items-center justify-center mb-3 group-hover:bg-accent-secondary/10 group-hover:text-accent-secondary transition-colors">
                     <Upload className="h-5 w-5 text-text-secondary group-hover:text-accent-secondary" />
                   </div>
@@ -163,7 +163,7 @@ export default function ClubOwnerRegistrationPage() {
           </section>
 
           {/* SECTION 3 & 4: Rooms and PCs */}
-          <section className="bg-background-secondary border border-border-primary rounded-[24px] p-6 sm:p-8 shadow-sm">
+          <section className="bg-background-secondary border border-border-primary rounded-50px p-6 sm:p-8 shadow-sm">
             <div className="flex items-center justify-between mb-6 border-b border-border-primary pb-4">
               <div className="flex items-center gap-3">
                 <div className="flex items-center justify-center h-8 w-8 rounded-full bg-accent-secondary/10 text-accent-secondary font-bold font-mono text-sm">3</div>
@@ -176,7 +176,7 @@ export default function ClubOwnerRegistrationPage() {
             
             <div className="space-y-6">
               {rooms.map((room, index) => (
-                <div key={room.id} className="p-5 rounded-xl border border-border-primary bg-background-tertiary relative group animate-in fade-in zoom-in-95 duration-200">
+                <div key={room.id} className="p-5 rounded-2xl border border-border-primary bg-background-tertiary relative group animate-in fade-in zoom-in-95 duration-200">
                   {rooms.length > 1 && (
                     <button type="button" onClick={() => removeRoom(room.id)} className="absolute top-4 right-4 text-text-secondary hover:text-status-occupied transition-colors">
                       <Trash2 className="h-4 w-4" />
@@ -188,11 +188,11 @@ export default function ClubOwnerRegistrationPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5 border-b border-border-primary/50 pb-5">
                     <div className="space-y-1.5">
                       <label className="text-xs font-medium text-text-secondary">Zona nomi</label>
-                      <input required type="text" className="w-full bg-background-primary border border-border-primary rounded-lg px-3 py-2 text-sm text-text-primary focus:outline-none focus:border-accent-secondary" placeholder="VIP Zal" />
+                      <input required type="text" className="w-full bg-background-primary border border-border-primary rounded-2xl px-3 py-2 text-sm text-text-primary focus:outline-none focus:border-accent-secondary" placeholder="VIP Zal" />
                     </div>
                     <div className="space-y-1.5">
                       <label className="text-xs font-medium text-text-secondary">Turi</label>
-                      <select className="w-full bg-background-primary border border-border-primary rounded-lg px-3 py-2 text-sm text-text-primary focus:outline-none focus:border-accent-secondary appearance-none">
+                      <select className="w-full bg-background-primary border border-border-primary rounded-2xl px-3 py-2 text-sm text-text-primary focus:outline-none focus:border-accent-secondary appearance-none">
                         <option value="pc">PC (Kompyuter)</option>
                         <option value="ps5">PlayStation 5</option>
                         <option value="vr">VR</option>
@@ -201,17 +201,17 @@ export default function ClubOwnerRegistrationPage() {
                     </div>
                     <div className="space-y-1.5">
                       <label className="text-xs font-medium text-text-secondary">Qurilmalar soni</label>
-                      <input required type="number" min="1" className="w-full bg-background-primary border border-border-primary rounded-lg px-3 py-2 text-sm text-text-primary focus:outline-none focus:border-accent-secondary" placeholder="10" />
+                      <input required type="number" min="1" className="w-full bg-background-primary border border-border-primary rounded-2xl px-3 py-2 text-sm text-text-primary focus:outline-none focus:border-accent-secondary" placeholder="10" />
                     </div>
                   </div>
 
                   <div className="space-y-3">
                     <p className="text-xs font-bold text-text-secondary uppercase tracking-wider">Kompyuter / Qurilma xususiyatlari</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                      <input type="text" className="w-full bg-background-primary border border-border-primary rounded-lg px-3 py-2 text-xs text-text-primary focus:outline-none focus:border-accent-secondary" placeholder="GPU (Masalan: RTX 4070)" />
-                      <input type="text" className="w-full bg-background-primary border border-border-primary rounded-lg px-3 py-2 text-xs text-text-primary focus:outline-none focus:border-accent-secondary" placeholder="CPU (Masalan: i5-13400)" />
-                      <input type="text" className="w-full bg-background-primary border border-border-primary rounded-lg px-3 py-2 text-xs text-text-primary focus:outline-none focus:border-accent-secondary" placeholder="Monitor (Masalan: 240Hz)" />
-                      <input type="text" className="w-full bg-background-primary border border-border-primary rounded-lg px-3 py-2 text-xs text-text-primary focus:outline-none focus:border-accent-secondary" placeholder="Narxi (soatiga)" />
+                      <input type="text" className="w-full bg-background-primary border border-border-primary rounded-2xl px-3 py-2 text-xs text-text-primary focus:outline-none focus:border-accent-secondary" placeholder="GPU (Masalan: RTX 4070)" />
+                      <input type="text" className="w-full bg-background-primary border border-border-primary rounded-2xl px-3 py-2 text-xs text-text-primary focus:outline-none focus:border-accent-secondary" placeholder="CPU (Masalan: i5-13400)" />
+                      <input type="text" className="w-full bg-background-primary border border-border-primary rounded-2xl px-3 py-2 text-xs text-text-primary focus:outline-none focus:border-accent-secondary" placeholder="Monitor (Masalan: 240Hz)" />
+                      <input type="text" className="w-full bg-background-primary border border-border-primary rounded-2xl px-3 py-2 text-xs text-text-primary focus:outline-none focus:border-accent-secondary" placeholder="Narxi (soatiga)" />
                     </div>
                   </div>
                 </div>
@@ -220,13 +220,13 @@ export default function ClubOwnerRegistrationPage() {
           </section>
 
           {/* SECTION 5: Menu */}
-          <section className="bg-background-secondary border border-border-primary rounded-[24px] p-6 sm:p-8 shadow-sm">
+          <section className="bg-background-secondary border border-border-primary rounded-50px p-6 sm:p-8 shadow-sm">
             <div className="flex items-center justify-between mb-6 border-b border-border-primary pb-4">
               <div className="flex items-center gap-3">
                 <div className="flex items-center justify-center h-8 w-8 rounded-full bg-accent-secondary/10 text-accent-secondary font-bold font-mono text-sm">4</div>
                 <h2 className="font-heading text-xl font-bold text-text-primary">Bar / Menyu (ixtiyoriy)</h2>
               </div>
-              <label className="flex items-center gap-2 cursor-pointer text-sm text-text-secondary bg-background-tertiary px-3 py-1.5 rounded-lg border border-border-primary">
+              <label className="flex items-center gap-2 cursor-pointer text-sm text-text-secondary bg-background-tertiary px-3 py-1.5 rounded-full border border-border-primary">
                 <input 
                   type="checkbox" 
                   checked={skipMenu} 
@@ -241,15 +241,15 @@ export default function ClubOwnerRegistrationPage() {
               <div className="space-y-4">
                 {menuItems.map((item) => (
                   <div key={item.id} className="flex flex-col sm:flex-row gap-3 items-start sm:items-center animate-in fade-in zoom-in-95 duration-200">
-                    <input type="text" className="w-full sm:flex-1 bg-background-tertiary border border-border-primary rounded-lg px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary" placeholder="Mahsulot nomi (Masalan: Red Bull)" />
-                    <input type="text" className="w-full sm:w-32 bg-background-tertiary border border-border-primary rounded-lg px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary" placeholder="Narxi" />
-                    <select className="w-full sm:w-40 bg-background-tertiary border border-border-primary rounded-lg px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary appearance-none">
+                    <input type="text" className="w-full sm:flex-1 bg-background-tertiary border border-border-primary rounded-2xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary" placeholder="Mahsulot nomi (Masalan: Red Bull)" />
+                    <input type="text" className="w-full sm:w-32 bg-background-tertiary border border-border-primary rounded-2xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary" placeholder="Narxi" />
+                    <select className="w-full sm:w-40 bg-background-tertiary border border-border-primary rounded-2xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-accent-secondary appearance-none">
                       <option value="drink">Ichimlik</option>
                       <option value="snack">Snack</option>
                       <option value="food">Ovqat</option>
                     </select>
                     {menuItems.length > 1 && (
-                      <button type="button" onClick={() => removeMenuItem(item.id)} className="p-2.5 text-text-secondary hover:text-status-occupied hover:bg-status-occupied/10 rounded-lg transition-colors border border-transparent self-end sm:self-auto">
+                      <button type="button" onClick={() => removeMenuItem(item.id)} className="p-2.5 text-text-secondary hover:text-status-occupied hover:bg-status-occupied/10 rounded-full transition-colors border border-transparent self-end sm:self-auto">
                         <Trash2 className="h-4 w-4" />
                       </button>
                     )}
@@ -260,14 +260,14 @@ export default function ClubOwnerRegistrationPage() {
                 </Button>
               </div>
             ) : (
-              <div className="py-8 text-center text-text-secondary border-2 border-dashed border-border-primary rounded-xl bg-background-tertiary/50">
+              <div className="py-8 text-center text-text-secondary border-2 border-dashed border-border-primary rounded-3xl bg-background-tertiary/50">
                 Siz bar menyusini to'ldirishni o'tkazib yubordingiz. Uni keyinroq admin paneldan qo'shishingiz mumkin.
               </div>
             )}
           </section>
 
           {/* SECTION 6: Submit */}
-          <section className="bg-background-tertiary border border-border-primary rounded-[24px] p-6 sm:p-8 shadow-sm">
+          <section className="bg-background-tertiary border border-border-primary rounded-50px p-6 sm:p-8 shadow-sm">
             <div className="flex items-start gap-4 mb-6">
               <div className="mt-1 flex items-center justify-center h-6 w-6 rounded-full bg-accent-secondary/20 text-accent-secondary shrink-0">
                 <Info className="h-3.5 w-3.5" />
@@ -286,7 +286,7 @@ export default function ClubOwnerRegistrationPage() {
               </label>
             </div>
 
-            <Button type="submit" disabled={isLoading} className="w-full h-14 bg-accent-primary text-white hover:bg-accent-glow text-base font-bold rounded-xl transition-all shadow-accent-glow-sm hover:shadow-accent-glow">
+            <Button type="submit" disabled={isLoading} className="w-full h-14 bg-accent-primary text-white hover:bg-accent-glow text-base font-bold  transition-all shadow-accent-glow-sm hover:shadow-accent-glow">
               {isLoading ? (
                 <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Yuborilmoqda...</>
               ) : (

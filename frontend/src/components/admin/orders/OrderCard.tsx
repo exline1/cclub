@@ -61,7 +61,7 @@ export default function OrderCard({ order, onAccept, onReady, onCancel }: OrderC
   return (
     <div
       className={cn(
-        "glass-card p-4 rounded-xl border border-border-glass/40 bg-background-secondary/30 flex flex-col gap-3 shadow-sm hover:border-accent-glow/50 transition-all duration-300 animate-in fade-in zoom-in-95"
+        "glass-card p-4  /40 /30 flex flex-col gap-3 shadow-sm hover:border-accent-glow/50 transition-all duration-300 animate-in fade-in zoom-in-95"
       )}
     >
       {/* Header Info */}
@@ -82,7 +82,7 @@ export default function OrderCard({ order, onAccept, onReady, onCancel }: OrderC
               <Coffee className="h-3 w-3 text-accent-glow shrink-0" />
               {item.name}
             </span>
-            <span className="text-text-primary font-bold bg-background-primary/80 px-2 py-0.5 rounded border border-border-glass/40 scale-90">
+            <span className="text-text-primary font-bold bg-background-primary/80 px-2 py-0.5 rounded-full border border-border-glass/40 scale-90">
               x{item.qty}
             </span>
           </div>
@@ -109,7 +109,7 @@ export default function OrderCard({ order, onAccept, onReady, onCancel }: OrderC
             <button
               type="button"
               onClick={() => onAccept(order.id)}
-              className="flex-1 bg-accent-primary hover:bg-accent-glow text-white font-bold py-2 px-3 rounded-lg text-xs flex items-center justify-center gap-1.5 active:scale-95 transition-all duration-200 shadow-lg shadow-accent-primary/10"
+              className="flex-1 bg-accent-primary hover:bg-accent-glow text-white font-bold py-2 px-3 rounded-2xl text-xs flex items-center justify-center gap-1.5 active:scale-95 transition-all duration-200 shadow-lg shadow-accent-primary/10"
             >
               <Play className="h-3 w-3 fill-current" />
               Qabul qilish
@@ -122,7 +122,7 @@ export default function OrderCard({ order, onAccept, onReady, onCancel }: OrderC
                     onCancel(order.id);
                   }
                 }}
-                className="px-3 py-2 rounded-lg border border-border-glass bg-background-primary/30 text-text-secondary hover:text-status-occupied hover:border-status-occupied/50 active:scale-95 transition-all duration-200 text-xs font-bold"
+                className="px-3 py-2 rounded-2xl border border-border-glass bg-background-primary/30 text-text-secondary hover:text-status-occupied hover:border-status-occupied/50 active:scale-95 transition-all duration-200 text-xs font-bold"
               >
                 Bekor qilish
               </button>
@@ -134,7 +134,7 @@ export default function OrderCard({ order, onAccept, onReady, onCancel }: OrderC
             <button
               type="button"
               onClick={() => onReady(order.id)}
-              className="flex-1 bg-status-free hover:bg-status-free/90 text-white font-bold py-2 px-3 rounded-lg text-xs flex items-center justify-center gap-1.5 active:scale-95 transition-all duration-200 shadow-lg shadow-status-free/10"
+              className="flex-1 bg-status-free hover:bg-status-free/90 text-white font-bold py-2 px-3 rounded-2xl text-xs flex items-center justify-center gap-1.5 active:scale-95 transition-all duration-200 shadow-lg shadow-status-free/10"
             >
               <Check className="h-3.5 w-3.5" />
               Tayyor
@@ -147,7 +147,7 @@ export default function OrderCard({ order, onAccept, onReady, onCancel }: OrderC
                     onCancel(order.id);
                   }
                 }}
-                className="px-3 py-2 rounded-lg border border-border-glass bg-background-primary/30 text-text-secondary hover:text-status-occupied hover:border-status-occupied/50 active:scale-95 transition-all duration-200 text-xs font-bold"
+                className="px-3 py-2 rounded-2xl border border-border-glass bg-background-primary/30 text-text-secondary hover:text-status-occupied hover:border-status-occupied/50 active:scale-95 transition-all duration-200 text-xs font-bold"
               >
                 Bekor qilish
               </button>
@@ -155,13 +155,13 @@ export default function OrderCard({ order, onAccept, onReady, onCancel }: OrderC
           </div>
         )}
         {isDelivered && (
-          <div className="w-full py-1.5 rounded-lg bg-status-free/10 border border-status-free/20 text-status-free text-[10px] font-bold uppercase tracking-wider text-center flex items-center justify-center gap-1">
+          <div className="w-full py-1.5 rounded-full bg-status-free/10 border border-status-free/20 text-status-free text-[10px] font-bold uppercase tracking-wider text-center flex items-center justify-center gap-1">
             <Check className="h-3 w-3" />
             Yetkazildi
           </div>
         )}
         {isCancelled && (
-          <div className="w-full py-1.5 rounded-lg bg-status-occupied/10 border border-status-occupied/25 text-status-occupied text-[10px] font-bold uppercase tracking-wider text-center flex items-center justify-center gap-1">
+          <div className="w-full py-1.5 rounded-full bg-status-occupied/10 border border-status-occupied/25 text-status-occupied text-[10px] font-bold uppercase tracking-wider text-center flex items-center justify-center gap-1">
             <X className="h-3 w-3" />
             Bekor qilindi
           </div>

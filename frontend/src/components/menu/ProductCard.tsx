@@ -37,7 +37,7 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
         <span className="text-5xl sm:text-6xl drop-shadow-md select-none transform hover:scale-110 transition-transform duration-200">
           {product.emoji}
         </span>
-        <span className="absolute bottom-2.5 left-3 rounded bg-background-primary/80 px-2 py-0.5 text-[10px] font-bold text-text-secondary border border-border-glass/40 uppercase">
+        <span className="absolute bottom-2.5 left-3 rounded-full bg-background-primary/80 px-2 py-0.5 text-[10px] font-bold text-text-secondary border border-border-glass/40 uppercase">
           {product.category}
         </span>
       </div>

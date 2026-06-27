@@ -119,10 +119,10 @@ export function LoginForm() {
       subtitle="cclub hisobingizga kiring"
     >
       {/* Role Toggle */}
-      <div className="mb-6 flex rounded-lg bg-background-tertiary p-1 border border-border-primary">
+      <div className="mb-6 flex rounded-3xl bg-background-tertiary p-1 border border-border-primary">
         <button
           type="button"
-          className={`flex-1 rounded-md py-2 text-sm font-bold transition-all duration-200 ${
+          className={`flex-1 rounded-3xl py-2 text-sm font-bold transition-all duration-200 ${
             role === "mijoz"
               ? "bg-accent-primary text-white shadow-md"
               : "text-text-secondary hover:text-text-primary"
@@ -133,7 +133,7 @@ export function LoginForm() {
         </button>
         <button
           type="button"
-          className={`flex-1 rounded-md py-2 text-sm font-bold transition-all duration-200 ${
+          className={`flex-1 rounded-3xl py-2 text-sm font-bold transition-all duration-200 ${
             role === "klub"
               ? "bg-accent-primary text-white shadow-md"
               : "text-text-secondary hover:text-text-primary"
@@ -145,10 +145,10 @@ export function LoginForm() {
       </div>
 
       {/* Login Method Toggle */}
-      <div className="mb-6 flex rounded-lg bg-background-primary p-1 border border-border-glass">
+      <div className="mb-6 flex rounded-3xl bg-background-primary p-1 border border-border-glass">
         <button
           type="button"
-          className={`flex-1 rounded-md py-1.5 text-xs font-bold transition-all duration-200 ${
+          className={`flex-1 rounded-3xl py-1.5 text-xs font-bold transition-all duration-200 ${
             loginMethod === "phone"
               ? "bg-accent-primary text-white"
               : "text-text-secondary hover:text-text-primary"
@@ -159,7 +159,7 @@ export function LoginForm() {
         </button>
         <button
           type="button"
-          className={`flex-1 rounded-md py-1.5 text-xs font-bold transition-all duration-200 ${
+          className={`flex-1 rounded-3xl py-1.5 text-xs font-bold transition-all duration-200 ${
             loginMethod === "email"
               ? "bg-accent-primary text-white"
               : "text-text-secondary hover:text-text-primary"
@@ -229,7 +229,7 @@ export function LoginForm() {
             <button
               type="button"
               onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-text-secondary transition-colors duration-200 hover:text-text-primary h-8 w-8 flex items-center justify-center rounded-md"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-text-secondary transition-colors duration-200 hover:text-text-primary h-8 w-8 flex items-center justify-center rounded-full"
               aria-label={showPassword ? "Parolni yashirish" : "Parolni ko'rsatish"}
             >
               {showPassword ? <EyeOff className="h-4.5 w-4.5" /> : <Eye className="h-4.5 w-4.5" />}

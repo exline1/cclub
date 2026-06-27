@@ -140,7 +140,7 @@ export default function ProductsAdminPage() {
             setEditingProduct(null);
             setIsModalOpen(true);
           }}
-          className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-accent-glow hover:bg-accent-glow/95 border border-accent-glow/50 text-white text-xs font-bold transition-all duration-200 active:scale-95 shadow-lg shadow-accent-glow/15 shrink-0"
+          className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl bg-accent-glow hover:bg-accent-glow/95 border border-accent-glow/50 text-white text-xs font-bold transition-all duration-200 active:scale-95 shadow-lg shadow-accent-glow/15 shrink-0"
         >
           <Plus className="h-4 w-4 shrink-0" />
           Mahsulot qo&apos;shish
@@ -151,8 +151,8 @@ export default function ProductsAdminPage() {
       {(outOfStockCount > 0 || lowStockCount > 0) && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {outOfStockCount > 0 && (
-            <div className="flex items-center gap-3 p-3.5 rounded-xl border border-status-occupied/20 bg-status-occupied/5 animate-in slide-in-from-top-2 duration-200">
-              <div className="h-9 w-9 rounded-lg bg-status-occupied/10 text-status-occupied flex items-center justify-center shrink-0">
+            <div className="flex items-center gap-3 p-3.5 rounded-2xl border border-status-occupied/20 bg-status-occupied/5 animate-in slide-in-from-top-2 duration-200">
+              <div className="h-9 w-9 rounded-full bg-status-occupied/10 text-status-occupied flex items-center justify-center shrink-0">
                 <PackageOpen className="h-4.5 w-4.5" />
               </div>
               <div className="min-w-0">
@@ -165,8 +165,8 @@ export default function ProductsAdminPage() {
           )}
 
           {lowStockCount > 0 && (
-            <div className="flex items-center gap-3 p-3.5 rounded-xl border border-status-ending/25 bg-status-ending/5 animate-in slide-in-from-top-2 duration-200">
-              <div className="h-9 w-9 rounded-lg bg-status-ending/10 text-status-ending flex items-center justify-center shrink-0">
+            <div className="flex items-center gap-3 p-3.5 rounded-2xl border border-status-ending/25 bg-status-ending/5 animate-in slide-in-from-top-2 duration-200">
+              <div className="h-9 w-9 rounded-full bg-status-ending/10 text-status-ending flex items-center justify-center shrink-0">
                 <Filter className="h-4.5 w-4.5" />
               </div>
               <div className="min-w-0">
@@ -183,7 +183,7 @@ export default function ProductsAdminPage() {
       {/* Filters and Search controls */}
       <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
         {/* Category filtering tab buttons */}
-        <div className="flex bg-background-secondary/50 border border-border-glass/50 p-1 rounded-xl w-full md:w-auto shrink-0 select-none">
+        <div className="flex bg-background-secondary/50 border border-border-glass/50 p-1 rounded-3xl w-full md:w-auto shrink-0 select-none">
           {(["Hammasi", "drink", "snack", "fastfood"] as CategoryFilter[]).map((cat) => {
             const label =
               cat === "Hammasi"
@@ -199,7 +199,7 @@ export default function ProductsAdminPage() {
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
                 className={cn(
-                  "flex-1 md:flex-none px-3.5 py-2 rounded-lg text-[10px] sm:text-xs font-semibold tracking-wide transition-all active:scale-95 whitespace-nowrap",
+                  "flex-1 md:flex-none px-3.5 py-2 rounded-full text-[10px] sm:text-xs font-semibold tracking-wide transition-all active:scale-95 whitespace-nowrap",
                   selectedCategory === cat
                     ? "bg-accent-primary text-white shadow-accent-glow-sm"
                     : "text-text-secondary hover:text-text-primary"
@@ -219,7 +219,7 @@ export default function ProductsAdminPage() {
             placeholder="Mahsulot nomi bo'yicha..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-background-secondary/30 border border-border-glass/65 rounded-xl pl-9 pr-4 py-2.5 text-xs text-text-primary placeholder:text-text-secondary/50 focus:outline-none focus:border-accent-glow transition-all"
+            className="w-full bg-background-secondary/30 border border-border-glass/65 rounded-2xl pl-9 pr-4 py-2.5 text-xs text-text-primary placeholder:text-text-secondary/50 focus:outline-none focus:border-accent-glow transition-all"
           />
         </div>
       </div>

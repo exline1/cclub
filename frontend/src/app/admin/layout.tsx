@@ -97,7 +97,7 @@ export default function AdminLayout({
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "relative flex items-center justify-between px-3 py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 group active:scale-[0.98]",
+                  "relative flex items-center justify-between px-3 py-2.5 rounded-2xl text-xs sm:text-sm font-medium transition-all duration-200 group active:scale-[0.98]",
                   isActive
                     ? "bg-accent-primary/20 text-white font-bold border-l-2 border-accent-glow rounded-l-none pl-2.5"
                     : "text-text-secondary hover:text-text-primary hover:bg-background-primary/50"
@@ -121,7 +121,7 @@ export default function AdminLayout({
         <div className="p-4 border-t border-border-glass/40">
           <Link
             href="/"
-            className="flex items-center justify-center gap-2 px-3 py-2 border border-border-glass/50 rounded-lg text-xs font-semibold text-text-secondary hover:text-text-primary hover:border-accent-glow transition-all duration-200 active:scale-95"
+            className="flex items-center justify-center gap-2 px-3 py-2 border border-border-glass/50 rounded-2xl text-xs font-semibold text-text-secondary hover:text-text-primary hover:border-accent-glow transition-all duration-200 active:scale-95"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             Saytga qaytish
@@ -155,7 +155,7 @@ export default function AdminLayout({
             type="button"
             onClick={() => setIsMobileOpen(false)}
             aria-label="Yopish"
-            className="text-text-secondary hover:text-text-primary p-1 border border-border-glass/40 rounded-lg"
+            className="text-text-secondary hover:text-text-primary p-1 border border-border-glass/40 rounded-full"
           >
             <X className="h-4.5 w-4.5" />
           </button>
@@ -172,7 +172,7 @@ export default function AdminLayout({
                 href={item.href}
                 onClick={() => setIsMobileOpen(false)}
                 className={cn(
-                  "relative flex items-center justify-between px-3 py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 group active:scale-[0.98]",
+                  "relative flex items-center justify-between px-3 py-2.5 rounded-2xl text-xs sm:text-sm font-medium transition-all duration-200 group active:scale-[0.98]",
                   isActive
                     ? "bg-accent-primary/20 text-white font-bold border-l-2 border-accent-glow rounded-l-none pl-2.5"
                     : "text-text-secondary hover:text-text-primary hover:bg-background-primary/50"
@@ -195,7 +195,7 @@ export default function AdminLayout({
         <div className="p-4 border-t border-border-glass/40">
           <Link
             href="/"
-            className="flex items-center justify-center gap-2 px-3 py-2 border border-border-glass/50 rounded-lg text-xs font-semibold text-text-secondary hover:text-text-primary hover:border-accent-glow transition-all duration-200 active:scale-95"
+            className="flex items-center justify-center gap-2 px-3 py-2 border border-border-glass/50 rounded-2xl text-xs font-semibold text-text-secondary hover:text-text-primary hover:border-accent-glow transition-all duration-200 active:scale-95"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             Saytga qaytish
@@ -212,7 +212,7 @@ export default function AdminLayout({
               type="button"
               onClick={() => setIsMobileOpen(true)}
               aria-label="Menyuni ochish"
-              className="lg:hidden text-text-secondary hover:text-text-primary p-1.5 border border-border-glass/40 rounded-lg active:scale-95 transition-all"
+              className="lg:hidden text-text-secondary hover:text-text-primary p-1.5 border border-border-glass/40 rounded-full active:scale-95 transition-all"
             >
               <Menu className="h-5 w-5" />
             </button>

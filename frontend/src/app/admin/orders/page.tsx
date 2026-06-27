@@ -250,7 +250,7 @@ export default function OrdersAdminPage() {
           <button
             type="button"
             onClick={() => setSortOrder(sortOrder === "newest" ? "oldest" : "newest")}
-            className="flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-border-glass bg-background-primary/40 text-text-primary text-xs font-bold transition-all duration-200 hover:border-accent-glow hover:bg-accent-glow/5 active:scale-95"
+            className="flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-2xl border border-border-glass bg-background-primary/40 text-text-primary text-xs font-bold transition-all duration-200 hover:border-accent-glow hover:bg-accent-glow/5 active:scale-95"
           >
             Saralash: {sortOrder === "newest" ? "Eng yangi" : "Eng eski"}
           </button>
@@ -259,7 +259,7 @@ export default function OrdersAdminPage() {
           <button
             type="button"
             onClick={handleSimulateNewOrder}
-            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-accent-glow hover:bg-accent-glow/95 border border-accent-glow/50 text-white text-xs font-bold transition-all duration-200 active:scale-95 shadow-lg shadow-accent-glow/15"
+            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl bg-accent-glow hover:bg-accent-glow/95 border border-accent-glow/50 text-white text-xs font-bold transition-all duration-200 active:scale-95 shadow-lg shadow-accent-glow/15"
           >
             <Sparkles className="h-4 w-4 shrink-0" />
             Test: yangi buyurtma yuborish
@@ -300,7 +300,7 @@ export default function OrdersAdminPage() {
           <div className="flex items-center gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-status-occupied opacity-60" />
             <span>Bekor qilingan buyurtmalar</span>
-            <span className="text-[10px] bg-background-primary border border-border-glass/50 px-1.5 py-0.5 rounded text-text-secondary font-bold">
+            <span className="text-[10px] bg-background-primary border border-border-glass/50 px-1.5 py-0.5 rounded-full text-text-secondary font-bold">
               {cancelledOrders.length} ta buyurtma
             </span>
           </div>

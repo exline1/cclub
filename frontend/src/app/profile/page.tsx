@@ -157,7 +157,7 @@ export default function ProfilePage() {
           <button
             type="button"
             onClick={handleLogout}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border-glass text-text-secondary hover:text-status-occupied hover:border-status-occupied/50 transition-colors duration-200"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-glass text-text-secondary hover:text-status-occupied hover:border-status-occupied/50 transition-colors duration-200"
             title="Chiqish"
           >
             <LogOut className="h-4.5 w-4.5" />

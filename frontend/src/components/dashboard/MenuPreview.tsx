@@ -33,7 +33,7 @@ export function MenuPreview() {
           {PREVIEW_ITEMS.map((item) => (
             <div
               key={item.id}
-              className="flex items-center gap-3 p-3 rounded-lg border border-border-glass bg-background-primary transition-all duration-200 hover:border-accent-glow/50"
+              className="flex items-center gap-3 p-3 rounded-2xl border border-border-glass bg-background-primary transition-all duration-200 hover:border-accent-glow/50"
             >
               <div className="text-2xl sm:text-3xl">{item.emoji}</div>
               <div>

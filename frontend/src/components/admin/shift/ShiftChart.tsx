@@ -51,7 +51,7 @@ export default function ShiftChart() {
   const areaPath = `${linePath} L ${points[points.length - 1].x} ${paddingTop + chartHeight} L ${points[0].x} ${paddingTop + chartHeight} Z`;
 
   return (
-    <div className="glass-card border border-border-glass/40 bg-background-secondary/30 rounded-2xl p-5 space-y-4">
+    <div className="glass-card /40 /30  p-5 space-y-4">
       <div className="flex items-center justify-between">
         <div>
           <h3 className="font-heading text-sm font-bold text-text-primary">
@@ -171,7 +171,7 @@ export default function ShiftChart() {
         {/* Floating HTML Tooltip */}
         {hoveredIdx !== null && (
           <div
-            className="absolute bg-background-secondary border border-accent-glow p-2 rounded-lg text-[10px] text-text-primary shadow-xl font-bold font-heading pointer-events-none animate-in fade-in zoom-in-95 duration-100"
+            className="absolute bg-background-secondary border border-accent-glow p-2 rounded-full text-[10px] text-text-primary shadow-xl font-bold font-heading pointer-events-none animate-in fade-in zoom-in-95 duration-100"
             style={{
               left: `${((points[hoveredIdx].x - paddingLeft) / chartWidth) * 80 + 10}%`,
               top: `${(points[hoveredIdx].y / height) * 60}%`,

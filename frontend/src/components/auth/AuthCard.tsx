@@ -28,7 +28,7 @@ export function AuthCard({ title, subtitle, children, className }: AuthCardProps
         animate: "visible"
       } : {})}
       className={cn(
-        "glass-card w-full max-w-md rounded-2xl border border-border-glass p-6 shadow-lg sm:p-8",
+        "glass-card w-full max-w-md   p-6 shadow-lg sm:p-8",
         className
       )}
     >

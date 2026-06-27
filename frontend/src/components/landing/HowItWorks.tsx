@@ -78,10 +78,10 @@ export function HowItWorks() {
             <span className="gradient-text">Qanday ishlaydi?</span>
           </h2>
           
-          <div className="inline-flex rounded-full bg-background-secondary p-1 border border-border-primary mx-auto mb-6">
+          <div className="inline-flex rounded-3xl bg-background-secondary p-1 border border-border-primary mx-auto mb-6">
             <button
               onClick={() => setActiveTab("mijoz")}
-              className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${
+              className={`px-6 py-2 rounded-3xl text-sm font-bold transition-all ${
                 activeTab === "mijoz" ? "bg-accent-primary text-white shadow-md" : "text-text-secondary hover:text-text-primary"
               }`}
             >
@@ -89,7 +89,7 @@ export function HowItWorks() {
             </button>
             <button
               onClick={() => setActiveTab("klub")}
-              className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${
+              className={`px-6 py-2 rounded-3xl text-sm font-bold transition-all ${
                 activeTab === "klub" ? "bg-accent-primary text-white shadow-md" : "text-text-secondary hover:text-text-primary"
               }`}
             >

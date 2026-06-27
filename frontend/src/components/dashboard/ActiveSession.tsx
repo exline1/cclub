@@ -19,10 +19,10 @@ export function ActiveSession({ session, onEndSession }: ActiveSessionProps) {
   if (!session) return null;
 
   return (
-    <div className="rounded-xl border border-status-ending bg-status-ending/10 p-4 mb-6">
+    <div className="rounded-2xl border border-status-ending bg-status-ending/10 p-4 mb-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-status-ending/20 text-status-ending">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-status-ending/20 text-status-ending">
             <Monitor className="h-5 w-5" />
           </div>
           <div>

@@ -86,7 +86,7 @@ export default function ActivityAdminPage() {
           <button
             type="button"
             onClick={handleClearLogs}
-            className="flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-border-glass bg-background-secondary/20 text-text-secondary hover:text-status-occupied hover:border-status-occupied/50 text-xs font-bold transition-all duration-200 active:scale-95 shrink-0"
+            className="flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-2xl border border-border-glass bg-background-secondary/20 text-text-secondary hover:text-status-occupied hover:border-status-occupied/50 text-xs font-bold transition-all duration-200 active:scale-95 shrink-0"
           >
             <Trash2 className="h-4 w-4" />
             Jurnalni tozalash
@@ -95,7 +95,7 @@ export default function ActivityAdminPage() {
       </div>
 
       {/* Type filters tabs */}
-      <div className="flex flex-wrap bg-background-secondary/50 border border-border-glass/50 p-1 rounded-xl w-full sm:w-auto shrink-0 select-none">
+      <div className="flex flex-wrap bg-background-secondary/50 border border-border-glass/50 p-1 rounded-3xl w-full sm:w-auto shrink-0 select-none">
         {(["Hammasi", "pc", "order", "product", "system"] as LogTypeFilter[]).map((filter) => {
           const label =
             filter === "Hammasi"
@@ -113,7 +113,7 @@ export default function ActivityAdminPage() {
               key={filter}
               onClick={() => setSelectedFilter(filter)}
               className={cn(
-                "flex-1 sm:flex-none px-4 py-2 rounded-lg text-xs font-semibold tracking-wide transition-all active:scale-95 whitespace-nowrap",
+                "flex-1 sm:flex-none px-4 py-2 rounded-2xl text-xs font-semibold tracking-wide transition-all active:scale-95 whitespace-nowrap",
                 selectedFilter === filter
                   ? "bg-accent-primary text-white shadow-accent-glow-sm"
                   : "text-text-secondary hover:text-text-primary"
@@ -128,7 +128,7 @@ export default function ActivityAdminPage() {
       {/* Feed list */}
       <div className="space-y-3">
         {filteredLogs.length === 0 ? (
-          <div className="glass-card border border-border-glass/40 bg-background-secondary/35 p-12 text-center text-text-secondary/50 rounded-2xl">
+          <div className="glass-card /40 /35 p-12 text-center text-text-secondary/50 ">
             <ClipboardList className="h-10 w-10 mx-auto mb-2 opacity-50 stroke-1" />
             <p className="text-xs font-semibold">Tegishli yozuvlar topilmadi</p>
             <p className="text-[10px] opacity-75 mt-0.5">Hozircha jurnal tarixi bo&apos;sh turibdi.</p>

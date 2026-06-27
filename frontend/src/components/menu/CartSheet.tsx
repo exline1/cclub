@@ -58,7 +58,7 @@ export function CartSheet({
             type="button"
             onClick={onClose}
             aria-label="Yopish"
-            className="text-text-secondary hover:text-text-primary transition-colors h-8 w-8 flex items-center justify-center rounded-lg border border-border-glass/40 hover:border-accent-glow"
+            className="text-text-secondary hover:text-text-primary transition-colors h-8 w-8 flex items-center justify-center rounded-full border border-border-glass/40 hover:border-accent-glow"
           >
             <X className="h-4 w-4" />
           </button>
@@ -78,7 +78,7 @@ export function CartSheet({
             cartItems.map((item) => (
               <div
                 key={item.product.id}
-                className="flex items-center justify-between p-3 rounded-lg border border-border-glass bg-background-primary/40 gap-3"
+                className="flex items-center justify-between p-3 rounded-2xl border border-border-glass bg-background-primary/40 gap-3"
               >
                 <div className="text-2xl shrink-0">{item.product.emoji}</div>
                 <div className="flex-1 min-w-0">
@@ -91,12 +91,12 @@ export function CartSheet({
                 </div>
                 
                 {/* Quantity adjuster */}
-                <div className="flex items-center gap-1.5 bg-background-primary border border-border-glass rounded-lg p-1 shrink-0">
+                <div className="flex items-center gap-1.5 bg-background-primary border border-border-glass rounded-full p-1 shrink-0">
                   <button
                     type="button"
                     onClick={() => onUpdateQuantity(item.product.id, -1)}
                     aria-label="Kamaytirish"
-                    className="h-6 w-6 flex items-center justify-center rounded text-text-secondary hover:text-text-primary hover:bg-background-secondary transition-colors"
+                    className="h-6 w-6 flex items-center justify-center rounded-full text-text-secondary hover:text-text-primary hover:bg-background-secondary transition-colors"
                   >
                     <Minus className="h-3 w-3" />
                   </button>
@@ -107,7 +107,7 @@ export function CartSheet({
                     type="button"
                     onClick={() => onUpdateQuantity(item.product.id, 1)}
                     aria-label="Ko'paytirish"
-                    className="h-6 w-6 flex items-center justify-center rounded text-text-secondary hover:text-text-primary hover:bg-background-secondary transition-colors"
+                    className="h-6 w-6 flex items-center justify-center rounded-full text-text-secondary hover:text-text-primary hover:bg-background-secondary transition-colors"
                   >
                     <Plus className="h-3 w-3" />
                   </button>
@@ -117,7 +117,7 @@ export function CartSheet({
                 <button
                   type="button"
                   onClick={() => onRemoveItem(item.product.id)}
-                  className="text-text-secondary hover:text-status-occupied transition-colors p-1.5 rounded-lg hover:bg-status-occupied/10"
+                  className="text-text-secondary hover:text-status-occupied transition-colors p-1.5 rounded-full hover:bg-status-occupied/10"
                   aria-label="Mahsulotni o'chirish"
                 >
                   <Trash2 className="h-4 w-4" />

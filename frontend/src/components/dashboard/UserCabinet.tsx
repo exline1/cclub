@@ -13,7 +13,7 @@ interface UserCabinetProps {
 
 export function UserCabinet({ name, phone, joinDate }: UserCabinetProps) {
   return (
-    <Card className="mb-6 border-border-glass bg-background-secondary/40 glass-card">
+    <Card className="mb-6 border-border-glass /40 glass-card">
       <CardHeader className="pb-3 border-b border-border-glass/40">
         <CardTitle className="text-base sm:text-lg flex items-center gap-2 font-heading">
           <User className="h-4.5 w-4.5 text-accent-glow" />

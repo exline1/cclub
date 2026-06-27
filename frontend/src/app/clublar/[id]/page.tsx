@@ -238,7 +238,7 @@ export default function ClubProfilePage() {
                 </div>
               </div>
               
-              <Button onClick={() => handleBookingClick(club.zones[0]?.id || "")} className="h-14 px-8 rounded-xl bg-accent-primary hover:bg-accent-glow text-white font-bold text-lg shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] transition-all shrink-0">
+              <Button onClick={() => handleBookingClick(club.zones[0]?.id || "")} className="h-14 px-8 rounded-50px bg-accent-primary hover:bg-accent-glow text-white font-bold text-lg shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] transition-all shrink-0">
                 Joy band qilish
               </Button>
             </div>
@@ -259,15 +259,15 @@ export default function ClubProfilePage() {
                   <p className="text-sm text-text-secondary">Real-time ma'lumot</p>
                 </div>
                 <div className="flex flex-wrap items-center gap-4 text-sm font-semibold">
-                  <div className="flex items-center gap-2 bg-[#34D399]/10 text-[#34D399] px-4 py-2 rounded-xl border border-[#34D399]/20">
+                  <div className="flex items-center gap-2 bg-[#34D399]/10 text-[#34D399] px-4 py-2 rounded-full border border-[#34D399]/20">
                     <div className="h-2.5 w-2.5 rounded-full bg-[#34D399] animate-pulse"></div>
                     {freeCount} ta bo'sh
                   </div>
-                  <div className="flex items-center gap-2 bg-[#ef4444]/10 text-[#ef4444] px-4 py-2 rounded-xl border border-[#ef4444]/20">
+                  <div className="flex items-center gap-2 bg-[#ef4444]/10 text-[#ef4444] px-4 py-2 rounded-full border border-[#ef4444]/20">
                     <div className="h-2.5 w-2.5 rounded-full bg-[#ef4444]"></div>
                     {occupiedCount} ta band
                   </div>
-                  <div className="px-4 py-2 bg-background-tertiary rounded-xl border border-border-primary text-text-primary">
+                  <div className="px-4 py-2 bg-background-tertiary rounded-full border border-border-primary text-text-primary">
                     Jami: {totalComputers} ta
                   </div>
                 </div>
@@ -355,7 +355,7 @@ export default function ClubProfilePage() {
                         key={cat}
                         onClick={() => setCategory(cat as any)}
                         className={cn(
-                          "px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-colors",
+                          "px-4 py-2 rounded-2xl text-sm font-semibold whitespace-nowrap transition-colors",
                           category === cat 
                             ? "bg-accent-primary text-white" 
                             : "bg-background-tertiary text-text-secondary hover:text-text-primary"
@@ -448,7 +448,7 @@ export default function ClubProfilePage() {
                       value={reviewText}
                       onChange={(e) => setReviewText(e.target.value)}
                       placeholder="Klub haqida fikringizni yozing..."
-                      className="w-full bg-background-tertiary border border-border-primary rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-all resize-none mb-4"
+                      className="w-full bg-background-tertiary border border-border-primary rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-accent-primary focus:ring-1 focus:ring-accent-primary transition-all resize-none mb-4"
                       rows={4}
                     />
                     <Button type="submit" className="w-full h-12 bg-accent-primary hover:bg-accent-glow transition-all">
@@ -472,7 +472,7 @@ export default function ClubProfilePage() {
                 </h3>
                 <p className="text-text-secondary text-sm mb-2">{club.viloyat}, {club.tuman}</p>
                 <p className="font-medium mb-4">{club.address}</p>
-                <div className="w-full h-40 bg-background-tertiary rounded-xl flex items-center justify-center border border-border-primary text-text-secondary text-sm">
+                <div className="w-full h-40 bg-background-tertiary rounded-50px flex items-center justify-center border border-border-primary text-text-secondary text-sm">
                   Karta bu yerda bo'ladi
                 </div>
               </MotionDiv>
@@ -486,7 +486,7 @@ export default function ClubProfilePage() {
       {/* Floating Cart Widget */}
       {cartItemsCount > 0 && !isBarModalOpen && (
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 animate-in slide-in-from-bottom-10 fade-in w-[90%] max-w-sm">
-          <div className="bg-background-secondary border border-border-primary shadow-2xl rounded-2xl p-4 flex items-center justify-between">
+          <div className="bg-background-secondary border border-border-primary shadow-2xl rounded-3xl p-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="h-10 w-10 bg-accent-primary/20 text-accent-primary rounded-full flex items-center justify-center relative">
                 <ShoppingCart className="h-5 w-5" />
@@ -525,7 +525,7 @@ export default function ClubProfilePage() {
                 animate: "visible",
                 exit: "hidden"
               } : {})}
-              className="glass-card rounded-3xl p-6 md:p-8 w-full max-w-md shadow-2xl relative flex flex-col max-h-[90vh]"
+              className="glass-card  p-6 md:p-8 w-full max-w-md shadow-2xl relative flex flex-col max-h-[90vh]"
             >
               <button 
                 onClick={() => setIsBarModalOpen(false)}
@@ -540,17 +540,17 @@ export default function ClubProfilePage() {
               
               <div className="overflow-y-auto pr-2 flex-grow mb-6 space-y-4 hide-scrollbar">
                 {cart.map(item => (
-                  <div key={item.product.id} className="flex justify-between items-center bg-background-tertiary p-3 rounded-xl border border-border-primary">
+                  <div key={item.product.id} className="flex justify-between items-center bg-background-tertiary p-3 rounded-2xl border border-border-primary">
                     <div>
                       <h4 className="font-bold text-sm">{item.product.name}</h4>
                       <p className="text-xs text-text-secondary">{item.product.price.toLocaleString()} so'm x {item.quantity}</p>
                     </div>
                     <div className="flex items-center gap-3">
-                      <button onClick={() => updateQuantity(item.product.id, -1)} className="h-7 w-7 bg-background-secondary border border-border-primary rounded-md flex items-center justify-center hover:text-accent-primary transition-colors">
+                      <button onClick={() => updateQuantity(item.product.id, -1)} className="h-7 w-7 bg-background-secondary border border-border-primary rounded-full flex items-center justify-center hover:text-accent-primary transition-colors">
                         <Minus className="h-3 w-3" />
                       </button>
                       <span className="font-semibold text-sm w-4 text-center">{item.quantity}</span>
-                      <button onClick={() => updateQuantity(item.product.id, 1)} className="h-7 w-7 bg-background-secondary border border-border-primary rounded-md flex items-center justify-center hover:text-accent-primary transition-colors">
+                      <button onClick={() => updateQuantity(item.product.id, 1)} className="h-7 w-7 bg-background-secondary border border-border-primary rounded-full flex items-center justify-center hover:text-accent-primary transition-colors">
                         <Plus className="h-3 w-3" />
                       </button>
                     </div>
@@ -571,10 +571,10 @@ export default function ClubProfilePage() {
                     placeholder="Masalan: 12"
                     value={barComputerNumber}
                     onChange={(e) => setBarComputerNumber(e.target.value)}
-                    className="w-full bg-background-tertiary border border-border-primary rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-accent-primary"
+                    className="w-full bg-background-tertiary border border-border-primary rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-accent-primary"
                   />
                 </div>
-                <Button type="submit" className="w-full h-12 bg-accent-primary hover:bg-accent-glow text-white font-bold rounded-xl transition-all shadow-accent-glow-sm">
+                <Button type="submit" className="w-full h-12 bg-accent-primary hover:bg-accent-glow text-white font-bold  transition-all shadow-accent-glow-sm">
                   Buyurtmani yuborish
                 </Button>
               </form>
@@ -602,7 +602,7 @@ export default function ClubProfilePage() {
                 animate: "visible",
                 exit: "hidden"
               } : {})}
-              className="glass-card rounded-3xl p-6 md:p-8 w-full max-w-2xl shadow-2xl relative flex flex-col max-h-[90vh]"
+              className="glass-card  p-6 md:p-8 w-full max-w-2xl shadow-2xl relative flex flex-col max-h-[90vh]"
             >
               <button 
                 onClick={() => setIsModalOpen(false)}
@@ -659,7 +659,7 @@ export default function ClubProfilePage() {
                           disabled={comp.status !== "free"}
                           onClick={() => setSelectedComputer(comp)}
                           className={cn(
-                            "relative aspect-square rounded-xl border-2 flex flex-col items-center justify-center gap-1 transition-all",
+                            "relative aspect-square rounded-2xl border-2 flex flex-col items-center justify-center gap-1 transition-all",
                             comp.status === "free" 
                               ? selectedComputer?.id === comp.id 
                                 ? "border-accent-primary bg-accent-primary/10 shadow-[0_0_15px_rgba(99,102,241,0.3)]" 
@@ -677,7 +677,7 @@ export default function ClubProfilePage() {
                           </span>
                           
                           {comp.status === "ending" && comp.endsIn && (
-                            <div className="absolute -bottom-2 bg-background-secondary border border-border-primary rounded-md px-1.5 py-0.5 text-[10px] font-bold text-[#f59e0b] shadow-sm flex items-center gap-1 whitespace-nowrap z-10">
+                            <div className="absolute -bottom-2 bg-background-secondary border border-border-primary rounded-full px-1.5 py-0.5 text-[10px] font-bold text-[#f59e0b] shadow-sm flex items-center gap-1 whitespace-nowrap z-10">
                               <Clock className="h-2.5 w-2.5" />
                               ~{comp.endsIn}m
                             </div>
@@ -686,7 +686,7 @@ export default function ClubProfilePage() {
                       ))}
                     </div>
 
-                    <div className="flex flex-wrap gap-4 text-xs font-medium bg-background-tertiary p-3 rounded-xl border border-border-primary">
+                    <div className="flex flex-wrap gap-4 text-xs font-medium bg-background-tertiary p-3 rounded-2xl border border-border-primary">
                       <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded-full bg-[#34D399]"></div> Bo'sh</div>
                       <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded-full bg-[#ef4444]"></div> Band</div>
                       <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded-full bg-[#f59e0b]"></div> Vaqti tugayapti</div>
@@ -714,7 +714,7 @@ export default function ClubProfilePage() {
                     } : {})}
                     className={cn("space-y-6", !shouldAnimate && "animate-in slide-in-from-right-4")}
                   >
-                    <div className="bg-background-tertiary p-4 rounded-xl border border-border-primary mb-4 flex justify-between items-center">
+                    <div className="bg-background-tertiary p-4 rounded-2xl border border-border-primary mb-4 flex justify-between items-center">
                       <div>
                         <p className="text-sm text-text-secondary mb-1">Tanlangan kompyuter</p>
                         <p className="font-bold text-lg">{selectedComputer.number}-kompyuter ({club.zones.find(z=>z.id===selectedZone)?.name})</p>
@@ -734,7 +734,7 @@ export default function ClubProfilePage() {
                             type="button"
                             onClick={() => setDuration(h)}
                             className={cn(
-                              "h-12 rounded-xl border font-semibold transition-all",
+                              "h-12 rounded-2xl border font-semibold transition-all",
                               duration === h 
                                 ? "border-accent-primary bg-accent-primary/10 text-accent-primary" 
                                 : "border-border-primary bg-background-secondary text-text-primary hover:border-text-secondary"
@@ -752,13 +752,13 @@ export default function ClubProfilePage() {
                           placeholder="Masalan: 5"
                           value={duration}
                           onChange={(e) => setDuration(e.target.value ? Number(e.target.value) : "")}
-                          className="w-full bg-background-tertiary border border-border-primary rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-accent-primary"
+                          className="w-full bg-background-tertiary border border-border-primary rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-accent-primary"
                         />
                       </div>
                     </div>
 
                     {duration && (
-                      <div className="bg-accent-primary/10 border border-accent-primary/20 rounded-xl p-4 flex justify-between items-center">
+                      <div className="bg-accent-primary/10 border border-accent-primary/20 rounded-2xl p-4 flex justify-between items-center">
                         <span className="font-medium text-text-primary">Jami summa:</span>
                         <span className="font-bold text-xl text-accent-primary">{(selectedComputer.hourlyRate * Number(duration)).toLocaleString()} so'm</span>
                       </div>
@@ -818,7 +818,7 @@ export default function ClubProfilePage() {
                           placeholder="Masalan: Azamat"
                           value={userName}
                           onChange={(e) => setUserName(e.target.value)}
-                          className="w-full bg-background-tertiary border border-border-primary rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-accent-primary"
+                          className="w-full bg-background-tertiary border border-border-primary rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-accent-primary"
                         />
                         <p className="text-xs text-text-secondary mt-2 flex items-center gap-1">
                           <Info className="h-3.5 w-3.5" />
@@ -830,7 +830,7 @@ export default function ClubProfilePage() {
                         <Button type="button" variant="outline" onClick={() => setStep(2)} className="h-14 px-6 border-border-primary flex-shrink-0">
                           Orqaga
                         </Button>
-                        <Button type="submit" className="w-full h-14 bg-accent-primary hover:bg-accent-glow text-white font-bold text-lg rounded-xl transition-all shadow-accent-glow-sm flex items-center justify-center gap-2">
+                        <Button type="submit" className="w-full h-14 bg-accent-primary hover:bg-accent-glow text-white font-bold text-lg  transition-all shadow-accent-glow-sm flex items-center justify-center gap-2">
                           <CheckCircle2 className="h-5 w-5" />
                           Tasdiqlash
                         </Button>
@@ -864,7 +864,7 @@ export default function ClubProfilePage() {
                 animate: "visible",
                 exit: "hidden"
               } : {})}
-              className="glass-card rounded-3xl p-6 md:p-8 w-full max-w-sm shadow-2xl relative flex flex-col items-center text-center"
+              className="glass-card  p-6 md:p-8 w-full max-w-sm shadow-2xl relative flex flex-col items-center text-center"
             >
               <button 
                 onClick={() => setIsAuthModalOpen(false)}
@@ -883,12 +883,12 @@ export default function ClubProfilePage() {
               </p>
               
               <div className="flex flex-col gap-3 w-full">
-                <Button asChild className="w-full bg-accent-primary hover:bg-accent-glow text-white h-12 rounded-xl">
+                <Button asChild className="w-full bg-accent-primary hover:bg-accent-glow text-white h-12 ">
                   <Link href={`/login?returnUrl=/clublar/${id}`}>
                     Kirish
                   </Link>
                 </Button>
-                <Button asChild variant="outline" className="w-full border-border-primary text-text-primary h-12 rounded-xl hover:bg-background-tertiary">
+                <Button asChild variant="outline" className="w-full border-border-primary text-text-primary h-12  hover:bg-background-tertiary">
                   <Link href="/royxatdan-otish/mijoz">
                     Ro&apos;yxatdan o&apos;tish
                   </Link>

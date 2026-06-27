@@ -16,7 +16,7 @@ export function QuickActions({ onOpenBooking, hasActiveSession }: QuickActionsPr
       {/* Book seat card */}
       <Card className="hover:border-accent-glow hover:-translate-y-1 transition-all duration-300">
         <CardHeader className="pb-2">
-          <div className="mb-2 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent-deep text-accent-glow">
+          <div className="mb-2 inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent-deep text-accent-glow">
             <Gamepad2 className="h-5 w-5" />
           </div>
           <CardTitle className="text-base sm:text-lg">Joy band qilish</CardTitle>
@@ -38,7 +38,7 @@ export function QuickActions({ onOpenBooking, hasActiveSession }: QuickActionsPr
       {/* Bar Menu Card */}
       <Card className="hover:border-accent-glow hover:-translate-y-1 transition-all duration-300">
         <CardHeader className="pb-2">
-          <div className="mb-2 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent-deep text-accent-glow">
+          <div className="mb-2 inline-flex h-10 w-10 items-center justify-center rounded-full bg-accent-deep text-accent-glow">
             <Coffee className="h-5 w-5" />
           </div>
           <CardTitle className="text-base sm:text-lg">Bar menyu</CardTitle>

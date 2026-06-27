@@ -28,7 +28,7 @@ export default function OrderColumn({
   const isDelivered = status === "delivered";
 
   return (
-    <div className="flex flex-col bg-background-secondary/10 border border-border-glass/20 rounded-2xl p-4 sm:p-5 flex-1 min-h-[50vh] space-y-4">
+    <div className="flex flex-col bg-background-secondary/10 border border-border-glass/20 rounded-3xl p-4 sm:p-5 flex-1 min-h-[50vh] space-y-4">
       {/* Column Header */}
       <div
         className={cn(

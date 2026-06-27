@@ -44,7 +44,7 @@ export function OrderHistory({ orders }: OrderHistoryProps) {
             {orders.map((order) => (
               <div
                 key={order.id}
-                className="p-4.5 rounded-xl border border-border-glass bg-background-primary/40 space-y-3"
+                className="p-4.5 rounded-2xl border border-border-glass bg-background-primary/40 space-y-3"
               >
                 {/* Order header */}
                 <div className="flex items-center justify-between text-xs sm:text-sm">

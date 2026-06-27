@@ -332,7 +332,7 @@ function ComputersAdminContent() {
         </div>
 
         {/* Stats Summary Widget */}
-        <div className="flex flex-wrap gap-2 sm:gap-3 bg-background-secondary/40 border border-border-glass/40 rounded-xl p-2 sm:p-3 glass-card">
+        <div className="flex flex-wrap gap-2 sm:gap-3 /40 /40  p-2 sm:p-3 glass-card">
           <div className="px-3 py-1 flex items-center gap-1.5 border-r border-border-glass/30">
             <span className="h-2 w-2 rounded-full bg-status-occupied" />
             <span className="text-xs text-text-secondary">
@@ -357,13 +357,13 @@ function ComputersAdminContent() {
       {/* Control Bars: Filters and Search */}
       <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
         {/* Zone Filters Tab Buttons */}
-        <div className="flex bg-background-secondary/50 border border-border-glass/50 p-1 rounded-xl w-full md:w-auto shrink-0 select-none">
+        <div className="flex bg-background-secondary/50 border border-border-glass/50 p-1 rounded-3xl w-full md:w-auto shrink-0 select-none">
           {(["Hammasi", "Standard", "VIP", "PS5"] as ZoneFilter[]).map((zone) => (
             <button
               key={zone}
               onClick={() => setSelectedZone(zone)}
               className={cn(
-                "flex-1 md:flex-none px-4 py-2 rounded-lg text-xs font-semibold tracking-wide transition-all active:scale-95",
+                "flex-1 md:flex-none px-4 py-2 rounded-2xl text-xs font-semibold tracking-wide transition-all active:scale-95",
                 selectedZone === zone
                   ? "bg-accent-primary text-white shadow-accent-glow-sm"
                   : "text-text-secondary hover:text-text-primary"
@@ -382,13 +382,13 @@ function ComputersAdminContent() {
             placeholder="Raqam yoki mijoz bo'yicha..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-background-secondary/30 border border-border-glass/65 rounded-xl pl-9 pr-4 py-2.5 text-xs text-text-primary placeholder:text-text-secondary/50 focus:outline-none focus:border-accent-glow transition-all"
+            className="w-full bg-background-secondary/30 border border-border-glass/65 rounded-2xl pl-9 pr-4 py-2.5 text-xs text-text-primary placeholder:text-text-secondary/50 focus:outline-none focus:border-accent-glow transition-all"
           />
         </div>
       </div>
 
       {statusParam && (
-        <div className="flex items-center justify-between bg-status-ending/10 border border-status-ending/30 text-status-ending px-4 py-3 rounded-xl text-xs font-semibold">
+        <div className="flex items-center justify-between bg-status-ending/10 border border-status-ending/30 text-status-ending px-4 py-3 rounded-2xl text-xs font-semibold">
           <div className="flex items-center gap-2">
             <AlertTriangle className="h-4 w-4" />
             <span>Faqat tugash arafasidagi kompyuterlar ko&apos;rsatilmoqda (Status: {statusParam})</span>
@@ -397,7 +397,7 @@ function ComputersAdminContent() {
             onClick={() => {
               router.push("/admin/computers");
             }}
-            className="text-[10px] font-bold text-status-ending uppercase bg-status-ending/10 hover:bg-status-ending/20 px-2 py-1 rounded transition-all"
+            className="text-[10px] font-bold text-status-ending uppercase bg-status-ending/10 hover:bg-status-ending/20 px-2 py-1 rounded-full transition-all"
           >
             Filtrni tozalash
           </button>
@@ -423,7 +423,7 @@ function ComputersAdminContent() {
                   <h3 className="font-heading text-sm font-bold text-text-primary tracking-wide">
                     {zone.label}
                   </h3>
-                  <span className="text-[10px] bg-background-primary border border-border-glass/50 px-1.5 py-0.5 rounded text-text-secondary font-bold">
+                  <span className="text-[10px] bg-background-primary border border-border-glass/50 px-1.5 py-0.5 rounded-full text-text-secondary font-bold">
                     {zoneComputers.length} ta PC
                   </span>
                 </div>
@@ -451,7 +451,7 @@ function ComputersAdminContent() {
               <h3 className="font-heading text-sm font-bold text-text-primary tracking-wide">
                 {selectedZone} Zona
               </h3>
-              <span className="text-[10px] bg-background-primary border border-border-glass/50 px-1.5 py-0.5 rounded text-text-secondary font-bold">
+              <span className="text-[10px] bg-background-primary border border-border-glass/50 px-1.5 py-0.5 rounded-full text-text-secondary font-bold">
                 {filteredComputers.length} ta PC
               </span>
             </div>

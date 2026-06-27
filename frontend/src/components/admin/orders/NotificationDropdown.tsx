@@ -115,7 +115,7 @@ export default function NotificationDropdown() {
         type="button"
         onClick={handleToggle}
         className={cn(
-          "relative p-2 rounded-lg border border-border-glass/40 bg-background-secondary/30 hover:border-accent-glow hover:text-accent-glow hover:bg-background-primary transition-all duration-200 active:scale-95",
+          "relative p-2 rounded-full border border-border-glass/40 bg-background-secondary/30 hover:border-accent-glow hover:text-accent-glow hover:bg-background-primary transition-all duration-200 active:scale-95",
           isOpen && "border-accent-glow text-accent-glow bg-background-primary"
         )}
       >
@@ -129,7 +129,7 @@ export default function NotificationDropdown() {
 
       {/* Dropdown Card */}
       {isOpen && (
-        <div className="absolute right-0 mt-2.5 w-80 sm:w-96 rounded-xl border border-border-glass bg-background-secondary p-4 shadow-2xl z-50 flex flex-col max-h-[80vh] animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="absolute right-0 mt-2.5 w-80 sm:w-96 rounded-2xl border border-border-glass bg-background-secondary p-4 shadow-2xl z-50 flex flex-col max-h-[80vh] animate-in fade-in slide-in-from-top-2 duration-200">
           {/* Header */}
           <div className="flex items-center justify-between border-b border-border-glass/40 pb-2 mb-3">
             <span className="font-heading text-xs sm:text-sm font-bold text-text-primary">
@@ -164,14 +164,14 @@ export default function NotificationDropdown() {
                   <div
                     key={item.id}
                     className={cn(
-                      "flex gap-3 p-3 rounded-lg border border-border-glass/30 bg-background-primary/40 hover:border-accent-glow/40 transition-colors",
+                      "flex gap-3 p-3 rounded-2xl border border-border-glass/30 bg-background-primary/40 hover:border-accent-glow/40 transition-colors",
                       !item.isRead && "border-accent-glow/30 bg-accent-deep/5"
                     )}
                   >
                     {/* Icon matching Type */}
                     <div
                       className={cn(
-                        "h-8 w-8 rounded-lg shrink-0 flex items-center justify-center text-xs",
+                        "h-8 w-8 rounded-full shrink-0 flex items-center justify-center text-xs",
                         isOrder
                           ? "bg-status-free/10 text-status-free"
                           : isPc

@@ -8,15 +8,23 @@ export interface InputProps
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
     return (
-      <input
-        type={type}
+      <div
         className={cn(
-          "flex h-11 w-full rounded-full border border-border-glass bg-background-secondary px-4 py-2 text-sm text-text-primary transition-all duration-200 placeholder:text-text-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-primary disabled:cursor-not-allowed disabled:opacity-50",
+          "glass rounded-2xl flex h-11 w-full items-center px-4 transition-all duration-200 focus-within:ring-2 focus-within:ring-accent-glow focus-within:border-accent-glow",
           className
         )}
-        ref={ref}
-        {...props}
-      />
+      >
+        <input
+          type={type}
+          className={cn(
+            "w-full h-full bg-transparent py-2 text-sm text-text-primary placeholder:text-text-secondary focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+            className?.includes("text-center") && "text-center",
+            className?.includes("text-right") && "text-right"
+          )}
+          ref={ref}
+          {...props}
+        />
+      </div>
     );
   }
 );

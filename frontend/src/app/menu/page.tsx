@@ -161,7 +161,7 @@ function MenuContent() {
           <button
             type="button"
             onClick={() => setIsCartOpen(true)}
-            className="relative inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border-glass text-text-secondary hover:text-accent-glow hover:border-accent-glow transition-all duration-200 active:scale-95"
+            className="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-border-glass text-text-secondary hover:text-accent-glow hover:border-accent-glow transition-all duration-200 active:scale-95"
             aria-label="Savat"
           >
             <ShoppingCart className="h-4.5 w-4.5" />

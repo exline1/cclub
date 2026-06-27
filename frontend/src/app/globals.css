@@ -32,6 +32,28 @@
 }
 
 @layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15); /* ВЕРХНИЙ БЛИК */
+    border-radius: 50px;
+  }
+
+  .glass-hover {
+    @apply glass transition-all duration-300;
+  }
+  .glass-hover:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 
+      0 8px 48px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  }
+
   .glass-nav {
     background: var(--bg-glass);
     backdrop-filter: blur(8px);
@@ -39,8 +61,7 @@
   }
 
   .glass-card {
-    /* Fallback to standard solid background style on mobile */
-    @apply bg-background-secondary border border-border-primary shadow-none rounded-[50px];
+    @apply glass;
   }
 
   .gradient-text {
@@ -61,7 +82,7 @@
     backdrop-filter: blur(24px) !important;
     -webkit-backdrop-filter: blur(24px) !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
     border-radius: 50px !important;
   }
 

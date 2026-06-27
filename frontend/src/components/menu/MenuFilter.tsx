@@ -23,7 +23,7 @@ export function MenuFilter({ activeCategory, onChangeCategory }: MenuFilterProps
           type="button"
           onClick={() => onChangeCategory(cat.id)}
           className={cn(
-            "rounded-lg px-4 py-2 text-xs font-bold transition-all duration-200 border whitespace-nowrap active:scale-95",
+            "rounded-2xl px-4 py-2 text-xs font-bold transition-all duration-200 border whitespace-nowrap active:scale-95",
             activeCategory === cat.id
               ? "bg-accent-primary border-accent-glow text-white shadow-accent-glow-sm"
               : "bg-background-secondary border-border-glass text-text-secondary hover:text-text-primary hover:border-accent-glow/50"

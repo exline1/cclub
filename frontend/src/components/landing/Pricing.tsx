@@ -136,7 +136,7 @@ export function Pricing() {
                   asChild
                   variant={plan.recommended ? "default" : "outline"} 
                   className={cn(
-                    "w-full h-12 rounded-xl transition-all",
+                    "w-full h-12 rounded-50px transition-all",
                     plan.recommended 
                       ? "bg-accent-primary hover:bg-accent-glow text-white border-0 shadow-accent-glow-sm" 
                       : "border-border-primary hover:bg-background-tertiary"

@@ -101,7 +101,7 @@ export default function ProductFormModal({
       />
 
       {/* Modal Container */}
-      <div className="relative glass-card w-full max-w-md rounded-2xl border border-border-glass bg-background-secondary p-6 shadow-2xl z-10 overflow-hidden max-h-[90vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
+      <div className="relative glass-card w-full max-w-md    p-6 shadow-2xl z-10 overflow-hidden max-h-[90vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
         
         {/* Header */}
         <div className="flex items-center justify-between border-b border-border-glass/40 pb-3 mb-4 shrink-0">
@@ -117,7 +117,7 @@ export default function ProductFormModal({
             type="button"
             onClick={onClose}
             aria-label="Yopish"
-            className="text-text-secondary hover:text-text-primary transition-colors h-8 w-8 flex items-center justify-center rounded-lg border border-border-glass/40 hover:border-accent-glow"
+            className="text-text-secondary hover:text-text-primary transition-colors h-8 w-8 flex items-center justify-center rounded-full border border-border-glass/40 hover:border-accent-glow"
           >
             <X className="h-4 w-4" />
           </button>
@@ -136,7 +136,7 @@ export default function ProductFormModal({
               placeholder="Masalan, Coca-Cola 0.5L"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className={`w-full bg-background-primary border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:ring-1 focus:ring-accent-glow transition-all ${
+              className={`w-full bg-background-primary border rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:ring-1 focus:ring-accent-glow transition-all ${
                 errors.name ? "border-status-occupied" : "border-border-glass/60"
               }`}
             />
@@ -156,7 +156,7 @@ export default function ProductFormModal({
               id="prod-cat"
               value={category}
               onChange={(e) => setCategory(e.target.value as Product["category"])}
-              className="w-full bg-background-primary border border-border-glass/60 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:ring-1 focus:ring-accent-glow transition-all"
+              className="w-full bg-background-primary border border-border-glass/60 rounded-2xl px-3 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:ring-1 focus:ring-accent-glow transition-all"
             >
               <option value="drink">Ichimlik</option>
               <option value="snack">Snack</option>
@@ -177,7 +177,7 @@ export default function ProductFormModal({
                 placeholder="Narxini kiriting"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
-                className={`w-full bg-background-primary border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:ring-1 focus:ring-accent-glow transition-all ${
+                className={`w-full bg-background-primary border rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:ring-1 focus:ring-accent-glow transition-all ${
                   errors.price ? "border-status-occupied" : "border-border-glass/60"
                 }`}
               />
@@ -200,7 +200,7 @@ export default function ProductFormModal({
                 placeholder="Qancha mavjud"
                 value={stock}
                 onChange={(e) => setStock(e.target.value)}
-                className={`w-full bg-background-primary border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:ring-1 focus:ring-accent-glow transition-all ${
+                className={`w-full bg-background-primary border rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-text-primary focus:outline-none focus:ring-1 focus:ring-accent-glow transition-all ${
                   errors.stock ? "border-status-occupied" : "border-border-glass/60"
                 }`}
               />
@@ -224,7 +224,7 @@ export default function ProductFormModal({
                 placeholder="Rasmning internetdagi manzili..."
                 value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.value)}
-                className="w-full bg-background-primary border border-border-glass/60 rounded-xl pl-9 pr-4 py-2.5 text-xs text-text-primary focus:outline-none focus:ring-1 focus:ring-accent-glow transition-all"
+                className="w-full bg-background-primary border border-border-glass/60 rounded-2xl pl-9 pr-4 py-2.5 text-xs text-text-primary focus:outline-none focus:ring-1 focus:ring-accent-glow transition-all"
               />
               <ImageIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-secondary/60" />
             </div>
@@ -238,13 +238,13 @@ export default function ProductFormModal({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 py-2.5 px-4 rounded-xl bg-background-primary border border-border-glass hover:border-accent-glow/50 text-text-secondary hover:text-text-primary transition-all duration-200 text-xs font-bold active:scale-95"
+              className="flex-1 py-2.5 px-4 rounded-2xl bg-background-primary border border-border-glass hover:border-accent-glow/50 text-text-secondary hover:text-text-primary transition-all duration-200 text-xs font-bold active:scale-95"
             >
               Bekor qilish
             </button>
             <button
               type="submit"
-              className="flex-1 py-2.5 px-4 rounded-xl bg-accent-glow hover:bg-accent-glow/90 text-white font-bold transition-all duration-200 text-xs flex items-center justify-center gap-1.5 active:scale-95 shadow-lg shadow-accent-glow/10"
+              className="flex-1 py-2.5 px-4 rounded-2xl bg-accent-glow hover:bg-accent-glow/90 text-white font-bold transition-all duration-200 text-xs flex items-center justify-center gap-1.5 active:scale-95 shadow-lg shadow-accent-glow/10"
             >
               <Save className="h-4 w-4" />
               Saqlash

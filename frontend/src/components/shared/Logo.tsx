@@ -22,7 +22,7 @@ export function Logo({
 }: LogoProps) {
   const content = (
     <div className={cn("flex items-center gap-2.5", className)}>
-      <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-lg sm:h-11 sm:w-11">
+      <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full sm:h-11 sm:w-11">
         <Image
           src={IMAGE_PATHS.logo}
           alt="cclub logotipi"

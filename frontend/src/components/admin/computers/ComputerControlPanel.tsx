@@ -137,7 +137,7 @@ export default function ComputerControlPanel({
             type="button"
             onClick={onClose}
             aria-label="Yopish"
-            className="text-text-secondary hover:text-text-primary transition-colors h-8 w-8 flex items-center justify-center rounded-lg border border-border-glass/40 hover:border-accent-glow"
+            className="text-text-secondary hover:text-text-primary transition-colors h-8 w-8 flex items-center justify-center rounded-full border border-border-glass/40 hover:border-accent-glow"
           >
             <X className="h-4 w-4" />
           </button>
@@ -146,12 +146,12 @@ export default function ComputerControlPanel({
         {/* Content Section */}
         <div className="flex-1 overflow-y-auto pr-1 space-y-6">
           {/* Status Details */}
-          <div className="glass-card bg-background-primary/50 border border-border-glass/40 rounded-xl p-4 space-y-3">
+          <div className="glass-card bg-background-primary/50 /40  p-4 space-y-3">
             <div className="flex justify-between items-center text-xs">
               <span className="text-text-secondary">Holati:</span>
               <span
                 className={cn(
-                  "px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider",
+                  "px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider",
                   computer.status === "free"
                     ? "bg-status-free/10 text-status-free border border-status-free/20"
                     : computer.status === "occupied"
@@ -203,7 +203,7 @@ export default function ComputerControlPanel({
                     placeholder="Mijoz ismini kiriting..."
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
-                    className="w-full bg-background-primary border border-border-glass/60 rounded-xl px-4 py-2.5 text-sm text-text-primary placeholder:text-text-secondary/50 focus:outline-none focus:border-accent-glow transition-all"
+                    className="w-full bg-background-primary border border-border-glass/60 rounded-2xl px-4 py-2.5 text-sm text-text-primary placeholder:text-text-secondary/50 focus:outline-none focus:border-accent-glow transition-all"
                   />
                 </div>
               </div>
@@ -221,7 +221,7 @@ export default function ComputerControlPanel({
                       setIsCustomMode(false);
                     }}
                     className={cn(
-                      "py-2 px-1 rounded-xl text-xs font-bold border transition-all duration-200 flex flex-col items-center justify-center gap-0.5",
+                      "py-2 px-1 rounded-2xl text-xs font-bold border transition-all duration-200 flex flex-col items-center justify-center gap-0.5",
                       selectedDuration === 1800 && !isCustomMode
                         ? "border-accent-glow bg-accent-primary text-white shadow-accent-glow-sm"
                         : "border-border-glass bg-background-primary text-text-secondary hover:border-accent-glow/50 hover:text-text-primary"
@@ -239,7 +239,7 @@ export default function ComputerControlPanel({
                       setIsCustomMode(false);
                     }}
                     className={cn(
-                      "py-2 px-1 rounded-xl text-xs font-bold border transition-all duration-200 flex flex-col items-center justify-center gap-0.5",
+                      "py-2 px-1 rounded-2xl text-xs font-bold border transition-all duration-200 flex flex-col items-center justify-center gap-0.5",
                       selectedDuration === 3600 && !isCustomMode
                         ? "border-accent-glow bg-accent-primary text-white shadow-accent-glow-sm"
                         : "border-border-glass bg-background-primary text-text-secondary hover:border-accent-glow/50 hover:text-text-primary"
@@ -257,7 +257,7 @@ export default function ComputerControlPanel({
                       setIsCustomMode(false);
                     }}
                     className={cn(
-                      "py-2 px-1 rounded-xl text-xs font-bold border transition-all duration-200 flex flex-col items-center justify-center gap-0.5",
+                      "py-2 px-1 rounded-2xl text-xs font-bold border transition-all duration-200 flex flex-col items-center justify-center gap-0.5",
                       selectedDuration === 7200 && !isCustomMode
                         ? "border-accent-glow bg-accent-primary text-white shadow-accent-glow-sm"
                         : "border-border-glass bg-background-primary text-text-secondary hover:border-accent-glow/50 hover:text-text-primary"
@@ -275,7 +275,7 @@ export default function ComputerControlPanel({
                       setIsCustomMode(false);
                     }}
                     className={cn(
-                      "py-2 px-1 rounded-xl text-xs font-bold border transition-all duration-200 flex flex-col items-center justify-center gap-0.5",
+                      "py-2 px-1 rounded-2xl text-xs font-bold border transition-all duration-200 flex flex-col items-center justify-center gap-0.5",
                       selectedDuration === 10800 && !isCustomMode
                         ? "border-accent-glow bg-accent-primary text-white shadow-accent-glow-sm"
                         : "border-border-glass bg-background-primary text-text-secondary hover:border-accent-glow/50 hover:text-text-primary"
@@ -292,7 +292,7 @@ export default function ComputerControlPanel({
                   type="button"
                   onClick={() => setIsCustomMode(true)}
                   className={cn(
-                    "w-full py-2.5 rounded-xl text-xs font-bold border transition-all duration-200",
+                    "w-full py-2.5 rounded-2xl text-xs font-bold border transition-all duration-200",
                     isCustomMode
                       ? "border-accent-glow bg-accent-primary text-white shadow-accent-glow-sm"
                       : "border-border-glass bg-background-primary text-text-secondary hover:border-accent-glow/50 hover:text-text-primary"
@@ -310,14 +310,14 @@ export default function ComputerControlPanel({
                       value={customMinutes}
                       onChange={(e) => setCustomMinutes(e.target.value)}
                       required
-                      className="w-full bg-background-primary border border-accent-glow/55 rounded-xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:ring-1 focus:ring-accent-glow transition-all"
+                      className="w-full bg-background-primary border border-accent-glow/55 rounded-2xl px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:ring-1 focus:ring-accent-glow transition-all"
                     />
                   </div>
                 )}
               </div>
 
               {/* Pricing Summary */}
-              <div className="rounded-xl bg-background-primary border border-border-glass/40 p-4 mt-4 flex items-center justify-between">
+              <div className="rounded-2xl bg-background-primary border border-border-glass/40 p-4 mt-4 flex items-center justify-between">
                 <span className="text-xs text-text-secondary">Jami hisob:</span>
                 <span className="font-heading text-sm font-bold text-accent-glow">
                   {(() => {
@@ -336,7 +336,7 @@ export default function ComputerControlPanel({
               {/* Start Trigger Button */}
               <button
                 type="submit"
-                className="w-full bg-status-free hover:bg-status-free/90 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 active:scale-95 shadow-lg shadow-status-free/10 text-sm mt-6"
+                className="w-full bg-status-free hover:bg-status-free/90 text-white font-bold py-3 px-4 rounded-2xl flex items-center justify-center gap-2 transition-all duration-200 active:scale-95 shadow-lg shadow-status-free/10 text-sm mt-6"
               >
                 <Play className="h-4.5 w-4.5 fill-current" />
                 START (Ishga tushirish)
@@ -354,7 +354,7 @@ export default function ComputerControlPanel({
                   <button
                     type="button"
                     onClick={() => onAddTime(computer.id, 900)} // +15 min
-                    className="py-2 px-1 rounded-xl border border-border-glass bg-background-primary text-text-primary hover:border-accent-glow/60 hover:bg-accent-deep/10 text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all duration-200"
+                    className="py-2 px-1 rounded-2xl border border-border-glass bg-background-primary text-text-primary hover:border-accent-glow/60 hover:bg-accent-deep/10 text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all duration-200"
                   >
                     <span className="flex items-center gap-1">
                       <Plus className="h-3 w-3" />
@@ -367,7 +367,7 @@ export default function ComputerControlPanel({
                   <button
                     type="button"
                     onClick={() => onAddTime(computer.id, 1800)} // +30 min
-                    className="py-2 px-1 rounded-xl border border-border-glass bg-background-primary text-text-primary hover:border-accent-glow/60 hover:bg-accent-deep/10 text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all duration-200"
+                    className="py-2 px-1 rounded-2xl border border-border-glass bg-background-primary text-text-primary hover:border-accent-glow/60 hover:bg-accent-deep/10 text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all duration-200"
                   >
                     <span className="flex items-center gap-1">
                       <Plus className="h-3 w-3" />
@@ -380,7 +380,7 @@ export default function ComputerControlPanel({
                   <button
                     type="button"
                     onClick={() => onAddTime(computer.id, 3600)} // +60 min
-                    className="py-2 px-1 rounded-xl border border-border-glass bg-background-primary text-text-primary hover:border-accent-glow/60 hover:bg-accent-deep/10 text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all duration-200"
+                    className="py-2 px-1 rounded-2xl border border-border-glass bg-background-primary text-text-primary hover:border-accent-glow/60 hover:bg-accent-deep/10 text-[10px] font-bold flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all duration-200"
                   >
                     <span className="flex items-center gap-1">
                       <Plus className="h-3 w-3" />
@@ -401,7 +401,7 @@ export default function ComputerControlPanel({
                 <button
                   type="button"
                   onClick={onChangePcClick}
-                  className="w-full py-3 px-4 rounded-xl border border-border-glass bg-background-primary text-text-primary hover:border-accent-glow hover:bg-accent-deep/10 text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all duration-200"
+                  className="w-full py-3 px-4 rounded-2xl border border-border-glass bg-background-primary text-text-primary hover:border-accent-glow hover:bg-accent-deep/10 text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all duration-200"
                 >
                   <RefreshCw className="h-4 w-4 text-accent-glow" />
                   Kompyuterni almashtirish (Change PC)
@@ -417,7 +417,7 @@ export default function ComputerControlPanel({
                       onStop(computer.id);
                     }
                   }}
-                  className="w-full bg-status-occupied hover:bg-status-occupied/90 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 active:scale-95 shadow-lg shadow-status-occupied/10 text-sm"
+                  className="w-full bg-status-occupied hover:bg-status-occupied/90 text-white font-bold py-3 px-4 rounded-2xl flex items-center justify-center gap-2 transition-all duration-200 active:scale-95 shadow-lg shadow-status-occupied/10 text-sm"
                 >
                   <Square className="h-4.5 w-4.5 fill-current" />
                   STOP (Seansni to&apos;xtatish)

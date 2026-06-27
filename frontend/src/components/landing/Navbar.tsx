@@ -105,7 +105,7 @@ export function Navbar() {
                     <button 
                       type="button" 
                       aria-label="Profil menyusi"
-                      className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border-glass bg-background-primary/50 hover:bg-background-primary hover:border-accent-glow transition-all duration-200 active:scale-95"
+                      className="flex items-center gap-2 px-3 py-1.5 rounded-3xl border border-border-glass bg-background-primary/50 hover:bg-background-primary hover:border-accent-glow transition-all duration-200 active:scale-95"
                     >
                       <div className="flex h-7 w-7 items-center justify-center rounded-full bg-accent-deep border border-accent-glow/50 text-[11px] font-bold text-text-primary">
                         {initial}
@@ -161,7 +161,7 @@ export function Navbar() {
           {/* Mobile hamburger */}
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-border-primary text-text-primary transition-colors duration-200 hover:border-accent-primary xl:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border-primary text-text-primary transition-colors duration-200 hover:border-accent-primary xl:hidden"
             onClick={() => setIsOpen((prev) => !prev)}
             aria-label={isOpen ? "Menyuni yopish" : "Menyuni ochish"}
             aria-expanded={isOpen}
@@ -181,7 +181,7 @@ export function Navbar() {
             <Link
               href="/clublar"
               onClick={closeMenu}
-              className="flex items-center gap-2 rounded-lg px-3 py-3 text-base font-semibold text-accent-secondary transition-colors duration-200 hover:bg-background-tertiary"
+              className="flex items-center gap-2 rounded-2xl px-3 py-3 text-base font-semibold text-accent-secondary transition-colors duration-200 hover:bg-background-tertiary"
             >
               <MapPin className="h-5 w-5" />
               Barcha game clublar
@@ -192,7 +192,7 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={closeMenu}
-                className="block rounded-lg px-3 py-3 text-base font-medium text-text-secondary transition-colors duration-200 hover:bg-background-tertiary hover:text-text-primary"
+                className="block rounded-2xl px-3 py-3 text-base font-medium text-text-secondary transition-colors duration-200 hover:bg-background-tertiary hover:text-text-primary"
               >
                 {link.label}
               </Link>
@@ -203,20 +203,20 @@ export function Navbar() {
                   <Link
                     href="/dashboard"
                     onClick={closeMenu}
-                    className="flex items-center gap-2 rounded-lg px-3 py-3 text-base font-semibold text-text-primary hover:bg-background-tertiary"
+                    className="flex items-center gap-2 rounded-2xl px-3 py-3 text-base font-semibold text-text-primary hover:bg-background-tertiary"
                   >
                     Dashboard
                   </Link>
                   <Link
                     href="/profile"
                     onClick={closeMenu}
-                    className="flex items-center gap-2 rounded-lg px-3 py-3 text-base font-semibold text-text-primary hover:bg-background-tertiary"
+                    className="flex items-center gap-2 rounded-2xl px-3 py-3 text-base font-semibold text-text-primary hover:bg-background-tertiary"
                   >
                     Profil
                   </Link>
                   <button
                     onClick={() => { closeMenu(); handleLogout(); }}
-                    className="flex w-full items-center gap-2 rounded-lg px-3 py-3 text-left text-base font-semibold text-status-occupied hover:bg-status-occupied/10"
+                    className="flex w-full items-center gap-2 rounded-2xl px-3 py-3 text-left text-base font-semibold text-status-occupied hover:bg-status-occupied/10"
                   >
                     Chiqish
                   </button>

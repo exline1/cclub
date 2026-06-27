@@ -112,13 +112,13 @@ export function BookingModal({
       />
 
       {/* Modal Content */}
-      <div className="relative glass-card w-full max-w-lg rounded-2xl border border-border-glass bg-background-secondary p-6 shadow-2xl z-10 overflow-hidden max-h-[90vh] flex flex-col animate-in fade-in zoom-in duration-200">
+      <div className="relative glass-card w-full max-w-lg    p-6 shadow-2xl z-10 overflow-hidden max-h-[90vh] flex flex-col animate-in fade-in zoom-in duration-200">
         
         {/* Top Control Header for Mock State */}
         <div className="flex items-center justify-between border-b border-border-glass/40 pb-3 mb-4 shrink-0">
           <div className="flex items-center gap-2">
             <span className="font-heading text-base font-bold text-text-primary">Joy band qilish</span>
-            <label className="inline-flex items-center cursor-pointer ml-3 bg-background-primary px-2 py-0.5 rounded border border-border-glass text-[10px] text-text-secondary hover:text-text-primary select-none">
+            <label className="inline-flex items-center cursor-pointer ml-3 bg-background-primary px-2 py-0.5 rounded-full border border-border-glass text-[10px] text-text-secondary hover:text-text-primary select-none">
               <input 
                 type="checkbox" 
                 checked={mockFull} 
@@ -132,7 +132,7 @@ export function BookingModal({
             type="button"
             onClick={onClose}
             aria-label="Yopish"
-            className="text-text-secondary hover:text-text-primary transition-colors h-8 w-8 flex items-center justify-center rounded-lg border border-border-glass/40 hover:border-accent-glow"
+            className="text-text-secondary hover:text-text-primary transition-colors h-8 w-8 flex items-center justify-center rounded-full border border-border-glass/40 hover:border-accent-glow"
           >
             <X className="h-4 w-4" />
           </button>
@@ -165,7 +165,7 @@ export function BookingModal({
                       key={zone.id}
                       type="button"
                       onClick={() => setSelectedZone(zone.id)}
-                      className={`flex flex-col text-left p-3.5 rounded-xl border transition-all duration-200 ${
+                      className={`flex flex-col text-left p-3.5 rounded-2xl border transition-all duration-200 ${
                         selectedZone === zone.id
                           ? "border-accent-glow bg-accent-deep/20 shadow-accent-glow-sm"
                           : "border-border-glass bg-background-primary hover:border-accent-glow/50"
@@ -208,7 +208,7 @@ export function BookingModal({
                             : "bo'sh"
                         }`}
                         className={cn(
-                          "relative flex flex-col items-center justify-center p-2 rounded-xl border text-center transition-all duration-200 aspect-square select-none",
+                          "relative flex flex-col items-center justify-center p-2 rounded-2xl border text-center transition-all duration-200 aspect-square select-none",
                           isOccupied
                             ? "bg-background-secondary/20 border-border-glass/40 opacity-40 cursor-not-allowed text-text-secondary"
                             : isSelected
@@ -220,12 +220,12 @@ export function BookingModal({
                         <span className="text-[10px] font-bold font-heading">PC {pc.id}</span>
                         
                         {isOccupied && (
-                          <span className="absolute -top-1.5 -right-1 px-1 py-0.5 rounded bg-status-occupied text-[7px] font-bold text-white uppercase scale-90">
+                          <span className="absolute -top-1.5 -right-1 px-1 py-0.5 rounded-full bg-status-occupied text-[7px] font-bold text-white uppercase scale-90">
                             Band
                           </span>
                         )}
                         {isEnding && !isSelected && (
-                          <span className="absolute -top-1.5 -right-1 px-1 py-0.5 rounded bg-status-ending text-[7px] font-bold text-white uppercase scale-90">
+                          <span className="absolute -top-1.5 -right-1 px-1 py-0.5 rounded-full bg-status-ending text-[7px] font-bold text-white uppercase scale-90">
                             Band*
                           </span>
                         )}
@@ -285,7 +285,7 @@ export function BookingModal({
                   <button
                     type="button"
                     onClick={() => {setSelectedDuration("1"); setCustomDuration("");}}
-                    className={`py-2 rounded-lg text-xs font-bold border transition-all duration-200 ${
+                    className={`py-2 rounded-2xl text-xs font-bold border transition-all duration-200 ${
                       selectedDuration === "1" && !customDuration
                         ? "border-accent-glow bg-accent-primary text-white"
                         : "border-border-glass bg-background-primary text-text-secondary hover:border-accent-glow/50 hover:text-text-primary"
@@ -296,7 +296,7 @@ export function BookingModal({
                   <button
                     type="button"
                     onClick={() => {setSelectedDuration("2"); setCustomDuration("");}}
-                    className={`py-2 rounded-lg text-xs font-bold border transition-all duration-200 ${
+                    className={`py-2 rounded-2xl text-xs font-bold border transition-all duration-200 ${
                       selectedDuration === "2" && !customDuration
                         ? "border-accent-glow bg-accent-primary text-white"
                         : "border-border-glass bg-background-primary text-text-secondary hover:border-accent-glow/50 hover:text-text-primary"
@@ -307,7 +307,7 @@ export function BookingModal({
                   <button
                     type="button"
                     onClick={() => {setSelectedDuration("3"); setCustomDuration("");}}
-                    className={`py-2 rounded-lg text-xs font-bold border transition-all duration-200 ${
+                    className={`py-2 rounded-2xl text-xs font-bold border transition-all duration-200 ${
                       selectedDuration === "3" && !customDuration
                         ? "border-accent-glow bg-accent-primary text-white"
                         : "border-border-glass bg-background-primary text-text-secondary hover:border-accent-glow/50 hover:text-text-primary"
@@ -335,7 +335,7 @@ export function BookingModal({
               </div>
 
               {/* Pricing Summary */}
-              <div className="rounded-xl bg-background-primary border border-border-glass/40 p-4 mt-6">
+              <div className="rounded-2xl bg-background-primary border border-border-glass/40 p-4 mt-6">
                 <div className="flex items-center justify-between">
                   <span className="text-xs sm:text-sm text-text-secondary">Umumiy to&apos;lov (Naqd):</span>
                   <span className="font-heading text-lg sm:text-xl font-bold text-accent-glow">

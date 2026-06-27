@@ -52,7 +52,7 @@ export default function AdminOverviewPage() {
       {/* Grid of Metric Cards */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {/* Band PCs */}
-        <Card className="border-border-glass bg-background-secondary/30 glass-card">
+        <Card className="border-border-glass /30 glass-card">
           <CardContent className="p-4 flex items-center justify-between">
             <div className="space-y-1">
               <span className="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-wider">
@@ -62,14 +62,14 @@ export default function AdminOverviewPage() {
                 {occupiedCount} / {totalCount}
               </p>
             </div>
-            <div className="h-10 w-10 rounded-lg bg-status-occupied/10 text-status-occupied flex items-center justify-center">
+            <div className="h-10 w-10 rounded-full bg-status-occupied/10 text-status-occupied flex items-center justify-center">
               <Monitor className="h-5 w-5" />
             </div>
           </CardContent>
         </Card>
 
         {/* Free PCs */}
-        <Card className="border-border-glass bg-background-secondary/30 glass-card">
+        <Card className="border-border-glass /30 glass-card">
           <CardContent className="p-4 flex items-center justify-between">
             <div className="space-y-1">
               <span className="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-wider">
@@ -79,14 +79,14 @@ export default function AdminOverviewPage() {
                 {freeCount} / {totalCount}
               </p>
             </div>
-            <div className="h-10 w-10 rounded-lg bg-status-free/10 text-status-free flex items-center justify-center">
+            <div className="h-10 w-10 rounded-full bg-status-free/10 text-status-free flex items-center justify-center">
               <MonitorOff className="h-5 w-5" />
             </div>
           </CardContent>
         </Card>
 
         {/* Today's Revenue */}
-        <Card className="border-border-glass bg-background-secondary/30 glass-card">
+        <Card className="border-border-glass /30 glass-card">
           <CardContent className="p-4 flex items-center justify-between">
             <div className="space-y-1">
               <span className="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-wider">
@@ -96,14 +96,14 @@ export default function AdminOverviewPage() {
                 1,250,000 so&apos;m
               </p>
             </div>
-            <div className="h-10 w-10 rounded-lg bg-accent-glow/10 text-accent-glow flex items-center justify-center">
+            <div className="h-10 w-10 rounded-full bg-accent-glow/10 text-accent-glow flex items-center justify-center">
               <Coins className="h-5 w-5" />
             </div>
           </CardContent>
         </Card>
 
         {/* Pending Orders */}
-        <Card className="border-border-glass bg-background-secondary/30 glass-card">
+        <Card className="border-border-glass /30 glass-card">
           <CardContent className="p-4 flex items-center justify-between">
             <div className="space-y-1">
               <span className="text-[10px] sm:text-xs font-bold text-text-secondary uppercase tracking-wider">
@@ -113,7 +113,7 @@ export default function AdminOverviewPage() {
                 {pendingOrdersCount} ta
               </p>
             </div>
-            <div className="h-10 w-10 rounded-lg bg-status-ending/10 text-status-ending flex items-center justify-center">
+            <div className="h-10 w-10 rounded-full bg-status-ending/10 text-status-ending flex items-center justify-center">
               <ShoppingCart className="h-5 w-5" />
             </div>
           </CardContent>
@@ -124,7 +124,7 @@ export default function AdminOverviewPage() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {/* Left Column: Recent Orders (2 Columns on Large screen) */}
         <div className="lg:col-span-2 space-y-4">
-          <Card className="border-border-glass bg-background-secondary/40 glass-card">
+          <Card className="border-border-glass /40 glass-card">
             <CardHeader className="pb-3 border-b border-border-glass/30">
               <CardTitle className="text-sm sm:text-base font-heading flex items-center gap-2">
                 <ShoppingCart className="h-4.5 w-4.5 text-accent-glow" />
@@ -157,7 +157,7 @@ export default function AdminOverviewPage() {
                         <td className="p-3 text-center">
                           <span 
                             className={cn(
-                              "inline-flex px-2 py-0.5 rounded text-[10px] font-bold uppercase",
+                              "inline-flex px-2 py-0.5 rounded-full text-[10px] font-bold uppercase",
                               order.status === "pending"
                                 ? "bg-status-occupied/10 text-status-occupied border border-status-occupied/20"
                                 : order.status === "preparing"
@@ -184,7 +184,7 @@ export default function AdminOverviewPage() {
         {/* Right Column: Attention Required Section */}
         <div className="space-y-4">
           <Link href="/admin/computers?status=ending_soon" className="block">
-            <Card className="border-border-glass bg-background-secondary/40 glass-card cursor-pointer hover:border-status-ending/40 hover:shadow-status-ending-sm transition-all duration-200">
+            <Card className="border-border-glass /40 glass-card cursor-pointer hover:border-status-ending/40 hover:shadow-status-ending-sm transition-all duration-200">
               <CardHeader className="pb-3 border-b border-border-glass/30">
                 <CardTitle className="text-sm sm:text-base font-heading flex items-center gap-2 text-status-ending">
                   <AlertTriangle className="h-4.5 w-4.5" />
@@ -202,7 +202,7 @@ export default function AdminOverviewPage() {
                   attentionRequiredPcs.map((pc) => (
                     <div 
                       key={pc.id} 
-                      className="flex items-start gap-3 p-3 rounded-lg border border-status-ending/20 bg-status-ending/5"
+                      className="flex items-start gap-3 p-3 rounded-2xl border border-status-ending/20 bg-status-ending/5"
                     >
                       <Timer className="h-4.5 w-4.5 text-status-ending shrink-0 mt-0.5" />
                       <div className="flex-1 space-y-1">
@@ -210,7 +210,7 @@ export default function AdminOverviewPage() {
                           <span className="text-xs font-bold text-text-primary">
                             PC {pc.number} ({pc.zone})
                           </span>
-                          <span className="text-[10px] font-bold text-status-ending uppercase bg-status-ending/10 px-1.5 py-0.5 rounded">
+                          <span className="text-[10px] font-bold text-status-ending uppercase bg-status-ending/10 px-1.5 py-0.5 rounded-full">
                             {Math.floor(pc.remainingSeconds / 60)} daq.
                           </span>
                         </div>

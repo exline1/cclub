@@ -33,7 +33,7 @@ export default function ComputerCard({ computer, onClick }: ComputerCardProps) {
     <div
       onClick={onClick}
       className={cn(
-        "relative flex flex-col justify-between p-3.5 rounded-xl border text-center transition-all duration-300 aspect-square select-none cursor-pointer active:scale-95 group",
+        "relative flex flex-col justify-between p-3.5 rounded-2xl border text-center transition-all duration-300 aspect-square select-none cursor-pointer active:scale-95 group",
         isFree && "border-status-free/20 bg-status-free/5 text-status-free hover:border-status-free/50 hover:shadow-[0_0_15px_rgba(16,185,129,0.15)]",
         isOccupied && "border-status-occupied/20 bg-status-occupied/5 text-status-occupied hover:border-status-occupied/50 hover:shadow-[0_0_15px_rgba(239,68,68,0.15)] animate-in fade-in duration-200",
         isEnding && "border-status-ending/25 bg-status-ending/5 text-status-ending hover:border-status-ending/50 hover:shadow-[0_0_15px_rgba(245,158,11,0.2)] animate-pulse"

@@ -52,7 +52,7 @@ export default function ChangePcModal({
       />
 
       {/* Modal Container */}
-      <div className="relative glass-card w-full max-w-lg rounded-2xl border border-border-glass bg-background-secondary p-6 shadow-2xl z-10 overflow-hidden max-h-[85vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
+      <div className="relative glass-card w-full max-w-lg    p-6 shadow-2xl z-10 overflow-hidden max-h-[85vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-border-glass/40 pb-3 mb-4 shrink-0">
           <div>
@@ -67,7 +67,7 @@ export default function ChangePcModal({
             type="button"
             onClick={onClose}
             aria-label="Yopish"
-            className="text-text-secondary hover:text-text-primary transition-colors h-8 w-8 flex items-center justify-center rounded-lg border border-border-glass/40 hover:border-accent-glow"
+            className="text-text-secondary hover:text-text-primary transition-colors h-8 w-8 flex items-center justify-center rounded-full border border-border-glass/40 hover:border-accent-glow"
           >
             <X className="h-4 w-4" />
           </button>
@@ -103,7 +103,7 @@ export default function ChangePcModal({
                         key={pc.id}
                         type="button"
                         onClick={() => handleSelect(pc.id)}
-                        className="flex flex-col items-center justify-center p-2 rounded-xl border border-border-glass bg-background-primary hover:border-accent-glow/65 hover:bg-accent-deep/10 text-text-primary active:scale-95 transition-all duration-200 aspect-square select-none group"
+                        className="flex flex-col items-center justify-center p-2 rounded-2xl border border-border-glass bg-background-primary hover:border-accent-glow/65 hover:bg-accent-deep/10 text-text-primary active:scale-95 transition-all duration-200 aspect-square select-none group"
                       >
                         <Monitor className="h-4 w-4 mb-1 text-status-free group-hover:text-accent-glow transition-colors" />
                         <span className="text-[10px] font-bold font-heading">
@@ -123,7 +123,7 @@ export default function ChangePcModal({
           <button
             type="button"
             onClick={onClose}
-            className="flex-1 py-2 px-4 rounded-lg bg-background-primary border border-border-glass hover:border-accent-glow/50 text-text-secondary hover:text-text-primary transition-all duration-200 text-xs font-bold active:scale-95"
+            className="flex-1 py-2 px-4 rounded-full bg-background-primary border border-border-glass hover:border-accent-glow/50 text-text-secondary hover:text-text-primary transition-all duration-200 text-xs font-bold active:scale-95"
           >
             Bekor qilish
           </button>

@@ -40,8 +40,8 @@ export default function KlubPanelPage() {
             </Button>
           </div>
           
-          <div className="bg-background-secondary border border-border-primary rounded-[24px] p-8 text-center sm:p-16">
-            <div className="inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-accent-primary/10 text-accent-primary mb-6 animate-pulse">
+          <div className="bg-background-secondary border border-border-primary rounded-50px p-8 text-center sm:p-16">
+            <div className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-accent-primary/10 text-accent-primary mb-6 animate-pulse">
               <Settings className="h-10 w-10" />
             </div>
             <h2 className="font-heading text-2xl font-bold mb-4">Tez orada ishga tushadi</h2>
@@ -50,19 +50,19 @@ export default function KlubPanelPage() {
             </p>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
-              <div className="bg-background-tertiary p-4 rounded-xl border border-border-primary flex flex-col items-center opacity-50">
+              <div className="bg-background-tertiary p-4 rounded-2xl border border-border-primary flex flex-col items-center opacity-50">
                 <LayoutDashboard className="h-6 w-6 text-text-secondary mb-2" />
                 <span className="text-sm font-medium">Asosiy panel</span>
               </div>
-              <div className="bg-background-tertiary p-4 rounded-xl border border-border-primary flex flex-col items-center opacity-50">
+              <div className="bg-background-tertiary p-4 rounded-2xl border border-border-primary flex flex-col items-center opacity-50">
                 <Monitor className="h-6 w-6 text-text-secondary mb-2" />
                 <span className="text-sm font-medium">Kompyuterlar</span>
               </div>
-              <div className="bg-background-tertiary p-4 rounded-xl border border-border-primary flex flex-col items-center opacity-50">
+              <div className="bg-background-tertiary p-4 rounded-2xl border border-border-primary flex flex-col items-center opacity-50">
                 <Users className="h-6 w-6 text-text-secondary mb-2" />
                 <span className="text-sm font-medium">Mijozlar</span>
               </div>
-              <div className="bg-background-tertiary p-4 rounded-xl border border-border-primary flex flex-col items-center opacity-50">
+              <div className="bg-background-tertiary p-4 rounded-2xl border border-border-primary flex flex-col items-center opacity-50">
                 <BarChart className="h-6 w-6 text-text-secondary mb-2" />
                 <span className="text-sm font-medium">Hisobotlar</span>
               </div>

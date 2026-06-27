@@ -87,7 +87,7 @@ export default function CustomersAdminPage() {
         </div>
 
         {/* Stats summary row */}
-        <div className="flex flex-wrap gap-2 sm:gap-3 bg-background-secondary/40 border border-border-glass/40 rounded-xl p-2 sm:p-3 glass-card">
+        <div className="flex flex-wrap gap-2 sm:gap-3 /40 /40  p-2 sm:p-3 glass-card">
           <div className="px-3 py-1 flex items-center gap-1.5 border-r border-border-glass/30 text-xs">
             <Landmark className="h-4 w-4 text-accent-glow" />
             <span className="text-text-secondary">
@@ -113,7 +113,7 @@ export default function CustomersAdminPage() {
             placeholder="Ism yoki telefon bo'yicha..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-background-secondary/30 border border-border-glass/65 rounded-xl pl-9 pr-4 py-2.5 text-xs text-text-primary placeholder:text-text-secondary/50 focus:outline-none focus:border-accent-glow transition-all"
+            className="w-full bg-background-secondary/30 border border-border-glass/65 rounded-2xl pl-9 pr-4 py-2.5 text-xs text-text-primary placeholder:text-text-secondary/50 focus:outline-none focus:border-accent-glow transition-all"
           />
         </div>
         
@@ -123,7 +123,7 @@ export default function CustomersAdminPage() {
       </div>
 
       {/* Grid table */}
-      <div className="glass-card border border-border-glass/40 bg-background-secondary/30 rounded-2xl overflow-hidden shadow-xl animate-in fade-in duration-300">
+      <div className="glass-card /40 /30  overflow-hidden shadow-xl animate-in fade-in duration-300">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs sm:text-sm whitespace-nowrap">
             <thead>
@@ -177,7 +177,7 @@ export default function CustomersAdminPage() {
                           {name}
                         </span>
                         {isLoyal && (
-                          <span className="inline-flex items-center gap-0.5 text-[8px] font-bold text-status-free bg-status-free/10 border border-status-free/20 px-1 py-0.2 rounded uppercase tracking-wide">
+                          <span className="inline-flex items-center gap-0.5 text-[8px] font-bold text-status-free bg-status-free/10 border border-status-free/20 px-1 py-0.2 rounded-full uppercase tracking-wide">
                             Loyal
                           </span>
                         )}
